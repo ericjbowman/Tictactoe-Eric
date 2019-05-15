@@ -22,12 +22,14 @@ const fillContent = function() {
     rowThree: [$('.six').html(), $('.seven').html(), $('.eight').html()],
     columnOne: [$('.zero').html(), $('.three').html(), $('.six').html()],
     columnTwo: [$('.one').html(), $('.four').html(), $('.five').html()],
-    columnThree: [$('.two').html(), $('.five').html(), $('.six').html()]
+    columnThree: [$('.two').html(), $('.five').html(), $('.six').html()],
+    diagOne: [$('.zero').html(), $('.four').html(), $('.eight').html()],
+    diagTwo: [$('.two').html(), $('.four').html(), $('.six').html()]
   }
-  if (lines.rowOne.every(i => i === 'X') || lines.rowTwo.every(i => i === 'X') || lines.rowThree.every(i => i === 'X') || lines.columnOne.every(i => i === 'X') || lines.columnTwo.every(i => i === 'X') || lines.columnThree.every(i => i === 'X')) {
-    alert('X Wins!')
-  } else if (lines.rowOne.every(i => i === 'O') || lines.rowTwo.every(i => i === 'O') || lines.rowThree.every(i => i === 'O') || lines.columnOne.every(i => i === 'O') || lines.columnTwo.every(i => i === 'O') || lines.columnThree.every(i => i === 'O')) {
-    alert('O Wins!')
+  if (lines.rowOne.every(i => i === 'X') || lines.rowTwo.every(i => i === 'X') || lines.rowThree.every(i => i === 'X') || lines.columnOne.every(i => i === 'X') || lines.columnTwo.every(i => i === 'X') || lines.columnThree.every(i => i === 'X') || lines.diagOne.every(i => i === 'X') || lines.diagTwo.every(i => i === 'X')) {
+    $('h2').html('X Wins')
+  } else if (lines.rowOne.every(i => i === 'O') || lines.rowTwo.every(i => i === 'O') || lines.rowThree.every(i => i === 'O') || lines.columnOne.every(i => i === 'O') || lines.columnTwo.every(i => i === 'O') || lines.columnThree.every(i => i === 'O') || lines.diagOne.every(i => i === 'O') || lines.diagTwo.every(i => i === 'O')) {
+    $('h2').html('O Wins')
   }
   console.log(lines)
   checkForWin()
