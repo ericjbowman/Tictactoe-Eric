@@ -19,8 +19,8 @@ const fillContent = function() {
     rowTwo: [$('.three').html(), $('.four').html(), $('.five').html()],
     rowThree: [$('.six').html(), $('.seven').html(), $('.eight').html()],
     columnOne: [$('.zero').html(), $('.three').html(), $('.six').html()],
-    columnTwo: [$('.one').html(), $('.four').html(), $('.five').html()],
-    columnThree: [$('.two').html(), $('.five').html(), $('.six').html()],
+    columnTwo: [$('.one').html(), $('.four').html(), $('.seven').html()],
+    columnThree: [$('.two').html(), $('.five').html(), $('.eight').html()],
     diagOne: [$('.zero').html(), $('.four').html(), $('.eight').html()],
     diagTwo: [$('.two').html(), $('.four').html(), $('.six').html()]
   }
@@ -31,7 +31,6 @@ const fillContent = function() {
   } else if (moveArr.length === 9) {
     $('h2').html('Cats!')
   }
-  console.log(lines)
   checkForWin()
 }
 
