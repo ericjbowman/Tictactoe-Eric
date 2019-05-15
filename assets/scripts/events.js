@@ -16,7 +16,6 @@ const fillContent = function() {
     $(event.target).html('X')
     moveArr.push('X')
   }
-  checkForWin()
   const lines = {
     rowOne: [$('.zero').html(), $('.one').html(), $('.two').html()],
     rowTwo: [$('.three').html(), $('.four').html(), $('.five').html()],
@@ -25,7 +24,13 @@ const fillContent = function() {
     columnTwo: [$('.one').html(), $('.four').html(), $('.five').html()],
     columnThree: [$('.two').html(), $('.five').html(), $('.six').html()]
   }
+  if (lines.rowOne.every(i => i === 'X') || lines.rowTwo.every(i => i === 'X') || lines.rowThree.every(i => i === 'X') || lines.columnOne.every(i => i === 'X') || lines.columnTwo.every(i => i === 'X') || lines.columnThree.every(i => i === 'X')) {
+    alert('X Wins!')
+  } else if (lines.rowOne.every(i => i === 'O') || lines.rowTwo.every(i => i === 'O') || lines.rowThree.every(i => i === 'O') || lines.columnOne.every(i => i === 'O') || lines.columnTwo.every(i => i === 'O') || lines.columnThree.every(i => i === 'O')) {
+    alert('O Wins!')
+  }
   console.log(lines)
+  checkForWin()
 }
 
 // const eventChain = {
