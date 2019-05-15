@@ -1,15 +1,13 @@
 'use strict'
 // const zero = $('.zero')
-const moveArr = []
+let moveArr = []
 const checkForWin = function () {
   if ($('.zero').html() === $('one').html() && $('one').html() === $('.two').html()) {
     alert('you win!')
   }
 }
 const fillContent = function() {
-  if (moveArr.length === 9) {
-    return
-  } else if (moveArr.length % 2 !== 0) {
+    if (moveArr.length % 2 !== 0) {
     $(event.target).html("O")
     moveArr.push('O')
   } else if (moveArr.length % 2 === 0) {
@@ -30,6 +28,8 @@ const fillContent = function() {
     $('h2').html('X Wins')
   } else if (lines.rowOne.every(i => i === 'O') || lines.rowTwo.every(i => i === 'O') || lines.rowThree.every(i => i === 'O') || lines.columnOne.every(i => i === 'O') || lines.columnTwo.every(i => i === 'O') || lines.columnThree.every(i => i === 'O') || lines.diagOne.every(i => i === 'O') || lines.diagTwo.every(i => i === 'O')) {
     $('h2').html('O Wins')
+  } else if (moveArr.length === 9) {
+    $('h2').html('Cats!')
   }
   console.log(lines)
   checkForWin()
@@ -37,6 +37,8 @@ const fillContent = function() {
 
 const emptyContent = function () {
   $('.box').html('')
+  $('h2').html('')
+  moveArr = []
 }
 
 // const eventChain = {
