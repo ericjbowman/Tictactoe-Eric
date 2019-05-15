@@ -1,1 +1,12 @@
 @import '~bootstrap/scss/bootstrap';
+
+h1 {
+  color: blue;
+  text-align: center;
+}
+.board {
+  background-color: green;
+  height: 500px;
+  width: 500px;
+  margin: 0 auto;
+}
