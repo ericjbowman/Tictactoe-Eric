@@ -8,4 +8,5 @@ const events = require('./events.js')
 
 $(() => {
   $('.box').on('click', events.fillContent)
+  $('button').on('click', events.emptyContent)
 })

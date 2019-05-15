@@ -35,6 +35,10 @@ const fillContent = function() {
   checkForWin()
 }
 
+const emptyContent = function () {
+  $('.box').html('')
+}
+
 // const eventChain = {
 //   fillContent: function() {
 //     if (moveArr.length === 9) {
@@ -57,5 +61,6 @@ const fillContent = function() {
 
 module.exports = {
   fillContent,
-  checkForWin
+  checkForWin,
+  emptyContent
 }
