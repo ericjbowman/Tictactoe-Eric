@@ -12,8 +12,9 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
+      <h1>Tic Tac Toe!</h1>
       <p id="message"></p>
-      <form id="sign-up" class="border">
+      <form id="sign-up">
         <h3>Sign up!</h3>
           <input type="text" name="credentials[email]" placeholder="Email">
           <input type="password" name="credentials[password]" placeholder="Password">
@@ -21,37 +22,36 @@
           <input type="submit" value="Sign up!">
       </form>
 
-      <form id="sign-in" class="border">
+      <form id="sign-in">
         <h3>Sign in!</h3>
           <input type="text" name="credentials[email]" placeholder="Email">
           <input type="password" name="credentials[password]" placeholder="Password">
           <input type="submit" value="Sign in!">
       </form>
 
-      <form id="sign-out" class="border">
+      <form id="sign-out">
           <h3>Sign Out!</h3>
             <input type="submit" value="Sign out!">
       </form>
 
-      <form id="change-password" class="border">
+      <form id="change-password">
           <h3>Change Password!</h3>
             <input type="password" name="passwords[old]" placeholder="Old Password">
             <input type="password" name="passwords[new]" placeholder="New Password">
             <input type="submit" value="Change Password!">
       </form>
-      <h1>Tic Tac Toe!</h1>
       <div class="container">
-        <div class="row">
+        <div class="row top">
           <div class="col-4 box zero"></div>
           <div class="col-4 box one"></div>
           <div class="col-4 box two"></div>
         </div>
-        <div class="row">
+        <div class="row middle">
           <div class="col-4 box three"></div>
           <div class="col-4 box four"></div>
           <div class="col-4 box five"></div>
         </div>
-        <div class="row">
+        <div class="row bottom">
           <div class="col-4 box six"></div>
           <div class="col-4 box seven"></div>
           <div class="col-4 box eight"></div>
