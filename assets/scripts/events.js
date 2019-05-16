@@ -1,5 +1,9 @@
 'use strict'
 // const zero = $('.zero')
+const getFormFields = require(`../../lib/get-form-fields`)
+const api = require('./api')
+const ui = require('./ui')
+
 let moveArr = []
 const checkForWin = function () {
   if ($('.zero').html() === $('one').html() && $('one').html() === $('.two').html()) {
@@ -40,6 +44,52 @@ const emptyContent = function () {
   moveArr = []
 }
 
+const onSignUp = function (event) {
+  event.preventDefault()
+  console.log('sign up ran!')
+
+  const data = getFormFields(this)
+  api.signUp(data)
+    .then(ui.signUpSuccess)
+    .catch(ui.signUpFailure)
+}
+
+const onSignIn = function (event) {
+  event.preventDefault()
+  console.log('sign in ran!')
+
+  const data = getFormFields(this)
+  api.signIn(data)
+    .then(ui.signInSuccess)
+    .catch(ui.signInFailure)
+}
+
+const onSignOut = function (event) {
+  event.preventDefault()
+  console.log('sign out ran')
+
+  api.signOut()
+    .then(ui.signOutSuccess)
+    .catch(ui.signOutFailure)
+}
+
+const onChangePassword = function (event) {
+  event.preventDefault()
+  console.log('change password ran!')
+
+  const data = getFormFields(this)
+  api.changePassword(data)
+    .then(ui.changePasswordSuccess)
+    .catch(ui.changePasswordFailure)
+}
+
+const addHandlers = () => {
+  $('#sign-up').on('submit', onSignUp)
+  $('#sign-in').on('submit', onSignIn)
+  $('#sign-out').on('submit', onSignOut)
+  $('#change-password').on('submit', onChangePassword)
+}
+
 // const eventChain = {
 //   fillContent: function() {
 //     if (moveArr.length === 9) {
@@ -63,5 +113,7 @@ const emptyContent = function () {
 module.exports = {
   fillContent,
   checkForWin,
-  emptyContent
+  emptyContent,
+  addHandlers
+
 }
