@@ -44,9 +44,19 @@ const changePassword = function (data) {
   })
 }
 
+const addGame = function (data) {
+  return $.ajax({
+    url: config.apiUrl + '/sign-up',
+    method: 'POST',
+    data
+    // data: data
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
   signOut,
-  changePassword
+  changePassword,
+  addGame
 }

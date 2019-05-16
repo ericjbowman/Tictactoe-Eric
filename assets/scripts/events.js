@@ -5,16 +5,22 @@ const api = require('./api')
 const ui = require('./ui')
 
 let moveArr = []
-const checkForWin = function () {
-  if ($('.zero').html() === $('one').html() && $('one').html() === $('.two').html()) {
-    alert('you win!')
-  }
-}
-const fillContent = function() {
-    if (moveArr.length % 2 !== 0) {
-    $(event.target).html("O")
+// const checkForWin = function () {
+//   if ($('.zero').html() === $('one').html() && $('one').html() === $('.two').html()) {
+//     alert('you win!')
+//   }
+// }
+const fillContent = function () {
+  if ($('h2').html() === ('X wins!') || ($('h2').html() === 'O wins!') || ($('h2').html() === 'Cats!')) {
+    $('.borg').html('Resistance is futile!')
+  } else if ($(event.target).html() !== '') {
+    $('h2').html('Choose an empty Square!')
+  } else if (moveArr.length % 2 !== 0) {
+    $('h2').html('')
+    $(event.target).html('O')
     moveArr.push('O')
   } else if (moveArr.length % 2 === 0) {
+    $('h2').html('')
     $(event.target).html('X')
     moveArr.push('X')
   }
@@ -29,18 +35,19 @@ const fillContent = function() {
     diagTwo: [$('.two').html(), $('.four').html(), $('.six').html()]
   }
   if (lines.rowOne.every(i => i === 'X') || lines.rowTwo.every(i => i === 'X') || lines.rowThree.every(i => i === 'X') || lines.columnOne.every(i => i === 'X') || lines.columnTwo.every(i => i === 'X') || lines.columnThree.every(i => i === 'X') || lines.diagOne.every(i => i === 'X') || lines.diagTwo.every(i => i === 'X')) {
-    $('h2').html('X Wins')
+    $('h2').html('X wins!')
   } else if (lines.rowOne.every(i => i === 'O') || lines.rowTwo.every(i => i === 'O') || lines.rowThree.every(i => i === 'O') || lines.columnOne.every(i => i === 'O') || lines.columnTwo.every(i => i === 'O') || lines.columnThree.every(i => i === 'O') || lines.diagOne.every(i => i === 'O') || lines.diagTwo.every(i => i === 'O')) {
-    $('h2').html('O Wins')
+    $('h2').html('O wins!')
   } else if (moveArr.length === 9) {
     $('h2').html('Cats!')
   }
-  checkForWin()
+  // checkForWin()
 }
 
 const emptyContent = function () {
   $('.box').html('')
   $('h2').html('')
+  $('.borg').html('')
   moveArr = []
 }
 
@@ -83,6 +90,11 @@ const onChangePassword = function (event) {
     .catch(ui.changePasswordFailure)
 }
 
+// const onEndGame = function (event) {
+//   if ($('h2').html() !=== "") {
+//
+//   }
+// }
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
@@ -112,7 +124,7 @@ const addHandlers = () => {
 
 module.exports = {
   fillContent,
-  checkForWin,
+  // checkForWin,
   emptyContent,
   addHandlers
 
