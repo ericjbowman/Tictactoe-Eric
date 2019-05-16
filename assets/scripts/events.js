@@ -5,12 +5,12 @@ const api = require('./api')
 const ui = require('./ui')
 
 let gameData = {
-  "game": {
-    "cell": {
-      "index": 0,
-      "value": "x"
+  game: {
+    cell: {
+      index: 0,
+      value: "x"
     },
-    "over": false
+    over: false
   }
 }
 let moveArr = []
@@ -25,12 +25,16 @@ const fillContent = function () {
   } else if (moveArr.length % 2 !== 0) {
     $('h2').html('')
     $(event.target).html('O')
-    gameData.index = $(event.target).data('cell-index')
-    console.log($(event.target).data('cell-index'))
+    gameData.game.cell.index = $(event.target).data('cell-index')
+    gameData.game.cell.value = 'o'
+    console.log(gameData)
     moveArr.push('O')
   } else if (moveArr.length % 2 === 0) {
     $('h2').html('')
     $(event.target).html('X')
+    gameData.game.cell.index = $(event.target).data('cell-index')
+    gameData.game.cell.value = 'x'
+    console.log(gameData)
     moveArr.push('X')
   }
   const lines = {
