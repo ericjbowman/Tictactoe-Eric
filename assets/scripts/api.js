@@ -44,10 +44,13 @@ const changePassword = function (data) {
   })
 }
 
-const addMove = function (data) {
+const startGame = function (data) {
   return $.ajax({
-    url: config.apiUrl + '/sign-up',
+    url: config.apiUrl + '/games',
     method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
     data
     // data: data
   })
@@ -58,5 +61,5 @@ module.exports = {
   signIn,
   signOut,
   changePassword,
-  addMove
+  startGame
 }

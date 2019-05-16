@@ -5,12 +5,10 @@ const api = require('./api')
 const ui = require('./ui')
 
 let moveArr = []
-// const checkForWin = function () {
-//   if ($('.zero').html() === $('one').html() && $('one').html() === $('.two').html()) {
-//     alert('you win!')
-//   }
-// }
 const fillContent = function () {
+  if ($('.box').html() === '') {
+    api.startGame(gameData)
+  }
   if ($('h2').html() === ('X wins!') || ($('h2').html() === 'O wins!') || ($('h2').html() === 'Cats!')) {
     $('.borg').html('Resistance is futile!')
   } else if ($(event.target).html() !== '') {
@@ -34,6 +32,17 @@ const fillContent = function () {
     diagOne: [$('.zero').html(), $('.four').html(), $('.eight').html()],
     diagTwo: [$('.two').html(), $('.four').html(), $('.six').html()]
   }
+  let cells = []
+  cells[0] = $('.zero').html()
+  cells[1] = $('.one').html()
+  cells[2] = $('.two').html()
+  cells[3] = $('.three').html()
+  cells[4] = $('.four').html()
+  cells[5] = $('.five').html()
+  cells[6] = $('.six').html()
+  cells[7] = $('.seven').html()
+  cells[8] = $('.eight').html()
+  console.log(cells)
   if (lines.rowOne.every(i => i === 'X') || lines.rowTwo.every(i => i === 'X') || lines.rowThree.every(i => i === 'X') || lines.columnOne.every(i => i === 'X') || lines.columnTwo.every(i => i === 'X') || lines.columnThree.every(i => i === 'X') || lines.diagOne.every(i => i === 'X') || lines.diagTwo.every(i => i === 'X')) {
     $('h2').html('X wins!')
   } else if (lines.rowOne.every(i => i === 'O') || lines.rowTwo.every(i => i === 'O') || lines.rowThree.every(i => i === 'O') || lines.columnOne.every(i => i === 'O') || lines.columnTwo.every(i => i === 'O') || lines.columnThree.every(i => i === 'O') || lines.diagOne.every(i => i === 'O') || lines.diagTwo.every(i => i === 'O')) {
@@ -43,13 +52,19 @@ const fillContent = function () {
   }
   // checkForWin()
 }
-
+// let numGames = 0
 const emptyContent = function () {
   $('.box').html('')
   $('h2').html('')
   $('.borg').html('')
   moveArr = []
 }
+const gameData = {}
+
+// const onStartGame = function () {
+//   api.startGame(gameData)
+//   console.log(gameData)
+// }
 
 const onSignUp = function (event) {
   event.preventDefault()
