@@ -4,6 +4,15 @@ const getFormFields = require(`../../lib/get-form-fields`)
 const api = require('./api')
 const ui = require('./ui')
 
+let gameData = {
+  "game": {
+    "cell": {
+      "index": 0,
+      "value": "x"
+    },
+    "over": false
+  }
+}
 let moveArr = []
 const fillContent = function () {
   if ($('.box').html() === '') {
@@ -16,6 +25,8 @@ const fillContent = function () {
   } else if (moveArr.length % 2 !== 0) {
     $('h2').html('')
     $(event.target).html('O')
+    gameData.index = $(event.target).data('cell-index')
+    console.log($(event.target).data('cell-index'))
     moveArr.push('O')
   } else if (moveArr.length % 2 === 0) {
     $('h2').html('')
@@ -59,7 +70,7 @@ const emptyContent = function () {
   $('.borg').html('')
   moveArr = []
 }
-const gameData = {}
+// const gameData = {}
 
 // const onStartGame = function () {
 //   api.startGame(gameData)
@@ -104,6 +115,10 @@ const onChangePassword = function (event) {
     .then(ui.changePasswordSuccess)
     .catch(ui.changePasswordFailure)
 }
+
+// const onPatchGameData = function (gameData) {
+//   api.patchGameData(gameData)
+// }
 
 // const onEndGame = function (event) {
 //   if ($('h2').html() !=== "") {
