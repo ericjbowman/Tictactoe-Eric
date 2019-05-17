@@ -25,7 +25,7 @@ const newGame = function () {
 }
 const fillContent = function () {
   if ($('h2').html() === ('X wins!') || ($('h2').html() === 'O wins!') || ($('h2').html() === 'Cats!')) {
-    $('.moveMessage').html('Resistance is futile!')
+    $('.borg').html('Resistance is futile!')
   } else if ($(event.target).html() !== '') {
     $('.moveMessage').html('Choose an empty Square!')
   } else if (moveArr.length % 2 !== 0) {
@@ -96,6 +96,7 @@ const emptyContent = function () {
   moveArr = []
   newGame()
   gameData.game.over = false
+  $('#message').html('')
 }
 // const gameData = {}
 

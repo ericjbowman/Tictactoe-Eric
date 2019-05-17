@@ -84,7 +84,7 @@ const onPatchGameDataSuccess = function () {
 }
 
 const onPatchGameDataFailure = function () {
-  $('.moveMessage').html('Error!')
+  $('.moveMessage').html('Error')
 }
 const onIndexSuccess = function (responseData) {
   console.log(responseData)
