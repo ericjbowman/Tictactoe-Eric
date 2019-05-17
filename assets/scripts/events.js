@@ -93,6 +93,7 @@ const emptyContent = function () {
   $('h2').html('')
   $('.borg').html('')
   $('.gamesPlayed').html('')
+  $('.moveMessage').html('')
   moveArr = []
   newGame()
   gameData.game.over = false
