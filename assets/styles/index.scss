@@ -1,5 +1,10 @@
 @import '~bootstrap/scss/bootstrap';
-
+* {
+  font-family: 'Ubuntu Condensed', sans-serif;
+}
+body {
+  background-color: #c0cde0;
+}
 h1 {
   color: blue;
   text-align: center;
@@ -10,16 +15,35 @@ h1 {
   height: 600px;
   width: 600px;
   margin: 0 auto;
+  font-family: sans-serif;
 }
-
+input {
+  border: solid #000;
+  border-width: 3px;
+}
+h1 {
+  font-size: 70px;
+}
+.Login, {
+  margin-left: 20px;
+}
+p {
+  // margin-left: 20px;
+  font-size: 30px;
+  color: blue;
+  margin-bottom: 0px;
+}
+.but {
+  background-color: #85b3fc;
+}
 .row {
   height: 200px;
-  border: solid #000;
 }
 
 .col-4 {
   align-items: center;
   border: solid #000;
+  border-width: 5px;
   display: flex;
   justify-content: center;
   font-size: 100px;
@@ -38,14 +62,23 @@ form {
   color: blue;
 }
 
+button {
+  font-size: 30px;
+  padding: 1em;
+  margin-top: 20px;
+  background-color: #4286f4;
+  border: solid #000;
+  border-width: 5px;
+}
+
+button:hover {
+  background-color: #85b3fc;
+}
+
 .playAgain {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.top, .middle {
-  border-bottom: 0;
 }
 
 .disappear {

@@ -29,6 +29,7 @@ const signInSuccess = function (data) {
   $('#sign-in').hide()
   $('#change-password').removeClass()
   $('#sign-out').removeClass()
+  $('button').removeClass()
 }
 
 const signInFailure = function (error) {

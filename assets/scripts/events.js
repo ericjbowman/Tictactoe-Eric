@@ -24,11 +24,11 @@ const newGame = function () {
   }
 }
 const fillContent = function () {
-  if ($('h2').html() === ('X wins!') || ($('h2').html() === 'O wins!') || ($('h2').html() === 'Cats!')) {
+  if (gameData.game.over === true) {
     $('.borg').html('Resistance is futile!')
   } else if ($(event.target).html() !== '') {
     $('.moveMessage').html('Choose an empty Square!')
-  } else if (moveArr.length % 2 !== 0) {
+  } else if ((moveArr.length % 2 !== 0) && (gameData.game.over === false)) {
     $('.moveMessage').html("It's X's turn")
     $(event.target).html('O')
     moveArr.push('O')
@@ -38,7 +38,7 @@ const fillContent = function () {
     api.patchGameData(gameData, store.id)
       .then(ui.onPatchGameDataSuccess)
       .catch(ui.onPatchGameDataFailure)
-  } else if (moveArr.length % 2 === 0) {
+  } else if ((moveArr.length % 2 === 0) && (gameData.game.over === false)) {
     $('.moveMessage').html("It's O's turn")
     $(event.target).html('X')
     moveArr.push('X')
@@ -165,6 +165,7 @@ const addHandlers = () => {
 // cells[8] = $('.eight').html()
 // console.log(cells)
 
+// $('h2').html() === ('X wins!') || ($('h2').html() === 'O wins!') || ($('h2').html() === 'Cats!')
 module.exports = {
   fillContent,
   emptyContent,

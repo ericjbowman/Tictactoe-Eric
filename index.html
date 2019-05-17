@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+      <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
       <title>Example</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -12,34 +13,37 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <h1>Tic Tac Toe!</h1>
-      <p id="message"></p>
+      <h1>Tic Tac Toe</h1>
       <div class="Login">
       <form id="sign-up">
         <h3>Sign up!</h3>
           <input type="text" name="credentials[email]" placeholder="Email">
           <input type="password" name="credentials[password]" placeholder="Password">
           <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
-          <input type="submit" value="Sign up!">
+          <input type="submit" value="Sign up!" class="but">
       </form>
 
       <form id="sign-in">
         <h3>Sign in!</h3>
           <input type="text" name="credentials[email]" placeholder="Email">
           <input type="password" name="credentials[password]" placeholder="Password">
-          <input type="submit" value="Sign in!">
+          <input type="submit" value="Sign in!" class="but">
       </form>
 
       <form id="sign-out" class="disappear">
-            <input type="submit" value="Sign out!">
+            <input type="submit" value="Sign out!" class="but">
       </form>
 
       <form id="change-password" class="disappear">
           <h3>Change Password!</h3>
             <input type="password" name="passwords[old]" placeholder="Old Password">
             <input type="password" name="passwords[new]" placeholder="New Password">
-            <input type="submit" value="Change Password!">
+            <input type="submit" value="Change Password!" class="but">
       </form>
+      <p id="message"></p>
+      <div class= "playAgain">
+        <button class="disappear">New Game</button>
+      </div>
       </div>
       <div class="container board disappear">
         <div class="row top">
@@ -62,8 +66,5 @@
       <h3 class = "moveMessage"></h3>
       <h3 class= "gamesPlayed"></h3>
       <h3 class= "borg"></h3>
-      <div class= "playAgain">
-        <button>New Game</button>
-      </div>
     </body>
 </html>
