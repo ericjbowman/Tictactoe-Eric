@@ -78,8 +78,9 @@ const onStartGameFailure = function () {
   $('.moveMessage').html('Error')
 }
 
+let worthlessNumber = 0
 const onPatchGameDataSuccess = function () {
-  $('.moveMessage').html('Nice Move!')
+  worthlessNumber++
 }
 
 const onPatchGameDataFailure = function () {

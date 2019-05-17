@@ -27,26 +27,26 @@ const fillContent = function () {
   if ($('h2').html() === ('X wins!') || ($('h2').html() === 'O wins!') || ($('h2').html() === 'Cats!')) {
     $('.moveMessage').html('Resistance is futile!')
   } else if ($(event.target).html() !== '') {
-    $('h2').html('Choose an empty Square!')
+    $('.moveMessage').html('Choose an empty Square!')
   } else if (moveArr.length % 2 !== 0) {
-    $('h2').html('')
+    $('.moveMessage').html("It's X's turn")
     $(event.target).html('O')
+    moveArr.push('O')
     gameData.game.cell.index = $(event.target).data('cell-index')
     gameData.game.cell.value = 'o'
-    console.log(store.id)
+    // console.log(store.id)
     api.patchGameData(gameData, store.id)
       .then(ui.onPatchGameDataSuccess)
       .catch(ui.onPatchGameDataFailure)
-    moveArr.push('O')
   } else if (moveArr.length % 2 === 0) {
-    $('h2').html('')
+    $('.moveMessage').html("It's O's turn")
     $(event.target).html('X')
+    moveArr.push('X')
     gameData.game.cell.index = $(event.target).data('cell-index')
     gameData.game.cell.value = 'x'
     api.patchGameData(gameData, store.id)
       .then(ui.onPatchGameDataSuccess)
       .catch(ui.onPatchGameDataFailure)
-    moveArr.push('X')
   }
   const lines = {
     rowOne: [$('.zero').html(), $('.one').html(), $('.two').html()],
@@ -60,12 +60,14 @@ const fillContent = function () {
   }
   if (lines.rowOne.every(i => i === 'X') || lines.rowTwo.every(i => i === 'X') || lines.rowThree.every(i => i === 'X') || lines.columnOne.every(i => i === 'X') || lines.columnTwo.every(i => i === 'X') || lines.columnThree.every(i => i === 'X') || lines.diagOne.every(i => i === 'X') || lines.diagTwo.every(i => i === 'X')) {
     $('h2').html('X wins!')
+    $('.moveMessage').html('')
     gameData.game.over = true
     api.indexGamedata()
       .then(ui.onIndexSuccess)
       .catch(ui.onIndexFailure)
   } else if (lines.rowOne.every(i => i === 'O') || lines.rowTwo.every(i => i === 'O') || lines.rowThree.every(i => i === 'O') || lines.columnOne.every(i => i === 'O') || lines.columnTwo.every(i => i === 'O') || lines.columnThree.every(i => i === 'O') || lines.diagOne.every(i => i === 'O') || lines.diagTwo.every(i => i === 'O')) {
     $('h2').html('O wins!')
+    $('.moveMessage').html('')
     gameData.game.over = true
     api.patchGameData(gameData, store.id)
       .then(console.log(gameData))
@@ -86,6 +88,7 @@ const fillContent = function () {
 }
 // let numGames = 0
 const emptyContent = function () {
+  $('.board').removeClass('disappear')
   $('.box').html('')
   $('h2').html('')
   $('.borg').html('')
