@@ -30,6 +30,8 @@ const signInSuccess = function (data) {
   $('#change-password').removeClass()
   $('#sign-out').removeClass()
   $('button').removeClass()
+  $('#sign-out').show()
+  $('#change-password').show()
 }
 
 const signInFailure = function (error) {
@@ -47,6 +49,8 @@ const signOutSuccess = function () {
   console.log('signOutSuccess ran and nothing was returned!')
   $('#sign-up').show()
   $('#sign-in').show()
+  $('#sign-out').hide()
+  $('#change-password').hide()
   store.user = null
 }
 

@@ -77,6 +77,7 @@ const fillContent = function () {
       .catch(ui.onIndexFailure)
   } else if (moveArr.length === 9) {
     $('h2').html('Cats!')
+    $('.moveMessage').html('')
     gameData.game.over = true
     api.patchGameData(gameData, store.id)
       .then(console.log(gameData))
