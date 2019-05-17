@@ -23,8 +23,10 @@ const signInSuccess = function (data) {
   $('#message').addClass('success')
   console.log('signInSuccess ran. Data is :', data)
   store.user = data.user
-  $('#sign-up').html('')
-  $('#sign-in').html('')
+  // $('#sign-up').addClass('.disappear')
+  // $('#sign-in').addClass('.disappear')
+  $('#sign-up').hide()
+  $('#sign-in').hide()
   $('#change-password').removeClass()
   $('#sign-out').removeClass()
 }
@@ -42,6 +44,8 @@ const signOutSuccess = function () {
   $('#message').addClass('success')
   $('form').trigger('reset')
   console.log('signOutSuccess ran and nothing was returned!')
+  $('#sign-up').show()
+  $('#sign-in').show()
   store.user = null
 }
 
@@ -67,13 +71,28 @@ const changePasswordFailure = function (error) {
 }
 const onStartGameSuccess = function (responseData) {
   store.id = responseData.game.id
-  console.log(store.id)
+  // alert(store.id)
 }
 
+const onStartGameFailure = function () {
+  $('.moveMessage').html('Error')
+}
+
+const onPatchGameDataSuccess = function () {
+  $('.moveMessage').html('Nice Move!')
+}
+
+const onPatchGameDataFailure = function () {
+  $('.moveMessage').html('Error!')
+}
 const onIndexSuccess = function (responseData) {
   console.log(responseData)
   // store.games.id = responseData.games.length
   $('.gamesPlayed').html(`Games played: ${responseData.games.length}`)
+}
+
+const onIndexFailure = function () {
+  $('.moveMessage').html('Error!')
 }
 
 module.exports = {
@@ -86,5 +105,9 @@ module.exports = {
   changePasswordSuccess,
   changePasswordFailure,
   onIndexSuccess,
-  onStartGameSuccess
+  onIndexFailure,
+  onStartGameSuccess,
+  onStartGameFailure,
+  onPatchGameDataSuccess,
+  onPatchGameDataFailure
 }

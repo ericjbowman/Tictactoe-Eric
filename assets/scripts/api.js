@@ -44,7 +44,7 @@ const changePassword = function (data) {
   })
 }
 
-const startGame = function (data) {
+const startGame = function (event) {
   return $.ajax({
     url: config.apiUrl + '/games',
     method: 'POST',
