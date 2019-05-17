@@ -51,28 +51,41 @@ const startGame = function (data) {
     headers: {
       Authorization: 'Token token=' + store.user.token
     },
-    data
+    data: {}
     // data: data
   })
 }
 
-const patchGameData = function (data) {
-  console.log('data is ', data)
+const patchGameData = function (data, id) {
+  // console.log('data is ', data)
   return $.ajax({
-    url: config.apiUrl + '/games/:id',
+    url: config.apiUrl + '/games/' + id,
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token
     },
-    data
+    data: data
+  })
+}
+
+const indexGamedata = function () {
+  return $.ajax({
+    url: config.apiUrl + '/games',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+    // data
     // data: data
   })
 }
+
 module.exports = {
   signUp,
   signIn,
   signOut,
   changePassword,
   startGame,
-  patchGameData
+  patchGameData,
+  indexGamedata
 }

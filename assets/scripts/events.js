@@ -3,20 +3,25 @@
 const getFormFields = require(`../../lib/get-form-fields`)
 const api = require('./api')
 const ui = require('./ui')
+const store = require('./store')
 
-let gameData = {
+const gameData = {
   game: {
     cell: {
       index: 0,
-      value: "x"
+      value: ''
     },
     over: false
   }
 }
+// DRY as the ocean...
 let moveArr = []
 const fillContent = function () {
-  if ($('.box').html() === '') {
-    api.startGame(gameData)
+  if (moveArr.length === 0) {
+    api.startGame()
+      .then(ui.onStartGameSuccess)
+    // .catch(ui.onStartGameFailure)
+    gameData.game.over = false
   }
   if ($('h2').html() === ('X wins!') || ($('h2').html() === 'O wins!') || ($('h2').html() === 'Cats!')) {
     $('.borg').html('Resistance is futile!')
@@ -27,13 +32,18 @@ const fillContent = function () {
     $(event.target).html('O')
     gameData.game.cell.index = $(event.target).data('cell-index')
     gameData.game.cell.value = 'o'
-    console.log(gameData)
+    api.patchGameData(gameData, store.id)
+      .then(console.log('successfull patch!'))
+      .catch(console.log('unsuccessfull patch'))
     moveArr.push('O')
   } else if (moveArr.length % 2 === 0) {
     $('h2').html('')
     $(event.target).html('X')
     gameData.game.cell.index = $(event.target).data('cell-index')
     gameData.game.cell.value = 'x'
+    api.patchGameData(gameData, store.id)
+      .then(console.log('successful patch'))
+      .catch(console.log('unsuccessfull patch'))
     console.log(gameData)
     moveArr.push('X')
   }
@@ -47,31 +57,38 @@ const fillContent = function () {
     diagOne: [$('.zero').html(), $('.four').html(), $('.eight').html()],
     diagTwo: [$('.two').html(), $('.four').html(), $('.six').html()]
   }
-  let cells = []
-  cells[0] = $('.zero').html()
-  cells[1] = $('.one').html()
-  cells[2] = $('.two').html()
-  cells[3] = $('.three').html()
-  cells[4] = $('.four').html()
-  cells[5] = $('.five').html()
-  cells[6] = $('.six').html()
-  cells[7] = $('.seven').html()
-  cells[8] = $('.eight').html()
-  console.log(cells)
   if (lines.rowOne.every(i => i === 'X') || lines.rowTwo.every(i => i === 'X') || lines.rowThree.every(i => i === 'X') || lines.columnOne.every(i => i === 'X') || lines.columnTwo.every(i => i === 'X') || lines.columnThree.every(i => i === 'X') || lines.diagOne.every(i => i === 'X') || lines.diagTwo.every(i => i === 'X')) {
     $('h2').html('X wins!')
+    gameData.game.over = true
+    api.indexGamedata()
+      .then(ui.onIndexSuccess)
+      .catch(ui.onError)
   } else if (lines.rowOne.every(i => i === 'O') || lines.rowTwo.every(i => i === 'O') || lines.rowThree.every(i => i === 'O') || lines.columnOne.every(i => i === 'O') || lines.columnTwo.every(i => i === 'O') || lines.columnThree.every(i => i === 'O') || lines.diagOne.every(i => i === 'O') || lines.diagTwo.every(i => i === 'O')) {
     $('h2').html('O wins!')
+    gameData.game.over = true
+    api.patchGameData(gameData, store.id)
+      .then(console.log(gameData))
+      .catch(console.log('did not work'))
+    api.indexGamedata()
+      .then(ui.onIndexSuccess)
+      .catch(ui.onError)
   } else if (moveArr.length === 9) {
     $('h2').html('Cats!')
+    gameData.game.over = true
+    api.patchGameData(gameData, store.id)
+      .then(console.log(gameData))
+      .catch(console.log('did not work'))
+    api.indexGamedata()
+      .then(ui.onIndexSuccess)
+      .catch(ui.onError)
   }
-  // checkForWin()
 }
 // let numGames = 0
 const emptyContent = function () {
   $('.box').html('')
   $('h2').html('')
   $('.borg').html('')
+  $('.gamesPlayed').html('')
   moveArr = []
 }
 // const gameData = {}
@@ -89,11 +106,13 @@ const onSignUp = function (event) {
   api.signUp(data)
     .then(ui.signUpSuccess)
     .catch(ui.signUpFailure)
+  // $('#sign-up').html('')
 }
 
 const onSignIn = function (event) {
   event.preventDefault()
   console.log('sign in ran!')
+  // $('#sign-in').html('')
 
   const data = getFormFields(this)
   api.signIn(data)
@@ -120,15 +139,6 @@ const onChangePassword = function (event) {
     .catch(ui.changePasswordFailure)
 }
 
-// const onPatchGameData = function (gameData) {
-//   api.patchGameData(gameData)
-// }
-
-// const onEndGame = function (event) {
-//   if ($('h2').html() !=== "") {
-//
-//   }
-// }
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
@@ -136,29 +146,20 @@ const addHandlers = () => {
   $('#change-password').on('submit', onChangePassword)
 }
 
-// const eventChain = {
-//   fillContent: function() {
-//     if (moveArr.length === 9) {
-//       return
-//     } else if (moveArr.length % 2 !== 0) {
-//       $(event.target).html("O")
-//       moveArr.push('O')
-//     } else if (moveArr.length % 2 === 0) {
-//       $(event.target).html('X')
-//       moveArr.push('X')
-//       console.log(moveArr)
-//     }
-//   },
-//   checkForWin: function () {
-//     if (moveArr[0] === movArr[1] && moveArr[1] === moveArr[3]) {
-//       alert('you win!')
-//     }
-//   }
-// }
+// const cells = []
+// cells[0] = $('.zero').html()
+// cells[1] = $('.one').html()
+// cells[2] = $('.two').html()
+// cells[3] = $('.three').html()
+// cells[4] = $('.four').html()
+// cells[5] = $('.five').html()
+// cells[6] = $('.six').html()
+// cells[7] = $('.seven').html()
+// cells[8] = $('.eight').html()
+// console.log(cells)
 
 module.exports = {
   fillContent,
-  // checkForWin,
   emptyContent,
   addHandlers
 

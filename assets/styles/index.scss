@@ -25,7 +25,7 @@ h1 {
   font-size: 100px;
 }
 
-h2, .borg {
+h2, .borg, .gamesPlayed {
   color: blue;
   text-align: center;
 }
@@ -44,4 +44,11 @@ form {
   border-bottom: 0;
 }
 
+.disappear {
+  display: none;
+}
+
+.container {
+  margin-top: 20px;
+}
 .blahblah {}
