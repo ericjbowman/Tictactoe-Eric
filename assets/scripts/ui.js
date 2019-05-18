@@ -21,7 +21,6 @@ const signInSuccess = function (data) {
   $('.info').html('')
   $('#message').text('Signed in successfully')
   $('#message').removeClass()
-  $('#message').addClass('success')
   console.log('signInSuccess ran. Data is :', data)
   store.user = data.user
   // $('#sign-up').addClass('.disappear')
