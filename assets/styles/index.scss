@@ -1,17 +1,38 @@
+// $primary: E1FFDA;
+// $secondary: red;
+// $light: FF2323;
+//
+// $primary-blue: blue;
+// $secondary-blue: #4286f4;
+// $background-grey: #c0cde0;
+// $blue-hover: #85b3fc;
+//
+
 @import '~bootstrap/scss/bootstrap';
+
+$primary-one: #E1FFDA;
+$secondary: red;
+$light: #FF2323;
+$pink-hover: #FF7C7C;
+
+$primary-blue: blue;
+$secondary-blue: #4286f4;
+$background-grey: #c0cde0;
+$blue-hover: #85b3fc;
+
 * {
   font-family: 'Ubuntu Condensed', sans-serif;
 }
 body {
-  background-color: #c0cde0;
+  background-color: $primary-one;
 }
 h1 {
-  color: blue;
+  color: black;
   text-align: center;
 }
 
 .container {
-  background-color: blue;
+  background-color: red;
   height: 450px;
   width: 450px;
   margin: 0 auto;
@@ -33,11 +54,14 @@ h1 {
 p {
   // margin-left: 20px;
   font-size: 30px;
-  color: blue;
+  color: $light;
   margin-bottom: 0px;
 }
 .but {
-  background-color: #85b3fc;
+  background-color: $light;
+}
+.but:hover {
+  background-color: $pink-hover;
 }
 .row {
   height: 150px;
@@ -53,29 +77,33 @@ p {
 }
 
 .col-4:hover {
-  background-color: #4286f4;
+  background-color: $pink-hover;
 }
 
-h2, h4, .borg, .gamesPlayed, .moveMessage {
-  color: blue;
+h2, h4, .gamesPlayed, .moveMessage {
+  color: black;
+  text-align: center;
+}
+.borg {
+  color: red;
   text-align: center;
 }
 
 form {
-  color: blue;
+  color: black;
 }
 
 button {
   font-size: 30px;
   padding: 1em;
   margin-bottom: 10px;
-  background-color: #4286f4;
+  background-color: red;
   border: solid #000;
   border-width: 2px;
 }
 
 button:hover {
-  background-color: #85b3fc;
+  background-color: $pink-hover;
 }
 
 .playAgain {
