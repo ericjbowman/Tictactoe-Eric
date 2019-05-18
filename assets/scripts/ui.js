@@ -7,7 +7,7 @@ const signUpSuccess = function (data) {
   $('#message').removeClass()
   $('#message').addClass('success')
   console.log('signUpSuccess ran. Data is :', data)
-  $('#sign-up').html('')
+  $('#sign-up').addClass('disappear')
 }
 
 const signUpFailure = function (error) {
@@ -58,6 +58,7 @@ const signOutSuccess = function () {
   $('.info').addClass('disappear')
   $('h4').show()
   $('.changePw').addClass('disappear')
+  $('#sign-up').removeClass('disappear')
   store.user = null
 }
 
@@ -65,6 +66,7 @@ const signOutFailure = function (error) {
   $('#message').text('Error on sign out')
   $('#message').removeClass()
   $('#message').addClass('failure')
+  $('#change-password').trigger('reset')
   console.error('signOutFailure ran. Error is :', error)
 }
 
@@ -76,6 +78,8 @@ const onChangePwButton = function () {
 const changePasswordSuccess = function () {
   $('.onChangePassword').removeClass('failure')
   $('.onChangePassword').html('Changed password successfully')
+  $('#change-password').trigger('reset')
+  // $('.change-password')[0].reset()
   // $('#message').removeClass()
   // $('#message').addClass('success')
   // console.log('changePasswordSuccess ran and nothing was returned!')
@@ -84,6 +88,7 @@ const changePasswordSuccess = function () {
 const changePasswordFailure = function (error) {
   $('.onChangePassword').addClass('failure')
   $('.onChangePassword').html('Failed to change password')
+  $('#change-password').trigger('reset')
   // $('#message').removeClass()
   console.error('changePasswordFailure ran. Error is :', error)
 }
