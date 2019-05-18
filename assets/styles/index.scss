@@ -20,13 +20,15 @@ h1 {
 
 input {
   border: solid #000;
-  border-width: 3px;
+  border-width: 2px;
 }
 h1 {
   font-size: 70px;
 }
+
 .Login, {
   margin-left: 20px;
+  height: 100px;
 }
 p {
   // margin-left: 20px;
@@ -44,7 +46,7 @@ p {
 .col-4 {
   align-items: center;
   border: solid #000;
-  border-width: 4px;
+  border-width: 2px;
   display: flex;
   justify-content: center;
   font-size: 80px;
@@ -54,7 +56,7 @@ p {
   background-color: #4286f4;
 }
 
-h2, .borg, .gamesPlayed, .moveMessage{
+h2, h4, .borg, .gamesPlayed, .moveMessage {
   color: blue;
   text-align: center;
 }
@@ -66,10 +68,10 @@ form {
 button {
   font-size: 30px;
   padding: 1em;
-  margin-top: 20px, 0px, 0px, 0px;
+  margin-bottom: 10px;
   background-color: #4286f4;
   border: solid #000;
-  border-width: 5px;
+  border-width: 2px;
 }
 
 button:hover {
@@ -92,4 +94,6 @@ button:hover {
 .container {
   margin-top: 20px;
 }
-.blahblah {}
+.failure {
+  color: red;
+}

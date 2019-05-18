@@ -2,7 +2,7 @@
 <html>
     <head>
       <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
-      <title>Example</title>
+      <title>Tic Tac Toe</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Do not add `link` tags-->
@@ -13,7 +13,8 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <h1>Tic Tac Toe</h1>
+      <h1>Tic Tac Toe!</h1>
+      <h4 class="failure">Sign in to play</h4>
       <div class="Login">
       <form id="sign-up">
         <h3>Sign up</h3>
@@ -22,7 +23,6 @@
           <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
           <input type="submit" value="Sign up!" class="but">
       </form>
-
       <form id="sign-in">
         <h3>Sign in</h3>
           <input type="text" name="credentials[email]" placeholder="Email">
@@ -41,9 +41,9 @@
             <input type="submit" value="Change Password!" class="but">
       </form>
       <p id="message"></p>
+      </div>
       <div class= "playAgain">
         <button class="disappear">New Game</button>
-      </div>
       </div>
       <div class="container board disappear">
         <div class="row top">
@@ -63,10 +63,10 @@
         </div>
       </div>
       <div class= "bottomMessages">
-      <h2></h2>
-      <h3 class= "moveMessage"></h3>
-      <h3 class= "gamesPlayed"></h3>
-      <h3 class= "borg"></h3>
+      <h2 class="info"></h2>
+      <h3 class= "moveMessage info"></h3>
+      <h3 class= "gamesPlayed info"></h3>
+      <h3 class= "borg info"></h3>
       </div>
       <!-- <footer>
         <p>Created by Eric Bowman</p>
