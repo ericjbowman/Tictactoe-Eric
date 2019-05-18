@@ -1,13 +1,3 @@
-// $primary: E1FFDA;
-// $secondary: red;
-// $light: FF2323;
-//
-// $primary-blue: blue;
-// $secondary-blue: #4286f4;
-// $background-grey: #c0cde0;
-// $blue-hover: #85b3fc;
-//
-
 @import '~bootstrap/scss/bootstrap';
 
 $primary-one: #E1FFDA;
@@ -50,19 +40,24 @@ h1 {
 .Login, {
   margin-left: 20px;
   height: 100px;
+  width: 40%;
 }
+
 p {
   // margin-left: 20px;
   font-size: 30px;
   color: black;
   margin-bottom: 0px;
 }
+
 .but {
   background-color: $light;
 }
+
 .but:hover {
   background-color: $pink-hover;
 }
+
 .row {
   height: 150px;
 }
@@ -110,6 +105,7 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 0;
 }
 
 .disappear {
@@ -119,12 +115,15 @@ button:hover {
 .bottomMessages {
   height: 200px;
 }
+
 .container {
   margin-top: 20px;
 }
+
 .failure {
   color: red;
 }
+
 .btn {
   background-color: $secondary;
   border: solid #000;
@@ -134,4 +133,20 @@ button:hover {
 }
 .modal-content {
   background-color: $primary-one;
+}
+
+@media only screen and (max-width: 600px) {
+  .board {
+    height: 150px;
+    width: 150px;
+  }
+  .row {
+    height: 50px;
+  }
+  .box {
+    height: 50px;
+    width: 50px;
+    font-size: 30px;
+  }
+
 }
