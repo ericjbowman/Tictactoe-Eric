@@ -135,6 +135,10 @@ button:hover {
   background-color: $primary-one;
 }
 
+input {
+  margin-bottom: 2px;
+}
+
 @media only screen and (max-width: 600px) {
   .board {
     height: 150px;
