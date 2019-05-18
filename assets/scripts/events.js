@@ -5,6 +5,17 @@ const api = require('./api')
 const ui = require('./ui')
 const store = require('./store')
 
+// const lines = {
+//   rowOne: [$('.zero').html(), $('.one').html(), $('.two').html()],
+//   rowTwo: [$('.three').html(), $('.four').html(), $('.five').html()],
+//   rowThree: [$('.six').html(), $('.seven').html(), $('.eight').html()],
+//   columnOne: [$('.zero').html(), $('.three').html(), $('.six').html()],
+//   columnTwo: [$('.one').html(), $('.four').html(), $('.seven').html()],
+//   columnThree: [$('.two').html(), $('.five').html(), $('.eight').html()],
+//   diagOne: [$('.zero').html(), $('.four').html(), $('.eight').html()],
+//   diagTwo: [$('.two').html(), $('.four').html(), $('.six').html()]
+// }
+
 const gameData = {
   game: {
     cell: {
@@ -23,30 +34,28 @@ const newGame = function () {
       .catch(ui.onStartGameFailure)
   }
 }
+const move = function (player) {
+  $(event.target).html(player)
+  moveArr.push('player')
+  gameData.game.cell.index = $(event.target).data('cell-index')
+  gameData.game.cell.value = player
+  api.patchGameData(gameData, store.id)
+    .then(ui.onPatchGameDataSuccess)
+    .catch(ui.onPatchGameDataFailure)
+}
 const fillContent = function () {
   if (gameData.game.over === true) {
     $('.borg').html('Resistance is futile!')
   } else if ($(event.target).html() !== '') {
     $('.moveMessage').html('Choose an empty Square!')
   } else if ((moveArr.length % 2 !== 0) && (gameData.game.over === false)) {
-    $('.moveMessage').html("It's X's turn")
-    $(event.target).html('O')
-    moveArr.push('O')
-    gameData.game.cell.index = $(event.target).data('cell-index')
-    gameData.game.cell.value = 'o'
-    // console.log(store.id)
-    api.patchGameData(gameData, store.id)
-      .then(ui.onPatchGameDataSuccess)
-      .catch(ui.onPatchGameDataFailure)
+    const player = 'o'
+    $('.moveMessage').html(`It's X's turn`)
+    move(player)
   } else if ((moveArr.length % 2 === 0) && (gameData.game.over === false)) {
-    $('.moveMessage').html("It's O's turn")
-    $(event.target).html('X')
-    moveArr.push('X')
-    gameData.game.cell.index = $(event.target).data('cell-index')
-    gameData.game.cell.value = 'x'
-    api.patchGameData(gameData, store.id)
-      .then(ui.onPatchGameDataSuccess)
-      .catch(ui.onPatchGameDataFailure)
+    const player = 'x'
+    $('.moveMessage').html(`It's O's turn`)
+    move(player)
   }
   const lines = {
     rowOne: [$('.zero').html(), $('.one').html(), $('.two').html()],
@@ -58,14 +67,14 @@ const fillContent = function () {
     diagOne: [$('.zero').html(), $('.four').html(), $('.eight').html()],
     diagTwo: [$('.two').html(), $('.four').html(), $('.six').html()]
   }
-  if (lines.rowOne.every(i => i === 'X') || lines.rowTwo.every(i => i === 'X') || lines.rowThree.every(i => i === 'X') || lines.columnOne.every(i => i === 'X') || lines.columnTwo.every(i => i === 'X') || lines.columnThree.every(i => i === 'X') || lines.diagOne.every(i => i === 'X') || lines.diagTwo.every(i => i === 'X')) {
+  if (lines.rowOne.every(i => i === 'x') || lines.rowTwo.every(i => i === 'x') || lines.rowThree.every(i => i === 'x') || lines.columnOne.every(i => i === 'x') || lines.columnTwo.every(i => i === 'x') || lines.columnThree.every(i => i === 'x') || lines.diagOne.every(i => i === 'x') || lines.diagTwo.every(i => i === 'x')) {
     $('h2').html('X wins!')
     $('.moveMessage').html('')
     gameData.game.over = true
     api.indexGamedata()
       .then(ui.onIndexSuccess)
       .catch(ui.onIndexFailure)
-  } else if (lines.rowOne.every(i => i === 'O') || lines.rowTwo.every(i => i === 'O') || lines.rowThree.every(i => i === 'O') || lines.columnOne.every(i => i === 'O') || lines.columnTwo.every(i => i === 'O') || lines.columnThree.every(i => i === 'O') || lines.diagOne.every(i => i === 'O') || lines.diagTwo.every(i => i === 'O')) {
+  } else if (lines.rowOne.every(i => i === 'o') || lines.rowTwo.every(i => i === 'o') || lines.rowThree.every(i => i === 'o') || lines.columnOne.every(i => i === 'o') || lines.columnTwo.every(i => i === 'o') || lines.columnThree.every(i => i === 'o') || lines.diagOne.every(i => i === 'o') || lines.diagTwo.every(i => i === 'o')) {
     $('h2').html('O wins!')
     $('.moveMessage').html('')
     gameData.game.over = true
