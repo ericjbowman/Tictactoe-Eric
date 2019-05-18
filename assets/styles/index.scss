@@ -125,3 +125,13 @@ button:hover {
 .failure {
   color: red;
 }
+.btn {
+  background-color: $secondary;
+  border: solid #000;
+  border-width: 2px;
+  border-radius: 0px;
+  margin-top: 5px;
+}
+.modal-content {
+  background-color: $primary-one;
+}

@@ -27,9 +27,9 @@ const signInSuccess = function (data) {
   // $('#sign-in').addClass('.disappear')
   $('#sign-up').hide()
   $('#sign-in').hide()
-  $('#change-password').removeClass()
+  $('.changePw').removeClass('disappear')
   $('#sign-out').removeClass()
-  $('button').removeClass('disappear')
+  $('.newGame').removeClass('disappear')
   $('#sign-out').show()
   $('#change-password').show()
   $('h4').hide()
@@ -54,9 +54,10 @@ const signOutSuccess = function () {
   $('#sign-out').hide()
   $('#change-password').hide()
   $('.board').addClass('disappear')
-  $('button').addClass('disappear')
+  $('.newGame').addClass('disappear')
   $('.info').addClass('disappear')
   $('h4').show()
+  $('.changePw').addClass('disappear')
   store.user = null
 }
 
@@ -67,17 +68,23 @@ const signOutFailure = function (error) {
   console.error('signOutFailure ran. Error is :', error)
 }
 
+const onChangePwButton = function () {
+  $('.onChangePassword').html('')
+  $('.onChangePassword').removeClass('failure')
+}
+
 const changePasswordSuccess = function () {
-  $('#message').text('Changed password successfully')
-  $('#message').removeClass()
-  $('#message').addClass('success')
-  console.log('changePasswordSuccess ran and nothing was returned!')
+  $('.onChangePassword').removeClass('failure')
+  $('.onChangePassword').html('Changed password successfully')
+  // $('#message').removeClass()
+  // $('#message').addClass('success')
+  // console.log('changePasswordSuccess ran and nothing was returned!')
 }
 
 const changePasswordFailure = function (error) {
-  $('#message').text('Error on change password')
-  $('#message').removeClass()
-  $('#message').addClass('failure')
+  $('.onChangePassword').addClass('failure')
+  $('.onChangePassword').html('Failed to change password')
+  // $('#message').removeClass()
   console.error('changePasswordFailure ran. Error is :', error)
 }
 const onStartGameSuccess = function (responseData) {
@@ -121,5 +128,6 @@ module.exports = {
   onStartGameSuccess,
   onStartGameFailure,
   onPatchGameDataSuccess,
-  onPatchGameDataFailure
+  onPatchGameDataFailure,
+  onChangePwButton
 }
