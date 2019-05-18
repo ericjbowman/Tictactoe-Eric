@@ -18,6 +18,7 @@ const signUpFailure = function (error) {
 }
 
 const signInSuccess = function (data) {
+  $('.info').html('')
   $('#message').text('Signed in successfully')
   $('#message').removeClass()
   $('#message').addClass('success')
@@ -33,7 +34,7 @@ const signInSuccess = function (data) {
   $('#sign-out').show()
   $('#change-password').show()
   $('h4').hide()
-  $('info').removeClass('disappear')
+  $('.info').removeClass('disappear')
 }
 
 const signInFailure = function (error) {
