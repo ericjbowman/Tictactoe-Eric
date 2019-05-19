@@ -88,7 +88,7 @@ form {
   color: black;
 }
 
-button {
+.newGame {
   font-size: 30px;
   padding: .5em;
   margin-bottom: 10px;
@@ -131,6 +131,7 @@ button:hover {
   border-radius: 0px;
   margin-top: 5px;
 }
+
 .modal-content {
   background-color: $primary-one;
 }
@@ -138,6 +139,39 @@ button:hover {
 input {
   margin-bottom: 2px;
 }
+
+footer {
+  bottom: 0;
+  margin-bottom: 0;
+  font-size: 2px;
+}
+
+#me {
+  font-size: 20px;
+}
+.fbottom {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-size: 2px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-body {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+}
+
 
 @media only screen and (max-width: 600px) {
   .board {
