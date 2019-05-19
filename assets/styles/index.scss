@@ -4,7 +4,7 @@ $primary-one: #E1FFDA;
 $secondary: #FECEA3;
 $light: #FEDCBE;
 $pink-hover: #FEDCBE;
-$border-color: #00520A;
+$border-color: #000;
 
 $primary-blue: blue;
 $secondary-blue: #4286f4;
@@ -31,7 +31,7 @@ h1 {
 }
 
 input {
-  border: solid #000;
+  border: solid $border-color;
   border-width: 2px;
 }
 h1 {
@@ -65,7 +65,7 @@ p {
 
 .col-4 {
   align-items: center;
-  border: solid #000;
+  border: solid $border-color;
   border-width: 2px;
   display: flex;
   justify-content: center;
@@ -98,7 +98,7 @@ form {
   padding: .5em;
   margin-bottom: 10px;
   background-color: $secondary;
-  border: solid #000;
+  border: solid $border-color;
   border-width: 2px;
 }
 
@@ -131,7 +131,7 @@ button:hover {
 
 .btn {
   background-color: $secondary;
-  border: solid #000;
+  border: solid $border-color;
   border-width: 2px;
   border-radius: 0px;
   margin-top: 5px;
@@ -153,11 +153,13 @@ footer {
 #me {
   font-size: 20px;
 }
+
 .fbottom {
   padding: 10px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  // height: 100px;
 }
 
 .modal-header {
@@ -174,7 +176,6 @@ footer {
   display: flex;
   justify-content: center;
 }
-
 
 @media only screen and (max-width: 600px) {
   .board {

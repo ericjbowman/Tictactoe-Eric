@@ -5,17 +5,7 @@ const api = require('./api')
 const ui = require('./ui')
 const store = require('./store')
 
-// const lines = {
-//   rowOne: [$('.zero').html(), $('.one').html(), $('.two').html()],
-//   rowTwo: [$('.three').html(), $('.four').html(), $('.five').html()],
-//   rowThree: [$('.six').html(), $('.seven').html(), $('.eight').html()],
-//   columnOne: [$('.zero').html(), $('.three').html(), $('.six').html()],
-//   columnTwo: [$('.one').html(), $('.four').html(), $('.seven').html()],
-//   columnThree: [$('.two').html(), $('.five').html(), $('.eight').html()],
-//   diagOne: [$('.zero').html(), $('.four').html(), $('.eight').html()],
-//   diagTwo: [$('.two').html(), $('.four').html(), $('.six').html()]
-// }
-
+// This is the data sent to the api
 const gameData = {
   game: {
     cell: {
@@ -25,21 +15,17 @@ const gameData = {
     over: false
   }
 }
-// DRY as the ocean...
-const triggerIndexSuccess = function () {
-  api.indexGamedata()
-    .then(ui.onIndexSuccess)
-    .catch(ui.onIndexFailure)
-}
-
+// moveArr is an arry of moves in order that they are made
 let moveArr = []
+// Initiates a new game
 const newGame = function () {
   if (moveArr.length === 0) {
     api.startGame()
-      .then(ui.onStartGameSuccess)
+      .then(ui.onStartGameSuccess, gameData.game.over = false)
       .catch(ui.onStartGameFailure)
   }
 }
+// move function shows the move on gameboard and updates api with cell index, value, and whether the game is over
 const move = function (player) {
   $(event.target).html(player)
   // moveArr.push('player')
@@ -49,11 +35,20 @@ const move = function (player) {
     .then(moveArr.push('player'))
     .catch(ui.onPatchGameDataFailure)
 }
+// triggerIndexSuccess ensures that the api patch happens before the api index occurs
+const triggerIndexSuccess = function () {
+  api.indexGamedata()
+    .then(ui.onIndexSuccess)
+    .catch(ui.onIndexFailure)
+}
+// finalMove initiates an API patch for gameData and API index if successfull
 const finalMove = function () {
   api.patchGameData(gameData, store.id)
     .then(triggerIndexSuccess())
     .catch(ui.onPatchGameDataFailure)
 }
+// fillContent is triggered by clicking a square. It checks if the game is over, if the square is already clicked, and whose turn it is, assigning player 'o' or 'x'.
+// Then it checks for a win or tie, let's the player know the result, and triggers finalMove.
 const fillContent = function () {
   if (gameData.game.over === true) {
     $('.borg').html('Resistance is futile!')
@@ -95,7 +90,8 @@ const fillContent = function () {
     finalMove()
   }
 }
-// let numGames = 0
+// emptyContent is triggered by the newGame button and removes messages and contents of game board. It also triggers newGame,
+// posting a new game to the api.
 const emptyContent = function () {
   $('.board').removeClass('disappear')
   $('.box').html('')
@@ -104,31 +100,22 @@ const emptyContent = function () {
   $('.gamesPlayed').html('')
   $('.moveMessage').html('')
   moveArr = []
-  newGame()
   gameData.game.over = false
+  newGame()
   $('#message').html('')
 }
-// const gameData = {}
-
-// const onStartGame = function () {
-//   api.startGame(gameData)
-//   console.log(gameData)
-// }
 
 const onSignUp = function (event) {
   event.preventDefault()
-  console.log('sign up ran!')
-
   const data = getFormFields(this)
   api.signUp(data)
     .then(ui.signUpSuccess)
     .catch(ui.signUpFailure)
-  // $('#sign-up').html('')
+  $('#sign-up').html('')
 }
 
 const onSignIn = function (event) {
   event.preventDefault()
-  console.log('sign in ran!')
   // $('#sign-in').html('')
 
   const data = getFormFields(this)
@@ -139,8 +126,6 @@ const onSignIn = function (event) {
 
 const onSignOut = function (event) {
   event.preventDefault()
-  console.log('sign out ran')
-
   api.signOut()
     .then(ui.signOutSuccess)
     .catch(ui.signOutFailure)
@@ -148,8 +133,6 @@ const onSignOut = function (event) {
 
 const onChangePassword = function (event) {
   event.preventDefault()
-  console.log('change password ran!')
-
   const data = getFormFields(this)
   api.changePassword(data)
     .then(ui.changePasswordSuccess)
@@ -175,7 +158,6 @@ const addHandlers = () => {
 // cells[8] = $('.eight').html()
 // console.log(cells)
 
-// $('h2').html() === ('X wins!') || ($('h2').html() === 'O wins!') || ($('h2').html() === 'Cats!')
 module.exports = {
   fillContent,
   emptyContent,
