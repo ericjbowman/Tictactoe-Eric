@@ -101,11 +101,6 @@ const onStartGameFailure = function () {
   $('.moveMessage').html('Error')
 }
 
-let worthlessNumber = 0
-const onPatchGameDataSuccess = function () {
-  worthlessNumber++
-}
-
 const onPatchGameDataFailure = function () {
   $('.moveMessage').html('Error')
 }
@@ -155,7 +150,6 @@ module.exports = {
   onIndexFailure,
   onStartGameSuccess,
   onStartGameFailure,
-  onPatchGameDataSuccess,
   onPatchGameDataFailure,
   onChangePwButton
 }

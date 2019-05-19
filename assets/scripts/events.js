@@ -40,12 +40,12 @@ const move = function (player) {
   gameData.game.cell.index = $(event.target).data('cell-index')
   gameData.game.cell.value = player
   api.patchGameData(gameData, store.id)
-    .then(ui.onPatchGameDataSuccess)
+    .then(api.indexGamedata)
     .catch(ui.onPatchGameDataFailure)
 }
 const finalMove = function () {
   api.patchGameData(gameData, store.id)
-    .then(ui.onPatchGameDataSuccess)
+    .then(api.indexGamedata)
     .catch(ui.onPatchGameDataFailure)
 }
 const fillContent = function () {
@@ -76,6 +76,7 @@ const fillContent = function () {
     $('h2').html('X wins!')
     $('.moveMessage').html('')
     gameData.game.over = true
+    finalMove()
     api.indexGamedata()
       .then(ui.onIndexSuccess)
       .catch(ui.onIndexFailure)
