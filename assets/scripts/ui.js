@@ -132,7 +132,7 @@ const onIndexSuccess = function (responseData) {
 //     alert(xwins, ywins)
 //   }
 //   whoWon(responseData)
-// }
+}
 
 const onIndexFailure = function () {
   $('.moveMessage').html('Error!')
