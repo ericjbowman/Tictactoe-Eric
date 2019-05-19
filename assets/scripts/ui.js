@@ -109,10 +109,33 @@ const onPatchGameDataSuccess = function () {
 const onPatchGameDataFailure = function () {
   $('.moveMessage').html('Error')
 }
+let xwins = 0
+let ywins = 0
 const onIndexSuccess = function (responseData) {
   console.log(responseData)
   // store.games.id = responseData.games.length
   $('.gamesPlayed').html(`Games played: ${responseData.games.length}`)
+  const whoWon = function (responseData) {
+    responseData.games.forEach((game) => {
+      let xArray = []
+      let yArray = []
+      game.cells.forEach((cell) => {
+        if (cell === 'x') {
+          xArray.push(cell)
+        } else if (cell === 'o') {
+          yArray.push(cell)
+        }
+      })
+      console.log(`Number of x's in game = ${xArray}`)
+      if (game.over === true && xArray.length > yArray.length) {
+        xwins++
+      } else if (game.over === true && (xArray.length + yArray.length !== 9)) {
+        ywins++
+      }
+    })
+    alert(xwins, ywins)
+  }
+  whoWon(responseData)
 }
 
 const onIndexFailure = function () {

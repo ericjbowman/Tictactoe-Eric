@@ -22,7 +22,7 @@ h1 {
 }
 
 .container {
-  background-color: red;
+  background-color: $secondary;
   height: 450px;
   width: 450px;
   margin: 0 auto;
@@ -92,7 +92,7 @@ form {
   font-size: 30px;
   padding: .5em;
   margin-bottom: 10px;
-  background-color: red;
+  background-color: $secondary;
   border: solid #000;
   border-width: 2px;
 }
