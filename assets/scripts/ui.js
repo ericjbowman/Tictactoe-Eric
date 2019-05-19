@@ -74,7 +74,8 @@ const signOutFailure = function (error) {
   console.error('signOutFailure ran. Error is :', error)
 }
 
-const onChangePwButton = function () {
+const onChangePwButton = function (event) {
+  event.preventDefault()
   $('.onChangePassword').html('')
   $('.onChangePassword').removeClass('failure')
 }
@@ -100,6 +101,9 @@ const onStartGameSuccess = function (responseData) {
   store.id = responseData.game.id
   // alert(store.id)
 }
+const logPatchData = function (responseData) {
+  console.log(responseData)
+}
 
 const onStartGameFailure = function () {
   $('.moveMessage').html('Error')
@@ -112,7 +116,7 @@ const onPatchGameDataFailure = function () {
 const onIndexSuccess = function (responseData) {
   // let xwins = 0
   // let ywins = 0
-  console.log(responseData)
+  // console.log(responseData)
   // store.games.id = responseData.games.length
   $('.gamesPlayed').html(`Games played: ${responseData.games.length}`)
 //   const whoWon = function (responseData) {
@@ -156,5 +160,6 @@ module.exports = {
   onStartGameSuccess,
   onStartGameFailure,
   onPatchGameDataFailure,
-  onChangePwButton
+  onChangePwButton,
+  logPatchData
 }

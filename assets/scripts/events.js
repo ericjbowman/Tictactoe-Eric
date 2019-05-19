@@ -44,6 +44,7 @@ const triggerIndexSuccess = function () {
 // finalMove initiates an API patch for gameData and API index if successfull
 const finalMove = function () {
   api.patchGameData(gameData, store.id)
+    .then(ui.logPatchData)
     .then(triggerIndexSuccess())
     .catch(ui.onPatchGameDataFailure)
 }
