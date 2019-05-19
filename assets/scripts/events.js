@@ -26,6 +26,12 @@ const gameData = {
   }
 }
 // DRY as the ocean...
+const triggerIndexSuccess = function () {
+  api.indexGamedata()
+    .then(ui.onIndexSuccess)
+    .catch(ui.onIndexFailure)
+}
+
 let moveArr = []
 const newGame = function () {
   if (moveArr.length === 0) {
@@ -36,16 +42,16 @@ const newGame = function () {
 }
 const move = function (player) {
   $(event.target).html(player)
-  moveArr.push('player')
+  // moveArr.push('player')
   gameData.game.cell.index = $(event.target).data('cell-index')
   gameData.game.cell.value = player
   api.patchGameData(gameData, store.id)
-    .then(api.indexGamedata)
+    .then(moveArr.push('player'))
     .catch(ui.onPatchGameDataFailure)
 }
 const finalMove = function () {
   api.patchGameData(gameData, store.id)
-    .then(api.indexGamedata)
+    .then(triggerIndexSuccess())
     .catch(ui.onPatchGameDataFailure)
 }
 const fillContent = function () {
@@ -77,25 +83,16 @@ const fillContent = function () {
     $('.moveMessage').html('')
     gameData.game.over = true
     finalMove()
-    api.indexGamedata()
-      .then(ui.onIndexSuccess)
-      .catch(ui.onIndexFailure)
   } else if (lines.rowOne.every(i => i === 'o') || lines.rowTwo.every(i => i === 'o') || lines.rowThree.every(i => i === 'o') || lines.columnOne.every(i => i === 'o') || lines.columnTwo.every(i => i === 'o') || lines.columnThree.every(i => i === 'o') || lines.diagOne.every(i => i === 'o') || lines.diagTwo.every(i => i === 'o')) {
     $('h2').html('O wins!')
     $('.moveMessage').html('')
     gameData.game.over = true
     finalMove()
-    api.indexGamedata()
-      .then(ui.onIndexSuccess)
-      .catch(ui.onIndexFailure)
   } else if (moveArr.length === 9) {
     $('h2').html('Cats!')
     $('.moveMessage').html('')
     gameData.game.over = true
     finalMove()
-    api.indexGamedata()
-      .then(ui.onIndexSuccess)
-      .catch(ui.onIndexFailure)
   }
 }
 // let numGames = 0

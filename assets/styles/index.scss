@@ -1,9 +1,9 @@
 @import '~bootstrap/scss/bootstrap';
 
 $primary-one: #E1FFDA;
-$secondary: red;
-$light: #FF2323;
-$pink-hover: #FF6060;
+$secondary: #FECEA3;
+$light: #FEDCBE;
+$pink-hover: #FEDCBE;
 
 $primary-blue: blue;
 $secondary-blue: #4286f4;
@@ -51,7 +51,7 @@ p {
 }
 
 .but {
-  background-color: $light;
+  background-color: $secondary;
 }
 
 .but:hover {
@@ -75,9 +75,13 @@ p {
   background-color: $pink-hover;
 }
 
-h2, h4, .gamesPlayed, .moveMessage {
+h2, .gamesPlayed, .moveMessage {
   color: black;
   text-align: center;
+}
+h4 {
+  margin-left: 20px;
+  font-size: 30px;
 }
 .borg {
   color: red;
@@ -143,7 +147,6 @@ input {
 footer {
   bottom: 0;
   margin-bottom: 0;
-  font-size: 2px;
 }
 
 #me {
@@ -154,7 +157,6 @@ footer {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  font-size: 2px;
 }
 
 .modal-header {
