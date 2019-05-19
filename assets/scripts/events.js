@@ -43,6 +43,11 @@ const move = function (player) {
     .then(ui.onPatchGameDataSuccess)
     .catch(ui.onPatchGameDataFailure)
 }
+const finalMove = function () {
+  api.patchGameData(gameData, store.id)
+    .then(ui.onPatchGameDataSuccess)
+    .catch(ui.onPatchGameDataFailure)
+}
 const fillContent = function () {
   if (gameData.game.over === true) {
     $('.borg').html('Resistance is futile!')
@@ -78,9 +83,7 @@ const fillContent = function () {
     $('h2').html('O wins!')
     $('.moveMessage').html('')
     gameData.game.over = true
-    api.patchGameData(gameData, store.id)
-      .then(console.log(gameData))
-      .catch(console.log('did not work'))
+    finalMove()
     api.indexGamedata()
       .then(ui.onIndexSuccess)
       .catch(ui.onIndexFailure)
@@ -88,9 +91,7 @@ const fillContent = function () {
     $('h2').html('Cats!')
     $('.moveMessage').html('')
     gameData.game.over = true
-    api.patchGameData(gameData, store.id)
-      .then(console.log(gameData))
-      .catch(console.log('did not work'))
+    finalMove()
     api.indexGamedata()
       .then(ui.onIndexSuccess)
       .catch(ui.onIndexFailure)
