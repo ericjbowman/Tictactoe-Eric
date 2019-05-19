@@ -5,9 +5,9 @@ const store = require('./store')
 const signUpSuccess = function (data) {
   $('#message').text('Signed up successfully')
   $('#message').removeClass()
-  $('#message').addClass('success')
   console.log('signUpSuccess ran. Data is :', data)
-  $('#sign-up').addClass('disappear')
+  $('form').trigger('reset')
+  // $('#sign-up').addClass('disappear')
 }
 
 const signUpFailure = function (error) {
@@ -15,6 +15,7 @@ const signUpFailure = function (error) {
   $('#message').removeClass()
   $('#message').addClass('failure')
   console.error('signUpFailure ran. Error is :', error)
+  $('form').trigger('reset')
 }
 
 const signInSuccess = function (data) {
@@ -34,12 +35,15 @@ const signInSuccess = function (data) {
   $('#change-password').show()
   $('h4').hide()
   $('.info').removeClass('disappear')
+  $('#sign-up').addClass('disappear')
+  $('form').trigger('reset')
 }
 
 const signInFailure = function (error) {
   $('#message').text('Error on sign in')
   $('#message').removeClass()
   $('#message').addClass('failure')
+  $('form').trigger('reset')
   console.error('signInFailure ran. Error is :', error)
 }
 
@@ -106,8 +110,8 @@ const onPatchGameDataFailure = function () {
 }
 
 const onIndexSuccess = function (responseData) {
-  let xwins = 0
-  let ywins = 0
+  // let xwins = 0
+  // let ywins = 0
   console.log(responseData)
   // store.games.id = responseData.games.length
   $('.gamesPlayed').html(`Games played: ${responseData.games.length}`)

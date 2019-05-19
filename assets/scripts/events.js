@@ -52,6 +52,7 @@ const finalMove = function () {
 const fillContent = function () {
   if (gameData.game.over === true) {
     $('.borg').html('Resistance is futile!')
+    return
   } else if ($(event.target).html() !== '') {
     $('.moveMessage').html('Choose an empty Square!')
   } else if ((moveArr.length % 2 !== 0) && (gameData.game.over === false)) {
@@ -111,7 +112,6 @@ const onSignUp = function (event) {
   api.signUp(data)
     .then(ui.signUpSuccess)
     .catch(ui.signUpFailure)
-  $('#sign-up').html('')
 }
 
 const onSignIn = function (event) {
