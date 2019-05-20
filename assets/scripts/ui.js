@@ -32,6 +32,7 @@ const signInSuccess = function (data) {
   $('.info').removeClass('disappear')
   $('#sign-up').addClass('disappear')
   $('form').trigger('reset')
+  $('.playComputer').removeClass('disappear')
 }
 
 const signInFailure = function () {
@@ -56,6 +57,7 @@ const signOutSuccess = function () {
   $('h4').show()
   $('.changePw').addClass('disappear')
   $('#sign-up').removeClass('disappear')
+  $('.playComputer').addClass('disappear')
   store.user = null
 }
 

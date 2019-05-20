@@ -12,4 +12,5 @@ $(() => {
   $('.newGame').on('click', events.emptyContent)
   events.addHandlers()
   $('.changePw').on('click', ui.onChangePwButton)
+  $('.playComputer').on('click', events.compEmptyContent)
 })

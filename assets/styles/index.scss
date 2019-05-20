@@ -94,7 +94,7 @@ form {
   color: $border-color;
 }
 
-.newGame {
+.newGame, .playComputer {
   font-size: 30px;
   padding: .5em;
   margin-bottom: 10px;
@@ -223,7 +223,7 @@ footer {
     width: 50px;
     font-size: 30px;
   }
-  h2, h3, h4, p, .newGame {
+  h2, h3, h4, p, .newGame, .playComputer {
     font-size: 20px;
   }
   h1 {
