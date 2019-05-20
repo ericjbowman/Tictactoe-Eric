@@ -6,7 +6,6 @@ const signUpSuccess = function (data) {
   $('#message').text('Signed up successfully')
   $('#message').removeClass()
   $('form').trigger('reset')
-  // $('#sign-up').addClass('disappear')
   $('#sign-up').hide()
 }
 
