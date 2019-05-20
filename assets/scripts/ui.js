@@ -76,7 +76,6 @@ const signOutFailure = function (error) {
 
 const onChangePwButton = function (event) {
   event.preventDefault()
-  event.stopPropagation()
   $('.onChangePassword').html('')
   $('.onChangePassword').removeClass('failure')
 }
@@ -86,23 +85,32 @@ const changePasswordSuccess = function () {
   $('.onChangePassword').html('Changed password successfully')
   $('.onChangePassword').ready(function() {
     $('.onChangePassword').fadeIn('slow', function() {
-      $('.onChangePassword').delay(3000).fadeOut()
+      $('.onChangePassword').delay(2000).fadeOut()
     })
   })
   $('.onChangePassword').show()
+  $('.onChangePassword').html()
   $('#change-password').trigger('reset')
+
   // $('.change-password')[0].reset()
   // $('#message').removeClass()
   // $('#message').addClass('success')
   // console.log('changePasswordSuccess ran and nothing was returned!')
 }
 
-const changePasswordFailure = function (error) {
+const changePasswordFailure = function () {
+  $('.onChangePassword').show()
   $('.onChangePassword').addClass('failure')
   $('.onChangePassword').html('Failed to change password')
   $('#change-password').trigger('reset')
-  // $('#message').removeClass()
-  console.error('changePasswordFailure ran. Error is :', error)
+  $('.onChangePassword').ready(function() {
+    $('.onChangePassword').fadeIn('slow', function() {
+      $('.onChangePassword').delay(2000).fadeOut()
+    })
+  })
+  $('.onChangePassword').show()
+  $('.onChangePassword').html()
+  $('#change-password').trigger('reset')
 }
 const onStartGameSuccess = function (responseData) {
   store.id = responseData.game.id
