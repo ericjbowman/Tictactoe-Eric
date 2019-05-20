@@ -65,7 +65,6 @@ getAllIndexes(cells, 'x', 'o')
 //   }
 // })
 let n = Math.floor((Math.random() * (unusedCellIndexes.length)))
-alert(unusedCellIndexes)
 $(`div[data-cell-index=${unusedCellIndexes[n]}]`).html('o')
 moveArr.push('o')
 }
@@ -90,8 +89,10 @@ const compFillContent = function () {
     return
   } else if ($(event.target).html() !== '') {
     $('.moveMessage').html('Choose an empty Square!')
+    return
+  } else {
+    move('x')
   }
-  move('x')
   const lines = {
     rowOne: [$('.zero').html(), $('.one').html(), $('.two').html()],
     rowTwo: [$('.three').html(), $('.four').html(), $('.five').html()],
@@ -124,7 +125,6 @@ const fillContent = function () {
     compFillContent()
     return
   }
-  alert(moveArr)
   if (gameData.game.over === true) {
     $('.borg').html('Resistance is futile!')
     return
