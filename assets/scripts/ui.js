@@ -5,16 +5,14 @@ const store = require('./store')
 const signUpSuccess = function (data) {
   $('#message').text('Signed up successfully')
   $('#message').removeClass()
-  console.log('signUpSuccess ran. Data is :', data)
   $('form').trigger('reset')
   // $('#sign-up').addClass('disappear')
 }
 
-const signUpFailure = function (error) {
+const signUpFailure = function () {
   $('#message').text('Error on sign up')
   $('#message').removeClass()
   $('#message').addClass('failure')
-  console.error('signUpFailure ran. Error is :', error)
   $('form').trigger('reset')
 }
 
@@ -22,7 +20,6 @@ const signInSuccess = function (data) {
   $('.info').html('')
   $('#message').text('Signed in successfully')
   $('#message').removeClass()
-  console.log('signInSuccess ran. Data is :', data)
   store.user = data.user
   // $('#sign-up').addClass('.disappear')
   // $('#sign-in').addClass('.disappear')
@@ -39,12 +36,11 @@ const signInSuccess = function (data) {
   $('form').trigger('reset')
 }
 
-const signInFailure = function (error) {
+const signInFailure = function () {
   $('#message').text('Error on sign in')
   $('#message').removeClass()
   $('#message').addClass('failure')
   $('form').trigger('reset')
-  console.error('signInFailure ran. Error is :', error)
 }
 
 const signOutSuccess = function () {
@@ -52,7 +48,6 @@ const signOutSuccess = function () {
   $('#message').removeClass()
   $('#message').addClass('success')
   $('form').trigger('reset')
-  console.log('signOutSuccess ran and nothing was returned!')
   $('#sign-up').show()
   $('#sign-in').show()
   $('#sign-out').hide()
@@ -66,12 +61,11 @@ const signOutSuccess = function () {
   store.user = null
 }
 
-const signOutFailure = function (error) {
+const signOutFailure = function () {
   $('#message').text('Error on sign out')
   $('#message').removeClass()
   $('#message').addClass('failure')
   $('#change-password').trigger('reset')
-  console.error('signOutFailure ran. Error is :', error)
 }
 
 const onChangePwButton = function (event) {
@@ -116,9 +110,9 @@ const onStartGameSuccess = function (responseData) {
   store.id = responseData.game.id
   // alert(store.id)
 }
-const logPatchData = function (responseData) {
-  console.log(responseData)
-}
+// const logPatchData = function (responseData) {
+//   console.log(responseData)
+// }
 
 const onStartGameFailure = function () {
   $('.moveMessage').html('Error')
@@ -175,6 +169,6 @@ module.exports = {
   onStartGameSuccess,
   onStartGameFailure,
   onPatchGameDataFailure,
-  onChangePwButton,
-  logPatchData
+  onChangePwButton
+  // logPatchData
 }

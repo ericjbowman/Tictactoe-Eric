@@ -157,7 +157,6 @@ const addHandlers = () => {
 // cells[6] = $('.six').html()
 // cells[7] = $('.seven').html()
 // cells[8] = $('.eight').html()
-// console.log(cells)
 
 module.exports = {
   fillContent,
