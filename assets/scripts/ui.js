@@ -7,6 +7,7 @@ const signUpSuccess = function (data) {
   $('#message').removeClass()
   $('form').trigger('reset')
   // $('#sign-up').addClass('disappear')
+  $('#sign-up').hide()
 }
 
 const signUpFailure = function () {
