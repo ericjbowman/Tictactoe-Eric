@@ -200,6 +200,16 @@ footer {
   margin-top: 10px;
 }
 
+.embed-responsive {
+    max-height: 75vh;
+    max-width: 75vh;
+}
+
+.row.gameboard {
+  margin: 0;
+  max-height: 75vh;
+  max-width: 75vh;
+}
 @media only screen and (max-width: 600px) {
   .board {
     height: 150px;

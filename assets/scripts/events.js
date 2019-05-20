@@ -5,6 +5,7 @@ const api = require('./api')
 const ui = require('./ui')
 const store = require('./store')
 
+const cells = [$('.zero').html(), $('.one').html(), $('.two').html(), $('.three').html(), $('.four').html(), $('.five').html(), $('.six').html(), $('.seven').html(), $('.eight').html()]
 // This is the data sent to the api
 const gameData = {
   game: {
@@ -30,10 +31,37 @@ const move = function (player) {
   $(event.target).html(player)
   // moveArr.push('player')
   gameData.game.cell.index = $(event.target).data('cell-index')
-  gameData.game.cell.value = player
+  gameData.game.cell.value = 'x'
   api.patchGameData(gameData, store.id)
-    .then(moveArr.push('player'))
+    .then(moveArr.push('x'))
     .catch(ui.onPatchGameDataFailure)
+  computerMove()
+}
+const computerMove = function () {
+const cells = [$('.zero').html(), $('.one').html(), $('.two').html(), $('.three').html(), $('.four').html(), $('.five').html(), $('.six').html(), $('.seven').html(), $('.eight').html()]
+let unusedCellIndexes = []
+// for (let i = 0; i < cells.length; i++) {
+//   if (cells[i] !== 'x' && cells[i] !== 'o') {
+//     unusedCellIndexes.push(cells.indexOf(i))
+  // }
+function getAllIndexes (arr, val, sec) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] !== val && arr[i] !== sec) {
+      unusedCellIndexes.push(i)
+    }
+  }
+}
+getAllIndexes(cells, 'x', 'o')
+
+// cells.forEach(i => {
+//   if (i !== 'x' && i !== 'o') {
+//     unusedCellIndexes.push(cells.indexOf(i))
+//   }
+// })
+let n = Math.floor((Math.random() * (unusedCellIndexes.length)))
+alert(unusedCellIndexes)
+$(`div[data-cell-index=${unusedCellIndexes[n]}]`).html('o')
+moveArr.push('o')
 }
 // triggerIndexSuccess ensures that the api patch happens before the api index occurs
 const triggerIndexSuccess = function () {
@@ -56,15 +84,8 @@ const fillContent = function () {
     return
   } else if ($(event.target).html() !== '') {
     $('.moveMessage').html('Choose an empty Square!')
-  } else if ((moveArr.length % 2 !== 0) && (gameData.game.over === false)) {
-    const player = 'o'
-    $('.moveMessage').html(`It's X's turn`)
-    move(player)
-  } else if ((moveArr.length % 2 === 0) && (gameData.game.over === false)) {
-    const player = 'x'
-    $('.moveMessage').html(`It's O's turn`)
-    move(player)
   }
+  move('x')
   const lines = {
     rowOne: [$('.zero').html(), $('.one').html(), $('.two').html()],
     rowTwo: [$('.three').html(), $('.four').html(), $('.five').html()],
@@ -92,6 +113,48 @@ const fillContent = function () {
     finalMove()
   }
 }
+// const fillContent = function () {
+//   if (gameData.game.over === true) {
+//     $('.borg').html('Resistance is futile!')
+//     return
+//   } else if ($(event.target).html() !== '') {
+//     $('.moveMessage').html('Choose an empty Square!')
+//   } else if ((moveArr.length % 2 !== 0) && (gameData.game.over === false)) {
+//     const player = 'o'
+//     $('.moveMessage').html(`It's X's turn`)
+//     move(player)
+//   } else if ((moveArr.length % 2 === 0) && (gameData.game.over === false)) {
+//     const player = 'x'
+//     $('.moveMessage').html(`It's O's turn`)
+//     move(player)
+//   }
+//   const lines = {
+//     rowOne: [$('.zero').html(), $('.one').html(), $('.two').html()],
+//     rowTwo: [$('.three').html(), $('.four').html(), $('.five').html()],
+//     rowThree: [$('.six').html(), $('.seven').html(), $('.eight').html()],
+//     columnOne: [$('.zero').html(), $('.three').html(), $('.six').html()],
+//     columnTwo: [$('.one').html(), $('.four').html(), $('.seven').html()],
+//     columnThree: [$('.two').html(), $('.five').html(), $('.eight').html()],
+//     diagOne: [$('.zero').html(), $('.four').html(), $('.eight').html()],
+//     diagTwo: [$('.two').html(), $('.four').html(), $('.six').html()]
+//   }
+//   if (lines.rowOne.every(i => i === 'x') || lines.rowTwo.every(i => i === 'x') || lines.rowThree.every(i => i === 'x') || lines.columnOne.every(i => i === 'x') || lines.columnTwo.every(i => i === 'x') || lines.columnThree.every(i => i === 'x') || lines.diagOne.every(i => i === 'x') || lines.diagTwo.every(i => i === 'x')) {
+//     $('h2').html('X wins!')
+//     $('.moveMessage').html('')
+//     gameData.game.over = true
+//     finalMove()
+//   } else if (lines.rowOne.every(i => i === 'o') || lines.rowTwo.every(i => i === 'o') || lines.rowThree.every(i => i === 'o') || lines.columnOne.every(i => i === 'o') || lines.columnTwo.every(i => i === 'o') || lines.columnThree.every(i => i === 'o') || lines.diagOne.every(i => i === 'o') || lines.diagTwo.every(i => i === 'o')) {
+//     $('h2').html('O wins!')
+//     $('.moveMessage').html('')
+//     gameData.game.over = true
+//     finalMove()
+//   } else if (moveArr.length === 9) {
+//     $('h2').html('Cats!')
+//     $('.moveMessage').html('')
+//     gameData.game.over = true
+//     finalMove()
+//   }
+// }
 // emptyContent is triggered by the newGame button and removes messages and contents of game board. It also triggers newGame,
 // posting a new game to the api.
 const emptyContent = function () {
