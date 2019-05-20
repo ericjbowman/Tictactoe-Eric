@@ -22,8 +22,6 @@ const signInSuccess = function (data) {
   $('#message').text('Signed in successfully')
   $('#message').removeClass()
   store.user = data.user
-  // $('#sign-up').addClass('.disappear')
-  // $('#sign-in').addClass('.disappear')
   $('#sign-up').hide()
   $('#sign-in').hide()
   $('.changePw').removeClass('disappear')
@@ -86,11 +84,6 @@ const changePasswordSuccess = function () {
   $('.onChangePassword').show()
   $('.onChangePassword').html()
   $('#change-password').trigger('reset')
-
-  // $('.change-password')[0].reset()
-  // $('#message').removeClass()
-  // $('#message').addClass('success')
-  // console.log('changePasswordSuccess ran and nothing was returned!')
 }
 
 const changePasswordFailure = function () {
@@ -109,11 +102,7 @@ const changePasswordFailure = function () {
 }
 const onStartGameSuccess = function (responseData) {
   store.id = responseData.game.id
-  // alert(store.id)
 }
-// const logPatchData = function (responseData) {
-//   console.log(responseData)
-// }
 
 const onStartGameFailure = function () {
   $('.moveMessage').html('Error')
@@ -124,32 +113,7 @@ const onPatchGameDataFailure = function () {
 }
 
 const onIndexSuccess = function (responseData) {
-  // let xwins = 0
-  // let ywins = 0
-  // console.log(responseData)
-  // store.games.id = responseData.games.length
   $('.gamesPlayed').html(`Games played: ${responseData.games.length}`)
-//   const whoWon = function (responseData) {
-//     responseData.games.forEach((game) => {
-//       const xArray = []
-//       const yArray = []
-//       game.cells.forEach((cell) => {
-//         if (cell === 'x') {
-//           xArray.push(cell)
-//         } else if (cell === 'o') {
-//           yArray.push(cell)
-//         }
-//       })
-//       console.log(`Number of x's in game = ${xArray}`)
-//       if (game.over === true && xArray.length > yArray.length) {
-//         xwins++
-//       } else if (game.over === true && (xArray.length + yArray.length !== 9)) {
-//         ywins++
-//       }
-//     })
-//     alert(xwins, ywins)
-//   }
-//   whoWon(responseData)
 }
 
 const onIndexFailure = function () {
@@ -171,5 +135,4 @@ module.exports = {
   onStartGameFailure,
   onPatchGameDataFailure,
   onChangePwButton
-  // logPatchData
 }
