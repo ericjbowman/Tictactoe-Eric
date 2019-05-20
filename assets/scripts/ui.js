@@ -76,6 +76,7 @@ const signOutFailure = function (error) {
 
 const onChangePwButton = function (event) {
   event.preventDefault()
+  event.stopPropagation()
   $('.onChangePassword').html('')
   $('.onChangePassword').removeClass('failure')
 }
@@ -83,6 +84,12 @@ const onChangePwButton = function (event) {
 const changePasswordSuccess = function () {
   $('.onChangePassword').removeClass('failure')
   $('.onChangePassword').html('Changed password successfully')
+  $('.onChangePassword').ready(function() {
+    $('.onChangePassword').fadeIn('slow', function() {
+      $('.onChangePassword').delay(3000).fadeOut()
+    })
+  })
+  $('.onChangePassword').show()
   $('#change-password').trigger('reset')
   // $('.change-password')[0].reset()
   // $('#message').removeClass()
