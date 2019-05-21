@@ -8,24 +8,16 @@ const store = require('./store')
 let comp = false
 const selfMode = function () {
   comp = false
-  // $('#vsWho').modal('hide')
-  // $('#modal').modal('hide')
   $(this).closest('.modal')
 }
 const compMode = function () {
   comp = true
-  // $('#vsWho').modal('hide')
-  // $('#modal').modal('hide')
   $(this).closest('.modal')
 }
 
 const computerMove = function () {
   const cells = [$('.zero').html(), $('.one').html(), $('.two').html(), $('.three').html(), $('.four').html(), $('.five').html(), $('.six').html(), $('.seven').html(), $('.eight').html()]
   let unusedCellIndexes = []
-// for (let i = 0; i < cells.length; i++) {
-//   if (cells[i] !== 'x' && cells[i] !== 'o') {
-//     unusedCellIndexes.push(cells.indexOf(i))
-  // }
   function getAllIndexes (arr, val, sec) {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i] !== val && arr[i] !== sec) {
@@ -34,12 +26,6 @@ const computerMove = function () {
     }
   }
   getAllIndexes(cells, 'x', 'o')
-
-// cells.forEach(i => {
-//   if (i !== 'x' && i !== 'o') {
-//     unusedCellIndexes.push(cells.indexOf(i))
-//   }
-// })
   let n = Math.floor((Math.random() * (unusedCellIndexes.length)))
   $(`div[data-cell-index=${unusedCellIndexes[n]}]`).html('o')
   moveArr.push('o')

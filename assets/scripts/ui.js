@@ -56,6 +56,7 @@ const signOutSuccess = function () {
   $('h4').show()
   $('.changePw').addClass('disappear')
   $('#sign-up').removeClass('disappear')
+  $('.chooseOpBut').addClass('disappear')
   store.user = null
 }
 
@@ -101,6 +102,7 @@ const changePasswordFailure = function () {
 }
 const onStartGameSuccess = function (responseData) {
   store.id = responseData.game.id
+  $('.chooseOpBut').removeClass('disappear')
 }
 
 const onStartGameFailure = function () {
