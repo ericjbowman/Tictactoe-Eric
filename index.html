@@ -14,10 +14,13 @@
   </head>
 <body class="container-fluid">
   <header class="row headrow">
-    <div class="tit col-6">
+    <div class="tit col-4">
     <h1>Tic Tac Toe</h1>
     </div>
-    <nav class="col-6 uprt">
+    <div class="col-4 upmid" id="vanish">
+      <button type="button" class="btn newGame disappear" data-toggle="modal" data-target="#vsWho">New Game</button>
+    </div>
+    <nav class="col-4 uprt">
       <div>
         <button type="button" class="btn changePw disappear" data-toggle="modal" data-target="#change-pw">Change Password</button>
           <div class="modal fade" id="change-pw">
@@ -47,7 +50,7 @@
     </nav>
   </header>
 
-      <div class="col-6">
+      <div class="col-6 initLog">
       <h4 class="failure">Sign in to play</h4>
       <form id="sign-up">
         <h3>Sign up</h3>
@@ -64,9 +67,9 @@
       </form>
       <p id="message"></p>
     </div>
-    <div id="vanish">
+    <!-- <div id="vanish">
       <button type="button" class="btn newGame disappear" data-toggle="modal" data-target="#vsWho">New Game</button>
-    </div>
+    </div> -->
         <div class="modal fade" id="vsWho">
           <div class="modal-dialog">
             <div class="modal-content">
