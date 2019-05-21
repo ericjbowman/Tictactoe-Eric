@@ -17,7 +17,7 @@ $blue-hover: #85b3fc;
 body {
   background-color: $primary-one;
 }
-h1 {
+.tit {
   color: $border-color;
   text-align: center;
 }
@@ -82,7 +82,6 @@ h2, .gamesPlayed, .moveMessage {
   text-align: center;
 }
 h4 {
-  margin-left: 20px;
   font-size: 30px;
 }
 .borg {
@@ -208,7 +207,28 @@ footer {
   margin-bottom: 10px;
   margin-top: 10px;
 }
+.uprt {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
 
+.tit {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#sign-out {
+  margin-left: 5px;
+}
+
+.newgame {
+  margin: 0 auto;
+}
+#vanish {
+  display: flex;
+  justify-content: center;
+}
 @media only screen and (max-width: 600px) {
   .board {
     height: 150px;
