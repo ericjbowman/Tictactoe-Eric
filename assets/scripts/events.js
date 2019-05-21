@@ -120,6 +120,7 @@ const fillContent = function () {
     return
   } else if ($(event.target).html() !== '') {
     $('.moveMessage').html('Choose an empty Square!')
+    return
   } else if (comp === true) {
     const player = 'x'
     move(player)
