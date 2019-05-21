@@ -14,10 +14,11 @@ const selfMode = function () {
 const compMode = function () {
   comp = true
   $(this).closest('.modal')
-  $('.moveMessage').html('You: X Computer: O')
+  $('.moveMessage').html("It's your turn! You: X Computer: O")
 }
 
 const computerMove = function () {
+  $('.moveMessage').html("It's your turn! You: X Computer: O")
   const cells = [$('.zero').html(), $('.one').html(), $('.two').html(), $('.three').html(), $('.four').html(), $('.five').html(), $('.six').html(), $('.seven').html(), $('.eight').html()]
   let unusedCellIndexes = []
   function getAllIndexes (arr, val, sec) {
