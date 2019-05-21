@@ -13,7 +13,7 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <h1>Tic Tac Toe!</h1>
+      <h1>Tic Tac Toe</h1>
       <h4 class="failure">Sign in to play</h4>
       <div class="Login">
       <form id="sign-up">
@@ -41,7 +41,7 @@
               <div class="modal-header">
                 <h3>Change Password</h3>
               </div>
-              <div class="modal-body">
+              <div class="modal-body pwBody">
                 <form id="change-password" class="disappear">
                       <input type="password" name="passwords[old]" placeholder="Old Password">
                       <input type="password" name="passwords[new]" placeholder="New Password">
@@ -59,7 +59,7 @@
       <p id="message"></p>
       </div>
 
-      <div>
+      <div class="hasStartGame">
         <button type="button" class="btn newGame disappear" data-toggle="modal" data-target="#vsWho">Start Game</button>
           <div class="modal fade" id="vsWho">
             <div class="modal-dialog">
@@ -67,14 +67,14 @@
                 <div class="modal-header">
                   <h3>Choose You Opponent</h3>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body vsContent">
                   <div class= "playAgain">
-                    <button class="vsSelf">Vs. Self</button><button class="vsComp">Vs. Computer</button>
+                    <button class="vsSelf" data-dismiss="modal">You</button><button class="vsComp" data-dismiss="modal">Computer</button>
                   </div>
                 </div>
                 <div class="modal-footer">
                   <p class="onChooseOpponent"><p>
-                  <button type="button" class="btn cls" data-dismiss="modal">Close</button>
+                  <!-- <button type="button" class="btn cls" data-dismiss="modal">Close</button> -->
                 </div>
               </div>
             </div>

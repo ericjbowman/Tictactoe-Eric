@@ -51,7 +51,7 @@ p {
   margin-bottom: 0px;
 }
 
-.but {
+.but, button {
   background-color: $secondary;
   // padding: 10px, 10px;
 }
@@ -93,7 +93,10 @@ h4 {
 form {
   color: $border-color;
 }
-
+.hasStartGame {
+  display: flex;
+  justify-content: center;
+}
 .newGame {
   font-size: 30px;
   padding: .5em;
@@ -101,6 +104,7 @@ form {
   background-color: $secondary;
   border: solid $border-color;
   border-width: 2px;
+  margin: 0 auto;
 }
 
 button:hover {
@@ -173,9 +177,14 @@ footer {
   justify-content: center;
 }
 
-.modal-body {
+.pwBody {
   display: flex;
   justify-content: center;
+}
+
+.playAgain {
+  display: flex;
+  justify-content: space-around;
 }
 
 .modal-footer {

@@ -8,11 +8,15 @@ const store = require('./store')
 let comp = false
 const selfMode = function () {
   comp = false
-  alert(comp)
+  // $('#vsWho').modal('hide')
+  // $('#modal').modal('hide')
+  $(this).closest('.modal')
 }
 const compMode = function () {
   comp = true
-  alert(comp)
+  // $('#vsWho').modal('hide')
+  // $('#modal').modal('hide')
+  $(this).closest('.modal')
 }
 
 const computerMove = function () {
