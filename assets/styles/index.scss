@@ -150,7 +150,7 @@ button:hover {
 }
 
 .headrow {
-  margin-bottom: 5px;
+  // margin-bottom: 5px;
 }
 .modal-content {
   background-color: $primary-one;
@@ -238,11 +238,20 @@ footer {
   margin-top: 15px;
 
 }
+
 #vanish {
   display: flex;
   justify-content: center;
 }
 
+#signed-in {
+  margin: 0 auto;
+}
+
+#centerme {
+  display: flex;
+  justify-content: center;
+}
 // .initLog {
 //   display: flex;
 //   justify-content: center;

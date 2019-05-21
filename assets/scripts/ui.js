@@ -17,8 +17,8 @@ const signUpFailure = function () {
 }
 
 const signInSuccess = function (data) {
+  $('#message').html('')
   $('.info').html('')
-  $('#message').text('Signed in successfully')
   $('#message').removeClass()
   store.user = data.user
   $('#sign-up').hide()
@@ -32,7 +32,7 @@ const signInSuccess = function (data) {
   $('.info').removeClass('disappear')
   $('#sign-up').addClass('disappear')
   $('form').trigger('reset')
-  $('s-in').html('Signed in successfully baby')
+  $('#signed-in').html('Signed in!')
 }
 
 const signInFailure = function () {
@@ -85,6 +85,7 @@ const changePasswordSuccess = function () {
   $('.onChangePassword').show()
   $('.onChangePassword').html()
   $('#change-password').trigger('reset')
+  $('#signed-in').html('')
 }
 
 const changePasswordFailure = function () {
@@ -100,10 +101,12 @@ const changePasswordFailure = function () {
   $('.onChangePassword').show()
   $('.onChangePassword').html()
   $('#change-password').trigger('reset')
+  $('#signed-in').html('')
 }
 const onStartGameSuccess = function (responseData) {
   store.id = responseData.game.id
   $('.chooseOpBut').removeClass('disappear')
+  $('#signed-in').html('')
 }
 
 const onStartGameFailure = function () {
