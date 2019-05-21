@@ -137,6 +137,9 @@ const fillContent = function () {
   checkForWin()
   if (comp === true) {
     checkForWin()
+    if (gameData.game.over === true) {
+      return
+    }
     computerMove()
     checkForWin()
   }
