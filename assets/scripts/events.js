@@ -114,8 +114,6 @@ const checkForWin = function () {
   }
 }
 
-
-
 const fillContent = function () {
   if (gameData.game.over === true) {
     $('.borg').html('Resistance is futile!')

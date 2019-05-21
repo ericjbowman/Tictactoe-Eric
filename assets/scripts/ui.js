@@ -33,7 +33,6 @@ const signInSuccess = function (data) {
   $('#sign-up').addClass('disappear')
   $('form').trigger('reset')
   $('s-in').html('Signed in successfully baby')
-  // $('s-in').removeclass('disappear')
 }
 
 const signInFailure = function () {
