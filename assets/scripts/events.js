@@ -43,6 +43,12 @@ const computerMove = function () {
   let n = Math.floor((Math.random() * (unusedCellIndexes.length)))
   $(`div[data-cell-index=${unusedCellIndexes[n]}]`).html('o')
   moveArr.push('o')
+  if (unusedCellIndexes.length === 0) {
+    $('h2').html('Cats!')
+    $('.moveMessage').html('')
+    gameData.game.over = true
+    finalMove()
+  }
 }
 
 // This is the data sent to the api
