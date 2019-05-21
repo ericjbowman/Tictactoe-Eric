@@ -9,10 +9,12 @@ let comp = false
 const selfMode = function () {
   comp = false
   $(this).closest('.modal')
+  $('.moveMessage').html('Good Luck!')
 }
 const compMode = function () {
   comp = true
   $(this).closest('.modal')
+  $('.moveMessage').html('You: X Computer: O')
 }
 
 const computerMove = function () {
@@ -152,6 +154,7 @@ const emptyContent = function () {
   gameData.game.over = false
   newGame()
   $('#message').html('')
+  $('s-in').html('')
 }
 
 const onSignUp = function (event) {

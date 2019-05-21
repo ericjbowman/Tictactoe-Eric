@@ -16,6 +16,8 @@
   <header class="row headrow">
     <div class="tit col-6">
     <h1>Tic Tac Toe</h1>
+    <br>
+    <p class="s-in"<p>
     </div>
     <nav class="col-6 uprt">
       <div>
@@ -63,6 +65,7 @@
           <input type="password" name="credentials[password]" placeholder="Password">
           <br><input type="submit" value="Sign in" class="but">
       </form>
+      <p id="message"></p>
     <!-- </div> -->
     <div id="vanish">
       <button type="button" class="btn newGame disappear" data-toggle="modal" data-target="#vsWho">New Game</button>
@@ -75,7 +78,7 @@
               </div>
               <div class="modal-body vsContent">
                 <div class= "playAgain">
-                  <button class="vsSelf" data-dismiss="modal">You</button><button class="vsComp" data-dismiss="modal">Computer</button>
+                  <button class="vsSelf btn" data-dismiss="modal">Yourself</button><button class="vsComp btn" data-dismiss="modal">Computer</button>
                 </div>
               </div>
               <div class="modal-footer">
@@ -84,9 +87,9 @@
               </div>
             </div>
           </div>
-    <!-- </div>
-  </div> -->
-  <main class="row">
+        </div>
+
+  <div class="row">
     <div class="col-12">
       <div class="container board disappear">
         <div class="row top">
@@ -104,18 +107,14 @@
           <div class="col-4 box seven" data-cell-index='7'></div>
           <div class="col-4 box eight" data-cell-index='8'></div>
         </div>
+        <div class= "bottomMessages">
+          <h2 class="info"></h2>
+          <h3 class= "moveMessage info"></h3>
+          <h3 class= "gamesPlayed info"></h3>
+          <h3 class= "borg info"></h3>
+        </div>
       </div>
       <!-- gameboard -->
-    </div>
-  </main>
-  <div class="row mess">
-    <div class="col-12">
-      <div class= "bottomMessages">
-        <h2 class="info"></h2>
-        <h3 class= "moveMessage info"></h3>
-        <h3 class= "gamesPlayed info"></h3>
-        <h3 class= "borg info"></h3>
-      </div>
     </div>
   </div>
 </body>
