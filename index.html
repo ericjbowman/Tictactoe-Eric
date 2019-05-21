@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<html>
+<!-- <html>
     <head>
       <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
       <title>Tic Tac Toe!</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
-
-      <!-- Do not add `link` tags-->
       <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-
-      <!-- Do not add `script` tags-->
       <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
@@ -75,16 +71,11 @@
                 </div>
                 <div class="modal-footer">
                   <p class="onChooseOpponent"><p>
-                  <!-- <button type="button" class="btn cls" data-dismiss="modal">Close</button> -->
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-      <!-- <div class= "playAgain">
-        <button class="newGame disappear">New Game</button>
-      </div> -->
       <div class="container board disappear">
         <div class="row top">
           <div class="col-4 box zero" data-cell-index='0'></div>
@@ -111,5 +102,137 @@
       <footer class="fbottom">
           <p id="me">Created by Eric Bowman</p>
       </footer>
-    </body>
+    </body> -->
+
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
+    <title>Tic Tac Toe!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+          <!-- Do not add `link` tags-->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+          <!-- Do not add `script` tags-->
+    <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+    <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+  </head>
+<body class="container-fluid">
+  <header class="row headrow">
+    <h1 class="col-6">Tic Tac Toe</h1>
+    <nav class="col-6">
+      <div>
+        <button type="button" class="btn changePw disappear" data-toggle="modal" data-target="#change-pw">Change Password</button>
+          <div class="modal fade" id="change-pw">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3>Change Password</h3>
+                </div>
+                <div class="modal-body pwBody">
+                  <form id="change-password" class="disappear">
+                        <input type="password" name="passwords[old]" placeholder="Old Password">
+                        <input type="password" name="passwords[new]" placeholder="New Password">
+                        <input type="submit" value="Change Password!" class="but">
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <p class="onChangePassword"><p>
+                  <button type="button" class="btn cls" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <form id="sign-out" class="disappear">
+        <input type="submit" value="Sign out" class="but">
+      </form>
+    </nav>
+  </header>
+  <div class="row messrow">
+    <div class="col-12 ng">
+    <div>
+      <form id="sign-up">
+        <h3>Sign up</h3>
+          <input type="text" name="credentials[email]" placeholder="Email">
+          <input type="password" name="credentials[password]" placeholder="Password">
+          <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
+          <br><input type="submit" value="Sign up" class="but">
+      </form>
+      <form id="sign-in">
+        <h3>Sign in</h3>
+          <input type="text" name="credentials[email]" placeholder="Email">
+          <input type="password" name="credentials[password]" placeholder="Password">
+          <br><input type="submit" value="Sign in" class="but">
+      </form>
+    </div>
+      <button type="button" class="btn newGame disappear" data-toggle="modal" data-target="#vsWho">New Game</button>
+        <div class="modal fade" id="vsWho">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3>Choose Your Opponent</h3>
+              </div>
+              <div class="modal-body vsContent">
+                <div class= "playAgain">
+                  <button class="vsSelf" data-dismiss="modal">You</button><button class="vsComp" data-dismiss="modal">Computer</button>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <p class="onChooseOpponent"><p>
+                <!-- <button type="button" class="btn cls" data-dismiss="modal">Close</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <main class="row">
+    <div class="col-12">
+      <div class="container board disappear">
+        <div class="row top">
+          <div class="col-4 box zero" data-cell-index='0'></div>
+          <div class="col-4 box one" data-cell-index='1'></div>
+          <div class="col-4 box two" data-cell-index='2'></div>
+        </div>
+        <div class="row middle">
+          <div class="col-4 box three" data-cell-index='3'></div>
+          <div class="col-4 box four" data-cell-index='4'></div>
+          <div class="col-4 box five" data-cell-index='5'></div>
+        </div>
+        <div class="row bottom">
+          <div class="col-4 box six" data-cell-index='6'></div>
+          <div class="col-4 box seven" data-cell-index='7'></div>
+          <div class="col-4 box eight" data-cell-index='8'></div>
+        </div>
+      </div>
+      <!-- gameboard -->
+    </div>
+  </main>
+  <div class="row mess">
+    <div class="col-12">
+      <div class= "bottomMessages">
+        <h2 class="info"></h2>
+        <h3 class= "moveMessage info"></h3>
+        <h3 class= "gamesPlayed info"></h3>
+        <h3 class= "borg info"></h3>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </html>
