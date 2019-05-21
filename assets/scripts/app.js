@@ -12,6 +12,6 @@ $(() => {
   $('.newGame').on('click', events.emptyContent)
   events.addHandlers()
   $('.changePw').on('click', ui.onChangePwButton)
-  $('.vsSelf').on('click', events.SelfMode)
-  $('.vsComp').on('click', events.CompMode)
+  $('.vsSelf').on('click', events.selfMode)
+  $('.vsComp').on('click', events.compMode)
 })
