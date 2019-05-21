@@ -13,7 +13,7 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <h1>Tic Tac Toe</h1>
+      <h1>Tic Tac Toe!</h1>
       <h4 class="failure">Sign in to play</h4>
       <div class="Login">
       <form id="sign-up">
@@ -58,9 +58,32 @@
       </div>
       <p id="message"></p>
       </div>
-      <div class= "playAgain">
+
+      <div>
+        <button type="button" class="btn newGame disappear" data-toggle="modal" data-target="#vsWho">Start Game</button>
+          <div class="modal fade" id="vsWho">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3>Choose You Opponent</h3>
+                </div>
+                <div class="modal-body">
+                  <div class= "playAgain">
+                    <button class="vsSelf">Vs. Self</button><button class="vsComp">Vs. Computer</button>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <p class="onChooseOpponent"><p>
+                  <button type="button" class="btn cls" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <!-- <div class= "playAgain">
         <button class="newGame disappear">New Game</button>
-      </div>
+      </div> -->
       <div class="container board disappear">
         <div class="row top">
           <div class="col-4 box zero" data-cell-index='0'></div>

@@ -5,6 +5,42 @@ const api = require('./api')
 const ui = require('./ui')
 const store = require('./store')
 
+let comp = false
+const selfMode = function () {
+  comp = false
+  alert(comp)
+}
+const compMode = function () {
+  comp = true
+  alert(comp)
+}
+
+const computerMove = function () {
+  const cells = [$('.zero').html(), $('.one').html(), $('.two').html(), $('.three').html(), $('.four').html(), $('.five').html(), $('.six').html(), $('.seven').html(), $('.eight').html()]
+  let unusedCellIndexes = []
+// for (let i = 0; i < cells.length; i++) {
+//   if (cells[i] !== 'x' && cells[i] !== 'o') {
+//     unusedCellIndexes.push(cells.indexOf(i))
+  // }
+  function getAllIndexes (arr, val, sec) {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] !== val && arr[i] !== sec) {
+        unusedCellIndexes.push(i)
+      }
+    }
+  }
+  getAllIndexes(cells, 'x', 'o')
+
+// cells.forEach(i => {
+//   if (i !== 'x' && i !== 'o') {
+//     unusedCellIndexes.push(cells.indexOf(i))
+//   }
+// })
+  let n = Math.floor((Math.random() * (unusedCellIndexes.length)))
+  $(`div[data-cell-index=${unusedCellIndexes[n]}]`).html('o')
+  moveArr.push('o')
+}
+
 // This is the data sent to the api
 const gameData = {
   game: {
@@ -50,21 +86,8 @@ const finalMove = function () {
 }
 // fillContent is triggered by clicking a square. It checks if the game is over, if the square is already clicked, and whose turn it is, assigning player 'o' or 'x'.
 // Then it checks for a win or tie, let's the player know the result, and triggers finalMove.
-const fillContent = function () {
-  if (gameData.game.over === true) {
-    $('.borg').html('Resistance is futile!')
-    return
-  } else if ($(event.target).html() !== '') {
-    $('.moveMessage').html('Choose an empty Square!')
-  } else if ((moveArr.length % 2 !== 0) && (gameData.game.over === false)) {
-    const player = 'o'
-    $('.moveMessage').html(`It's X's turn`)
-    move(player)
-  } else if ((moveArr.length % 2 === 0) && (gameData.game.over === false)) {
-    const player = 'x'
-    $('.moveMessage').html(`It's O's turn`)
-    move(player)
-  }
+
+const checkForWin = function () {
   const lines = {
     rowOne: [$('.zero').html(), $('.one').html(), $('.two').html()],
     rowTwo: [$('.three').html(), $('.four').html(), $('.five').html()],
@@ -90,6 +113,34 @@ const fillContent = function () {
     $('.moveMessage').html('')
     gameData.game.over = true
     finalMove()
+  }
+}
+
+
+
+const fillContent = function () {
+  if (gameData.game.over === true) {
+    $('.borg').html('Resistance is futile!')
+    return
+  } else if ($(event.target).html() !== '') {
+    $('.moveMessage').html('Choose an empty Square!')
+  } else if (comp === true) {
+    const player = 'x'
+    move(player)
+  } else if ((moveArr.length % 2 !== 0) && (gameData.game.over === false)) {
+    const player = 'o'
+    $('.moveMessage').html(`It's X's turn`)
+    move(player)
+  } else if ((moveArr.length % 2 === 0) && (gameData.game.over === false)) {
+    const player = 'x'
+    $('.moveMessage').html(`It's O's turn`)
+    move(player)
+  }
+  checkForWin()
+  if (comp === true) {
+    checkForWin()
+    computerMove()
+    checkForWin()
   }
 }
 // emptyContent is triggered by the newGame button and removes messages and contents of game board. It also triggers newGame,
@@ -161,6 +212,8 @@ const addHandlers = () => {
 module.exports = {
   fillContent,
   emptyContent,
-  addHandlers
+  addHandlers,
+  compMode,
+  selfMode
 
 }
