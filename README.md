@@ -4,7 +4,7 @@ I started this project with wireframes and user stories to set goals for the gam
 
 I ran into a few problems with patching the API after each move because the ajax requests were happening asynchronously. To solve this, I used .then after the API functions to determine what I wanted to happen after the success of the API request. I utilized stack overflow to learn about many css features such as making elements fade away after a set amount of time. I used this for the repsonse messages that occur after the success or failure of changing the password. I also utilized the bootstrap documentation regarding the use of modals for the change password button.
 
-On future iterations I would like to stylize the page more and add AI to play against. I would also modify the game logic to reflect the api game data. I would use an array with indexes that correspond to the squares of the gameboard. Then I could use the function that checks for a win to check who won any game retrieved from the api data. That way I could display more statics rather than simply the number of games played.
+On future iterations I would like to stylize the page more and add more "intelligent" AI to play against. I would also modify the game logic to reflect the api game data. I would use an array with indexes that correspond to the squares of the gameboard. Then I could use the function that checks for a win to check who won any game retrieved from the api data. That way I could display more statics rather than simply the number of games played.
 
 I stylized the project using google fonts and bootstrap. Bootstrap was used to create a modal for the change-password button and for the grid layout of the gameboard.
 
