@@ -29,7 +29,9 @@ const compMode = function () {
 
 const computerMove = function () {
   $('.moveMessage').html("It's your turn! You: X Computer: O")
+
   const cells = [$('.zero').html(), $('.one').html(), $('.two').html(), $('.three').html(), $('.four').html(), $('.five').html(), $('.six').html(), $('.seven').html(), $('.eight').html()]
+
   // const rowOne = [[$('.zero').html(), $('.one').html(), $('.two').html()]
   // const rowTwo = [[$('.three').html(), $('.four').html(), $('.five').html()]
   // const rowThree = [$('.six').html(), $('.seven').html(), $('.eight').html()
@@ -46,7 +48,7 @@ const computerMove = function () {
   const columnThree = [cells[2], cells[5], cells[8]]
   const diagOne = [cells[0], cells[4], cells[8]]
   const diagTwo = [cells[2], cells[4], cells[6]]
-  alert(cells)
+  const lines = [['0', '1', '2'], ['3', '4', '5'], ['6', '7', '8'], ['0', '3', '6'], ['1', '4', '7'], ['2', '5', '8'], ['0', '4', '8'], ['2', '4', '6']]
   let unusedCellIndexes = []
   function getAllIndexes (arr, val, sec) {
     for (let i = 0; i < arr.length; i++) {
@@ -57,12 +59,31 @@ const computerMove = function () {
   }
   getAllIndexes(cells, 'x', 'o')
   let n = 0
-  if (($('.zero').html() === 'x' || $('.two').html() === 'x' || $('.six').html() === 'x' || $('.eight').html() === 'x') && $('.four').html() === '') {
+  if (($('.zero').html() === 'x' || $('.two').html() === 'x' || $('.six').html() === 'x' || $('.eight').html() === 'x') && unusedCellIndexes.length === 8) {
     n = 4
     $('.four').html('o')
+    return
+  } else if (lines.forEach(line => {
+    for (let i = 0; i < line.length; i++) {
+      (($(`div[data=${line[i]}]`).html() && $(`div[data=${line[i + 1]}]`).html() === 'x') || ($(`div[data=${line[i]}]`).html() && $(`div[data=${line[i + 2]}]`).html() === 'x'))
+      }
+  })) { alert('no middle')
+    lines.forEach(line => {
+      for (let i = 0; i < line.length; i++) {
+        // console.log($(`div[data=${line[i]}]`).html())
+        if (($(`div[data=${line[i]}]`).html() && $(`div[data=${line[i + 1]}]`).html() === 'x') || ($(`div[data=${line[i]}]`).html() && $(`div[data=${line[i + 2]}]`).html() === 'x')) {
+          // alert('2 in a row!')
+          const compBlock = line.filter(square => $(`div[data=${square}]`).html() === '')
+          if ($(`div[data=${compBlock}]`).html() === '') {
+            $(`div[data=${compBlock}]`).html('o')
+            n = 1
+          }
+        }
+      }
+    })
   } else {
     n = Math.floor((Math.random() * (unusedCellIndexes.length)))
-    $(`div[data-cell-index=${unusedCellIndexes[n]}]`).html('o')
+    $(`div[data=${unusedCellIndexes[n]}]`).html('o')
   }
   moveArr.push('o')
   if (unusedCellIndexes.length === 0) {
