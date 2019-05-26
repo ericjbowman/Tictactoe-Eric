@@ -30,6 +30,23 @@ const compMode = function () {
 const computerMove = function () {
   $('.moveMessage').html("It's your turn! You: X Computer: O")
   const cells = [$('.zero').html(), $('.one').html(), $('.two').html(), $('.three').html(), $('.four').html(), $('.five').html(), $('.six').html(), $('.seven').html(), $('.eight').html()]
+  // const rowOne = [[$('.zero').html(), $('.one').html(), $('.two').html()]
+  // const rowTwo = [[$('.three').html(), $('.four').html(), $('.five').html()]
+  // const rowThree = [$('.six').html(), $('.seven').html(), $('.eight').html()
+  // const columnOne = [cells[0], cells[3], cells[6]]
+  // const columnTwo = [cells[1], cells[4], cells[7]]
+  // const columnThree = [cells[2], cells[5], cells[8]]
+  // const diagOne = [cells[0], cells[4], cells[8]]
+  // const diagTwo = [cells[2], cells[4], cells[6]]
+  const rowOne = [cells[0], cells[1], cells[2]]
+  const rowTwo = [cells[3], cells[4], cells[5]]
+  const rowThree = [cells[6], cells[7], cells[8]]
+  const columnOne = [cells[0], cells[3], cells[6]]
+  const columnTwo = [cells[1], cells[4], cells[7]]
+  const columnThree = [cells[2], cells[5], cells[8]]
+  const diagOne = [cells[0], cells[4], cells[8]]
+  const diagTwo = [cells[2], cells[4], cells[6]]
+  alert(cells)
   let unusedCellIndexes = []
   function getAllIndexes (arr, val, sec) {
     for (let i = 0; i < arr.length; i++) {
@@ -39,8 +56,14 @@ const computerMove = function () {
     }
   }
   getAllIndexes(cells, 'x', 'o')
-  let n = Math.floor((Math.random() * (unusedCellIndexes.length)))
-  $(`div[data-cell-index=${unusedCellIndexes[n]}]`).html('o')
+  let n = 0
+  if (($('.zero').html() === 'x' || $('.two').html() === 'x' || $('.six').html() === 'x' || $('.eight').html() === 'x') && $('.four').html() === '') {
+    n = 4
+    $('.four').html('o')
+  } else {
+    n = Math.floor((Math.random() * (unusedCellIndexes.length)))
+    $(`div[data-cell-index=${unusedCellIndexes[n]}]`).html('o')
+  }
   moveArr.push('o')
   if (unusedCellIndexes.length === 0) {
     $('h2').html('Cats!')
@@ -109,7 +132,6 @@ const checkForWin = function () {
   if (rowOne.every(i => i === 'x') || rowTwo.every(i => i === 'x') || rowThree.every(i => i === 'x') || columnOne.every(i => i === 'x') || columnTwo.every(i => i === 'x') || columnThree.every(i => i === 'x') || diagOne.every(i => i === 'x') || diagTwo.every(i => i === 'x')) {
     $('h2').html('X wins!')
     $('.moveMessage').html('')
-    alert(localCells)
     gameData.game.over = true
     finalMove()
   } else if (rowOne.every(i => i === 'o') || rowTwo.every(i => i === 'o') || rowThree.every(i => i === 'o') || columnOne.every(i => i === 'o') || columnTwo.every(i => i === 'o') || columnThree.every(i => i === 'o') || diagOne.every(i => i === 'o') || diagTwo.every(i => i === 'o')) {
@@ -166,7 +188,7 @@ const emptyContent = function () {
   gameData.game.over = false
   newGame()
   $('#message').html('')
-  $('s-in').html('')
+  $('#signed-in').html('')
 }
 
 const onSignUp = function (event) {
