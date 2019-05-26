@@ -5,6 +5,16 @@ const api = require('./api')
 const ui = require('./ui')
 const store = require('./store')
 
+const localCells = [$('.zero').html(), $('.one').html(), $('.two').html(), $('.three').html(), $('.four').html(), $('.five').html(), $('.six').html(), $('.seven').html(), $('.eight').html()]
+const rowOne = [localCells[0], localCells[1], localCells[2]]
+const rowTwo = [localCells[3], localCells[4], localCells[5]]
+const rowThree = [localCells[6], localCells[7], localCells[8]]
+const columnOne = [localCells[0], localCells[3], localCells[6]]
+const columnTwo = [localCells[1], localCells[4], localCells[7]]
+const columnThree = [localCells[2], localCells[5], localCells[8]]
+const diagOne = [localCells[0], localCells[4], localCells[8]]
+const diagTwo = [localCells[2], localCells[4], localCells[6]]
+
 let comp = false
 const selfMode = function () {
   comp = false
@@ -87,22 +97,22 @@ const finalMove = function () {
 // Then it checks for a win or tie, let's the player know the result, and triggers finalMove.
 
 const checkForWin = function () {
-  const lines = {
-    rowOne: [$('.zero').html(), $('.one').html(), $('.two').html()],
-    rowTwo: [$('.three').html(), $('.four').html(), $('.five').html()],
-    rowThree: [$('.six').html(), $('.seven').html(), $('.eight').html()],
-    columnOne: [$('.zero').html(), $('.three').html(), $('.six').html()],
-    columnTwo: [$('.one').html(), $('.four').html(), $('.seven').html()],
-    columnThree: [$('.two').html(), $('.five').html(), $('.eight').html()],
-    diagOne: [$('.zero').html(), $('.four').html(), $('.eight').html()],
-    diagTwo: [$('.two').html(), $('.four').html(), $('.six').html()]
-  }
-  if (lines.rowOne.every(i => i === 'x') || lines.rowTwo.every(i => i === 'x') || lines.rowThree.every(i => i === 'x') || lines.columnOne.every(i => i === 'x') || lines.columnTwo.every(i => i === 'x') || lines.columnThree.every(i => i === 'x') || lines.diagOne.every(i => i === 'x') || lines.diagTwo.every(i => i === 'x')) {
+  const localCells = [$('.zero').html(), $('.one').html(), $('.two').html(), $('.three').html(), $('.four').html(), $('.five').html(), $('.six').html(), $('.seven').html(), $('.eight').html()]
+  const rowOne = [localCells[0], localCells[1], localCells[2]]
+  const rowTwo = [localCells[3], localCells[4], localCells[5]]
+  const rowThree = [localCells[6], localCells[7], localCells[8]]
+  const columnOne = [localCells[0], localCells[3], localCells[6]]
+  const columnTwo = [localCells[1], localCells[4], localCells[7]]
+  const columnThree = [localCells[2], localCells[5], localCells[8]]
+  const diagOne = [localCells[0], localCells[4], localCells[8]]
+  const diagTwo = [localCells[2], localCells[4], localCells[6]]
+  if (rowOne.every(i => i === 'x') || rowTwo.every(i => i === 'x') || rowThree.every(i => i === 'x') || columnOne.every(i => i === 'x') || columnTwo.every(i => i === 'x') || columnThree.every(i => i === 'x') || diagOne.every(i => i === 'x') || diagTwo.every(i => i === 'x')) {
     $('h2').html('X wins!')
     $('.moveMessage').html('')
+    alert(localCells)
     gameData.game.over = true
     finalMove()
-  } else if (lines.rowOne.every(i => i === 'o') || lines.rowTwo.every(i => i === 'o') || lines.rowThree.every(i => i === 'o') || lines.columnOne.every(i => i === 'o') || lines.columnTwo.every(i => i === 'o') || lines.columnThree.every(i => i === 'o') || lines.diagOne.every(i => i === 'o') || lines.diagTwo.every(i => i === 'o')) {
+  } else if (rowOne.every(i => i === 'o') || rowTwo.every(i => i === 'o') || rowThree.every(i => i === 'o') || columnOne.every(i => i === 'o') || columnTwo.every(i => i === 'o') || columnThree.every(i => i === 'o') || diagOne.every(i => i === 'o') || diagTwo.every(i => i === 'o')) {
     $('h2').html('O wins!')
     $('.moveMessage').html('')
     gameData.game.over = true
@@ -135,11 +145,10 @@ const fillContent = function () {
     move(player)
   }
   checkForWin()
+  if (gameData.game.over === true) {
+    return
+  }
   if (comp === true) {
-    checkForWin()
-    if (gameData.game.over === true) {
-      return
-    }
     computerMove()
     checkForWin()
   }
@@ -199,17 +208,6 @@ const addHandlers = () => {
   $('#sign-out').on('submit', onSignOut)
   $('#change-password').on('submit', onChangePassword)
 }
-
-// const cells = []
-// cells[0] = $('.zero').html()
-// cells[1] = $('.one').html()
-// cells[2] = $('.two').html()
-// cells[3] = $('.three').html()
-// cells[4] = $('.four').html()
-// cells[5] = $('.five').html()
-// cells[6] = $('.six').html()
-// cells[7] = $('.seven').html()
-// cells[8] = $('.eight').html()
 
 module.exports = {
   fillContent,
