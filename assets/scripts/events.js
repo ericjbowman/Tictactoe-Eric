@@ -16,6 +16,7 @@ const diagOne = [localCells[0], localCells[4], localCells[8]]
 const diagTwo = [localCells[2], localCells[4], localCells[6]]
 
 let comp = false
+let ultron = false
 const selfMode = function() {
   comp = false
   $(this).closest('.modal')
@@ -23,8 +24,14 @@ const selfMode = function() {
 }
 const compMode = function() {
   comp = true
+  ultron = false
   $(this).closest('.modal')
   $('.moveMessage').html("It's your turn! You: X Computer: O")
+}
+const ultronMode = function() {
+  comp = true
+  ultron = true
+  $('.moveMessage').html("It's your turn! You: X Ultron: O")
 }
 
 const computerMove = function() {
@@ -72,12 +79,12 @@ const computerMove = function() {
   getAllIndexes(cells, 'x', 'o')
   let n = 10
 
-  if (unusedCellIndexes.length === 8 && $('.four').html() === 'x') {
+  if (unusedCellIndexes.length === 8 && $('.four').html() === 'x' && ultron === true) {
     $('.zero').html('o')
-  } else if (($('.zero').html() === 'x' || $('.two').html() === 'x' || $('.six').html() === 'x' || $('.eight').html() === 'x') && unusedCellIndexes.length === 8) {
+  } else if (($('.zero').html() === 'x' || $('.two').html() === 'x' || $('.six').html() === 'x' || $('.eight').html() === 'x') && unusedCellIndexes.length === 8 && ultron === true) {
     n = 4
     $('.four').html('o')
-  } else if ((unusedCellIndexes.length < 8) && (openRows.some(line => (($(`div[data=${line[0]}]`).html() === 'o' && $(`div[data=${line[1]}]`).html() === 'o')) || (($(`div[data=${line[0]}]`).html() === 'o' && $(`div[data=${line[2]}]`).html() === 'o')) || (($(`div[data=${line[1]}]`).html() === 'o' && $(`div[data=${line[2]}]`).html() === 'o'))))) {
+  } else if ((unusedCellIndexes.length < 8) && (openRows.some(line => (($(`div[data=${line[0]}]`).html() === 'o' && $(`div[data=${line[1]}]`).html() === 'o')) || (($(`div[data=${line[0]}]`).html() === 'o' && $(`div[data=${line[2]}]`).html() === 'o')) || (($(`div[data=${line[1]}]`).html() === 'o' && $(`div[data=${line[2]}]`).html() === 'o')))) && ultron === true) {
     console.log('fewer than 8')
     for (let i = 0; i < cells.length; i++) {
       if (((($(`div[data=${openRows[i][0]}]`).html() === 'o' && $(`div[data=${openRows[i][1]}]`).html() === 'o')) || (($(`div[data=${openRows[i][0]}]`).html() === 'o' && $(`div[data=${openRows[i][2]}]`).html() === 'o')) || (($(`div[data=${openRows[i][1]}]`).html() === 'o' && $(`div[data=${openRows[i][2]}]`).html() === 'o')))) {
@@ -92,7 +99,7 @@ const computerMove = function() {
         }
       }
     }
-  } else if ((unusedCellIndexes.length < 8) && (openRows.some(line => (($(`div[data=${line[0]}]`).html() === 'x' && $(`div[data=${line[1]}]`).html() === 'x')) || (($(`div[data=${line[0]}]`).html() === 'x' && $(`div[data=${line[2]}]`).html() === 'x')) || (($(`div[data=${line[1]}]`).html() === 'x' && $(`div[data=${line[2]}]`).html() === 'x'))))) {
+  } else if ((unusedCellIndexes.length < 8) && (openRows.some(line => (($(`div[data=${line[0]}]`).html() === 'x' && $(`div[data=${line[1]}]`).html() === 'x')) || (($(`div[data=${line[0]}]`).html() === 'x' && $(`div[data=${line[2]}]`).html() === 'x')) || (($(`div[data=${line[1]}]`).html() === 'x' && $(`div[data=${line[2]}]`).html() === 'x')))) && ultron === true) {
     console.log('fewer than 8')
     for (let i = 0; i < cells.length; i++) {
       if (((($(`div[data=${openRows[i][0]}]`).html() === 'x' && $(`div[data=${openRows[i][1]}]`).html() === 'x')) || (($(`div[data=${openRows[i][0]}]`).html() === 'x' && $(`div[data=${openRows[i][2]}]`).html() === 'x')) || (($(`div[data=${openRows[i][1]}]`).html() === 'x' && $(`div[data=${openRows[i][2]}]`).html() === 'x')))) {
@@ -286,6 +293,6 @@ module.exports = {
   emptyContent,
   addHandlers,
   compMode,
-  selfMode
-
+  selfMode,
+  ultronMode
 }

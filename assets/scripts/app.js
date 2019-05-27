@@ -14,4 +14,5 @@ $(() => {
   $('.changePw').on('click', ui.onChangePwButton)
   $('.vsSelf').on('click', events.selfMode)
   $('.vsComp').on('click', events.compMode)
+  $('.vsUltron').on('click', events.ultronMode)
 })
