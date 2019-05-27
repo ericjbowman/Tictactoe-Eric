@@ -16,18 +16,18 @@ const diagOne = [localCells[0], localCells[4], localCells[8]]
 const diagTwo = [localCells[2], localCells[4], localCells[6]]
 
 let comp = false
-const selfMode = function () {
+const selfMode = function() {
   comp = false
   $(this).closest('.modal')
   $('.moveMessage').html('Good Luck!')
 }
-const compMode = function () {
+const compMode = function() {
   comp = true
   $(this).closest('.modal')
   $('.moveMessage').html("It's your turn! You: X Computer: O")
 }
 
-const computerMove = function () {
+const computerMove = function() {
   $('.moveMessage').html("It's your turn! You: X Computer: O")
 
   const cells = [$('.zero').html(), $('.one').html(), $('.two').html(), $('.three').html(), $('.four').html(), $('.five').html(), $('.six').html(), $('.seven').html(), $('.eight').html()]
@@ -48,9 +48,19 @@ const computerMove = function () {
   const columnThree = [cells[2], cells[5], cells[8]]
   const diagOne = [cells[0], cells[4], cells[8]]
   const diagTwo = [cells[2], cells[4], cells[6]]
-  const lines = [['0', '1', '2'], ['3', '4', '5'], ['6', '7', '8'], ['0', '3', '6'], ['1', '4', '7'], ['2', '5', '8'], ['0', '4', '8'], ['2', '4', '6']]
+  const lines = [
+    ['0', '1', '2'],
+    ['3', '4', '5'],
+    ['6', '7', '8'],
+    ['0', '3', '6'],
+    ['1', '4', '7'],
+    ['2', '5', '8'],
+    ['0', '4', '8'],
+    ['2', '4', '6']
+  ]
   let unusedCellIndexes = []
-  function getAllIndexes (arr, val, sec) {
+
+  function getAllIndexes(arr, val, sec) {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i] !== val && arr[i] !== sec) {
         unusedCellIndexes.push(i)
@@ -59,44 +69,41 @@ const computerMove = function () {
   }
   getAllIndexes(cells, 'x', 'o')
   let n = 10
-  if (($('.zero').html() === 'x' || $('.two').html() === 'x' || $('.six').html() === 'x' || $('.eight').html() === 'x') && unusedCellIndexes.length === 8) {
+  if (unusedCellIndexes.length === 8 && $('.four').html() === 'x') {
+    $('.zero').html('o')
+  } else if (($('.zero').html() === 'x' || $('.two').html() === 'x' || $('.six').html() === 'x' || $('.eight').html() === 'x') && unusedCellIndexes.length === 8) {
     n = 4
     $('.four').html('o')
-  } else if ((unusedCellIndexes.length < 8) && (lines.some(line => ($(`div[data=${line[0]}]`).html() === 'o' && $(`div[data=${line[1]}]`).html() === 'o') || ($(`div[data=${line[0]}]`).html() === 'o' && $(`div[data=${line[2]}]`).html() === 'o') || ($(`div[data=${line[1]}]`).html() === 'o' && $(`div[data=${line[2]}]`).html() === 'o')))) {
+  } else if ((unusedCellIndexes.length < 8) && (lines.some(line => (($(`div[data=${line[0]}]`).html() === 'o' && $(`div[data=${line[1]}]`).html() === 'o')) || (($(`div[data=${line[0]}]`).html() === 'o' && $(`div[data=${line[2]}]`).html() === 'o')) || (($(`div[data=${line[1]}]`).html() === 'o' && $(`div[data=${line[2]}]`).html() === 'o'))))) {
     console.log('fewer than 8')
-
-    let z = true
-    while (z === true) {
-      for (let i = 0; i < cells.length; i++) {
-        if ((($(`div[data=${lines[i][0]}]`).html() === 'o' && $(`div[data=${lines[i][1]}]`).html() === 'o') || ($(`div[data=${lines[i][0]}]`).html() === 'o' && $(`div[data=${lines[i][2]}]`).html() === 'o') || ($(`div[data=${lines[i][1]}]`).html() === 'o' && $(`div[data=${lines[i][2]}]`).html() === 'o'))) {
-          console.log('2 in a row!')
-          const compBlock = lines[i].filter(square => $(`div[data=${square}]`).html() === '')
-          if ((compBlock) && ($(`div[data=${compBlock}]`).html() === '')) {
-            $(`div[data=${compBlock}]`).html('o')
-            z = false
-            break
-          }
+    for (let i = 0; i < cells.length; i++) {
+      if (((($(`div[data=${lines[i][0]}]`).html() === 'o' && $(`div[data=${lines[i][1]}]`).html() === 'o')) || (($(`div[data=${lines[i][0]}]`).html() === 'o' && $(`div[data=${lines[i][2]}]`).html() === 'o')) || (($(`div[data=${lines[i][1]}]`).html() === 'o' && $(`div[data=${lines[i][2]}]`).html() === 'o')))) {
+        console.log('2 in a row!')
+        const compBlock = lines[i].filter(square => $(`div[data=${square}]`).html() === '')
+        if (!compBlock) {
+          break
+        }
+        if ((compBlock) && ($(`div[data=${compBlock}]`).html() === '')) {
+          $(`div[data=${compBlock}]`).html('o')
+          break
         }
       }
     }
-  } else if ((unusedCellIndexes.length < 8) && (lines.some(line => ($(`div[data=${line[0]}]`).html() === 'x' && $(`div[data=${line[1]}]`).html() === 'x') || ($(`div[data=${line[0]}]`).html() === 'x' && $(`div[data=${line[2]}]`).html() === 'x') || ($(`div[data=${line[1]}]`).html() === 'x' && $(`div[data=${line[2]}]`).html() === 'x')))) {
+  } else if ((unusedCellIndexes.length < 8) && (lines.some(line => (($(`div[data=${line[0]}]`).html() === 'x' && $(`div[data=${line[1]}]`).html() === 'x')) || (($(`div[data=${line[0]}]`).html() === 'x' && $(`div[data=${line[2]}]`).html() === 'x')) || (($(`div[data=${line[1]}]`).html() === 'x' && $(`div[data=${line[2]}]`).html() === 'x'))))) {
     console.log('fewer than 8')
-
-    let z = true
-    while (z === true) {
-      for (let i = 0; i < cells.length; i++) {
-        if ((($(`div[data=${lines[i][0]}]`).html() === 'x' && $(`div[data=${lines[i][1]}]`).html() === 'x') || ($(`div[data=${lines[i][0]}]`).html() === 'x' && $(`div[data=${lines[i][2]}]`).html() === 'x') || ($(`div[data=${lines[i][1]}]`).html() === 'x' && $(`div[data=${lines[i][2]}]`).html() === 'x'))) {
-          console.log('2 in a row!')
-          const compBlock = lines[i].filter(square => $(`div[data=${square}]`).html() === '')
-          if ((compBlock) && ($(`div[data=${compBlock}]`).html() === '')) {
-            $(`div[data=${compBlock}]`).html('o')
-            z = false
-            break
-          } else {
-            n = Math.floor((Math.random() * (unusedCellIndexes.length)))
-            $(`div[data=${unusedCellIndexes[n]}]`).html('o')
-            break
-          }
+    for (let i = 0; i < cells.length; i++) {
+      if (((($(`div[data=${lines[i][0]}]`).html() === 'x' && $(`div[data=${lines[i][1]}]`).html() === 'x')) || (($(`div[data=${lines[i][0]}]`).html() === 'x' && $(`div[data=${lines[i][2]}]`).html() === 'x')) || (($(`div[data=${lines[i][1]}]`).html() === 'x' && $(`div[data=${lines[i][2]}]`).html() === 'x')))) {
+        console.log('2 in a row!')
+        const compBlock = lines[i].filter(square => $(`div[data=${square}]`).html() === '')
+        if (!compBlock) {
+          break
+        } else if ((compBlock) && ($(`div[data=${compBlock}]`).html() === '')) {
+          $(`div[data=${compBlock}]`).html('o')
+          break
+        } else {
+          n = Math.floor((Math.random() * (unusedCellIndexes.length)))
+          $(`div[data=${unusedCellIndexes[n]}]`).html('o')
+          break
         }
       }
     }
@@ -126,7 +133,7 @@ const gameData = {
 // moveArr is an arry of moves in order that they are made
 let moveArr = []
 // Initiates a new game
-const newGame = function () {
+const newGame = function() {
   if (moveArr.length === 0) {
     api.startGame()
       .then(ui.onStartGameSuccess, gameData.game.over = false)
@@ -134,7 +141,7 @@ const newGame = function () {
   }
 }
 // move function shows the move on gameboard and updates api with cell index, value, and whether the game is over
-const move = function (player) {
+const move = function(player) {
   $(event.target).html(player)
   // moveArr.push('player')
   gameData.game.cell.index = $(event.target).data('cell-index')
@@ -144,13 +151,13 @@ const move = function (player) {
     .catch(ui.onPatchGameDataFailure)
 }
 // triggerIndexSuccess ensures that the api patch happens before the api index occurs
-const triggerIndexSuccess = function () {
+const triggerIndexSuccess = function() {
   api.indexGamedata()
     .then(ui.onIndexSuccess)
     .catch(ui.onIndexFailure)
 }
 // finalMove initiates an API patch for gameData and API index if successfull
-const finalMove = function () {
+const finalMove = function() {
   api.patchGameData(gameData, store.id)
     // .then(ui.logPatchData)
     .then(triggerIndexSuccess())
