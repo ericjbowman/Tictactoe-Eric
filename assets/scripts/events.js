@@ -40,7 +40,6 @@ const computerMove = function() {
   ]
   let unusedCellIndexes = []
   const openRows = lines.filter(line => line.some(square => $(`div[data=${square}]`).html() === ''))
-  console.log(openRows)
   function getAllIndexes(arr, val, sec) {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i] !== val && arr[i] !== sec) {
@@ -147,7 +146,7 @@ const checkForWin = function () {
     finalMove()
   } else if (localLines.some(line => line.every(cell => cell === 'o'))) {
     if (ultron === true) {
-      $('h2').html('Ultron wins!')
+      $('h2').html('Ultron scoffs at your ineptitude!')
       $('#ultron').delay(1000).fadeIn(2000)
     } else {
       $('h2').html('O wins!')
