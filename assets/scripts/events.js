@@ -192,6 +192,9 @@ const checkForWin = function () {
 const fillContent = function () {
   if (gameData.game.over === true) {
     $('.borg').html('Resistance is futile!')
+    if (comp === true) {
+      $('#locutus').show()
+    }
     return
   } else if ($(event.target).html() !== '') {
     $('.moveMessage').html('Choose an empty Square!')
