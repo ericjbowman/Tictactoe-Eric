@@ -124,6 +124,7 @@ const computerMove = function() {
   moveArr.push('o')
   if (unusedCellIndexes.length === 0) {
     $('h2').html('Cats!')
+    $('#cat').delay(1500).fadeIn(2000)
     $('.moveMessage').html('')
     gameData.game.over = true
     finalMove()
@@ -192,12 +193,18 @@ const checkForWin = function () {
     gameData.game.over = true
     finalMove()
   } else if (rowOne.every(i => i === 'o') || rowTwo.every(i => i === 'o') || rowThree.every(i => i === 'o') || columnOne.every(i => i === 'o') || columnTwo.every(i => i === 'o') || columnThree.every(i => i === 'o') || diagOne.every(i => i === 'o') || diagTwo.every(i => i === 'o')) {
-    $('h2').html('O wins!')
+    if (ultron === true) {
+      $('h2').html('Ultron wins!')
+      $('#ultron').delay(1500).fadeIn(2000)
+    } else {
+      $('h2').html('O wins!')
+    }
     $('.moveMessage').html('')
     gameData.game.over = true
     finalMove()
   } else if (moveArr.length === 9) {
     $('h2').html('Cats!')
+    $('#cat').delay(1500).fadeIn(2000)
     $('.moveMessage').html('')
     gameData.game.over = true
     finalMove()
@@ -246,6 +253,7 @@ const emptyContent = function () {
   newGame()
   $('#message').html('')
   $('#signed-in').html('')
+  $('img').hide()
 }
 
 const onSignUp = function (event) {
