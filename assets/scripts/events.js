@@ -146,7 +146,7 @@ const checkForWin = function () {
     finalMove()
   } else if (localLines.some(line => line.every(cell => cell === 'o'))) {
     if (ultron === true) {
-      $('h2').html('Ultron scoffs at your ineptitude!')
+      $('h2').html('Ultron finds you obsolete')
       $('#ultron').delay(1000).fadeIn(2000)
     } else {
       $('h2').html('O wins!')

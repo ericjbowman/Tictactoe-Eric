@@ -119,14 +119,11 @@ form {
 }
 
 .newGame {
-  font-size: 30px;
-  padding: .5em;
   margin-bottom: 5px;
   background-color: $secondary;
   border: solid $border-color;
   border-width: 2px;
   // margin: 0 auto;
-  height: 3em;
 }
 
 button:hover {
@@ -161,15 +158,11 @@ button:hover {
   margin-top: 5px;
 }
 
-// .headrow {
-//   // border-bottom: solid black;
-//   // border-width: 5px;
-//   max-height: 15vh;
-// }
-//
-// .bodmid {
-//   max-height: 85vh;
-// }
+.headrow {
+  // border-bottom: solid;
+  // border-width: 5px;
+}
+
 .modal-content {
   background-color: $primary-one;
 }
@@ -253,7 +246,14 @@ footer {
 }
 
 .newGame {
-  margin-top: 15px;
+  font-size: 30px;
+  padding: .5em;
+  margin-bottom: 5px;
+  background-color: $secondary;
+  border: solid $border-color;
+  border-width: 2px;
+  // margin: 0 auto;
+  height: 3em;
 
 }
 
@@ -305,7 +305,7 @@ footer {
     height: 150px;
     width: 150px;
   }
-  h2, h3, h4, p, .newGame {
+  h2, h3, h4, p, {
     font-size: 15px;
   }
   h1 {
