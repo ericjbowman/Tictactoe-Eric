@@ -193,7 +193,10 @@ const fillContent = function () {
   if (gameData.game.over === true) {
     $('.borg').html('Resistance is futile!')
     if (comp === true) {
-      $('#locutus').show()
+      if ($('h2').html() === 'O wins!') {
+        $('#locutus').show()
+      } else if ($('h2').html() === 'X wins!')
+        $('.borg').html('You already won!')
     }
     return
   } else if ($(event.target).html() !== '') {
