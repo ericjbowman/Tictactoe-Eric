@@ -38,24 +38,6 @@ const computerMove = function() {
   $('.moveMessage').html("It's your turn! You: X Computer: O")
 
   const cells = [$('.zero').html(), $('.one').html(), $('.two').html(), $('.three').html(), $('.four').html(), $('.five').html(), $('.six').html(), $('.seven').html(), $('.eight').html()]
-
-  // const rowOne = [[$('.zero').html(), $('.one').html(), $('.two').html()]
-  // const rowTwo = [[$('.three').html(), $('.four').html(), $('.five').html()]
-  // const rowThree = [$('.six').html(), $('.seven').html(), $('.eight').html()
-  // const columnOne = [cells[0], cells[3], cells[6]]
-  // const columnTwo = [cells[1], cells[4], cells[7]]
-  // const columnThree = [cells[2], cells[5], cells[8]]
-  // const diagOne = [cells[0], cells[4], cells[8]]
-  // const diagTwo = [cells[2], cells[4], cells[6]]
-
-  // const rowOne = [cells[0], cells[1], cells[2]]
-  // const rowTwo = [cells[3], cells[4], cells[5]]
-  // const rowThree = [cells[6], cells[7], cells[8]]
-  // const columnOne = [cells[0], cells[3], cells[6]]
-  // const columnTwo = [cells[1], cells[4], cells[7]]
-  // const columnThree = [cells[2], cells[5], cells[8]]
-  // const diagOne = [cells[0], cells[4], cells[8]]
-  // const diagTwo = [cells[2], cells[4], cells[6]]
   const lines = [
     ['0', '1', '2'],
     ['3', '4', '5'],
@@ -109,10 +91,6 @@ const computerMove = function() {
           break
         } else if ((compBlock) && ($(`div[data=${compBlock}]`).html() === '')) {
           $(`div[data=${compBlock}]`).html('o')
-          break
-        } else {
-          n = Math.floor((Math.random() * (unusedCellIndexes.length)))
-          $(`div[data=${unusedCellIndexes[n]}]`).html('o')
           break
         }
       }
