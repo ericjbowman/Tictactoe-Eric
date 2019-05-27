@@ -260,7 +260,7 @@ footer {
 }
 
 #signed-in {
-  margin: 0 auto;
+  margin: 10px 0px 0px 0px;
 }
 
 #centerme {
@@ -276,6 +276,12 @@ footer {
   display: flex;
   justify-content: center;
 }
+@media only screen and (max-width: 950px) {
+  h1 {
+    font-size: 40px;
+    margin-bottom: 5px;
+  }
+}
 @media only screen and (max-width: 600px) {
   .board {
     height: 150px;
@@ -290,14 +296,29 @@ footer {
     width: 50px;
     font-size: 30px;
   }
+  img {
+    height: 150px;
+    width: 150px;
+  }
   h2, h3, h4, p, .newGame {
-    font-size: 20px;
+    font-size: 15px;
   }
   h1 {
     font-size: 30px;
     margin-top: 5px;
+    margin-left: 0;
   }
   .btn {
     font-size: 15px;
+    border-size: 1px;
+  }
+  p {
+    font-size: 15px;
+  }
+  input {
+    font-size: 15px;
+  }
+  .headrow {
+    margin-bottom: 10px;
   }
 }
