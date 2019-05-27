@@ -67,16 +67,17 @@ const computerMove = function () {
 
     let z = true
     while (z === true) {
-      lines.forEach(line => {
-        if ((($(`div[data=${line[0]}]`).html() && $(`div[data=${line[1]}]`).html() === 'x') || ($(`div[data=${line[0]}]`).html() && $(`div[data=${line[2]}]`).html() === 'x') || ($(`div[data=${line[1]}]`).html() && $(`div[data=${line[2]}]`).html() === 'x'))) {
+      for (let i = 0; i < cells.length; i++) {
+        if ((($(`div[data=${lines[i][0]}]`).html() && $(`div[data=${lines[i][1]}]`).html() === 'x') || ($(`div[data=${lines[i][0]}]`).html() && $(`div[data=${lines[i][2]}]`).html() === 'x') || ($(`div[data=${lines[i][1]}]`).html() && $(`div[data=${lines[i][2]}]`).html() === 'x'))) {
           console.log('2 in a row!')
-          const compBlock = line.filter(square => $(`div[data=${square}]`).html() === '')
+          const compBlock = lines[i].filter(square => $(`div[data=${square}]`).html() === '')
           if (($(`div[data=${compBlock}]`).html() === '')) {
             $(`div[data=${compBlock}]`).html('o')
             z = false
+            break
           }
         }
-      })
+      }
     }
 
 
