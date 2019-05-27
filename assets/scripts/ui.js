@@ -109,20 +109,8 @@ const onStartGameSuccess = function (responseData) {
   $('#signed-in').html('')
 }
 
-const onStartGameFailure = function () {
-  $('.moveMessage').html('Error')
-}
-
-const onPatchGameDataFailure = function () {
-  $('.moveMessage').html('Error')
-}
-
 const onIndexSuccess = function (responseData) {
   $('.gamesPlayed').html(`Games played: ${responseData.games.length}`)
-}
-
-const onIndexFailure = function () {
-  $('.moveMessage').html('Error!')
 }
 
 module.exports = {
@@ -135,9 +123,6 @@ module.exports = {
   changePasswordSuccess,
   changePasswordFailure,
   onIndexSuccess,
-  onIndexFailure,
   onStartGameSuccess,
-  onStartGameFailure,
-  onPatchGameDataFailure,
   onChangePwButton
 }
