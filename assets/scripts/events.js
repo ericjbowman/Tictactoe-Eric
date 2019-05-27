@@ -40,14 +40,15 @@ const computerMove = function() {
   // const columnThree = [cells[2], cells[5], cells[8]]
   // const diagOne = [cells[0], cells[4], cells[8]]
   // const diagTwo = [cells[2], cells[4], cells[6]]
-  const rowOne = [cells[0], cells[1], cells[2]]
-  const rowTwo = [cells[3], cells[4], cells[5]]
-  const rowThree = [cells[6], cells[7], cells[8]]
-  const columnOne = [cells[0], cells[3], cells[6]]
-  const columnTwo = [cells[1], cells[4], cells[7]]
-  const columnThree = [cells[2], cells[5], cells[8]]
-  const diagOne = [cells[0], cells[4], cells[8]]
-  const diagTwo = [cells[2], cells[4], cells[6]]
+
+  // const rowOne = [cells[0], cells[1], cells[2]]
+  // const rowTwo = [cells[3], cells[4], cells[5]]
+  // const rowThree = [cells[6], cells[7], cells[8]]
+  // const columnOne = [cells[0], cells[3], cells[6]]
+  // const columnTwo = [cells[1], cells[4], cells[7]]
+  // const columnThree = [cells[2], cells[5], cells[8]]
+  // const diagOne = [cells[0], cells[4], cells[8]]
+  // const diagTwo = [cells[2], cells[4], cells[6]]
   const lines = [
     ['0', '1', '2'],
     ['3', '4', '5'],
@@ -59,7 +60,8 @@ const computerMove = function() {
     ['2', '4', '6']
   ]
   let unusedCellIndexes = []
-
+  const openRows = lines.filter(line => line.some(square => $(`div[data=${square}]`).html() === ''))
+  console.log(openRows)
   function getAllIndexes(arr, val, sec) {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i] !== val && arr[i] !== sec) {
@@ -69,17 +71,18 @@ const computerMove = function() {
   }
   getAllIndexes(cells, 'x', 'o')
   let n = 10
+
   if (unusedCellIndexes.length === 8 && $('.four').html() === 'x') {
     $('.zero').html('o')
   } else if (($('.zero').html() === 'x' || $('.two').html() === 'x' || $('.six').html() === 'x' || $('.eight').html() === 'x') && unusedCellIndexes.length === 8) {
     n = 4
     $('.four').html('o')
-  } else if ((unusedCellIndexes.length < 8) && (lines.some(line => (($(`div[data=${line[0]}]`).html() === 'o' && $(`div[data=${line[1]}]`).html() === 'o')) || (($(`div[data=${line[0]}]`).html() === 'o' && $(`div[data=${line[2]}]`).html() === 'o')) || (($(`div[data=${line[1]}]`).html() === 'o' && $(`div[data=${line[2]}]`).html() === 'o'))))) {
+  } else if ((unusedCellIndexes.length < 8) && (openRows.some(line => (($(`div[data=${line[0]}]`).html() === 'o' && $(`div[data=${line[1]}]`).html() === 'o')) || (($(`div[data=${line[0]}]`).html() === 'o' && $(`div[data=${line[2]}]`).html() === 'o')) || (($(`div[data=${line[1]}]`).html() === 'o' && $(`div[data=${line[2]}]`).html() === 'o'))))) {
     console.log('fewer than 8')
     for (let i = 0; i < cells.length; i++) {
-      if (((($(`div[data=${lines[i][0]}]`).html() === 'o' && $(`div[data=${lines[i][1]}]`).html() === 'o')) || (($(`div[data=${lines[i][0]}]`).html() === 'o' && $(`div[data=${lines[i][2]}]`).html() === 'o')) || (($(`div[data=${lines[i][1]}]`).html() === 'o' && $(`div[data=${lines[i][2]}]`).html() === 'o')))) {
+      if (((($(`div[data=${openRows[i][0]}]`).html() === 'o' && $(`div[data=${openRows[i][1]}]`).html() === 'o')) || (($(`div[data=${openRows[i][0]}]`).html() === 'o' && $(`div[data=${openRows[i][2]}]`).html() === 'o')) || (($(`div[data=${openRows[i][1]}]`).html() === 'o' && $(`div[data=${openRows[i][2]}]`).html() === 'o')))) {
         console.log('2 in a row!')
-        const compBlock = lines[i].filter(square => $(`div[data=${square}]`).html() === '')
+        const compBlock = openRows[i].filter(square => $(`div[data=${square}]`).html() === '')
         if (!compBlock) {
           break
         }
@@ -89,12 +92,12 @@ const computerMove = function() {
         }
       }
     }
-  } else if ((unusedCellIndexes.length < 8) && (lines.some(line => (($(`div[data=${line[0]}]`).html() === 'x' && $(`div[data=${line[1]}]`).html() === 'x')) || (($(`div[data=${line[0]}]`).html() === 'x' && $(`div[data=${line[2]}]`).html() === 'x')) || (($(`div[data=${line[1]}]`).html() === 'x' && $(`div[data=${line[2]}]`).html() === 'x'))))) {
+  } else if ((unusedCellIndexes.length < 8) && (openRows.some(line => (($(`div[data=${line[0]}]`).html() === 'x' && $(`div[data=${line[1]}]`).html() === 'x')) || (($(`div[data=${line[0]}]`).html() === 'x' && $(`div[data=${line[2]}]`).html() === 'x')) || (($(`div[data=${line[1]}]`).html() === 'x' && $(`div[data=${line[2]}]`).html() === 'x'))))) {
     console.log('fewer than 8')
     for (let i = 0; i < cells.length; i++) {
-      if (((($(`div[data=${lines[i][0]}]`).html() === 'x' && $(`div[data=${lines[i][1]}]`).html() === 'x')) || (($(`div[data=${lines[i][0]}]`).html() === 'x' && $(`div[data=${lines[i][2]}]`).html() === 'x')) || (($(`div[data=${lines[i][1]}]`).html() === 'x' && $(`div[data=${lines[i][2]}]`).html() === 'x')))) {
+      if (((($(`div[data=${openRows[i][0]}]`).html() === 'x' && $(`div[data=${openRows[i][1]}]`).html() === 'x')) || (($(`div[data=${openRows[i][0]}]`).html() === 'x' && $(`div[data=${openRows[i][2]}]`).html() === 'x')) || (($(`div[data=${openRows[i][1]}]`).html() === 'x' && $(`div[data=${openRows[i][2]}]`).html() === 'x')))) {
         console.log('2 in a row!')
-        const compBlock = lines[i].filter(square => $(`div[data=${square}]`).html() === '')
+        const compBlock = openRows[i].filter(square => $(`div[data=${square}]`).html() === '')
         if (!compBlock) {
           break
         } else if ((compBlock) && ($(`div[data=${compBlock}]`).html() === '')) {
