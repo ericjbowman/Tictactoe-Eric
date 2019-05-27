@@ -117,10 +117,7 @@ h4 {
 form {
   color: $border-color;
 }
-.hasStartGame {
-  display: flex;
-  justify-content: center;
-}
+
 .newGame {
   font-size: 30px;
   padding: .5em;
@@ -164,9 +161,15 @@ button:hover {
   margin-top: 5px;
 }
 
-.headrow {
-  // margin-bottom: 5px;
-}
+// .headrow {
+//   // border-bottom: solid black;
+//   // border-width: 5px;
+//   max-height: 15vh;
+// }
+//
+// .bodmid {
+//   max-height: 85vh;
+// }
 .modal-content {
   background-color: $primary-one;
 }
@@ -287,6 +290,7 @@ footer {
     height: 150px;
     width: 150px;
     margin-top: 10px;
+    border-width: 0.5px;
     }
   .row {
     height: 50px;
@@ -295,6 +299,7 @@ footer {
     height: 50px;
     width: 50px;
     font-size: 30px;
+    border-width: 0.5px;
   }
   img {
     height: 150px;
@@ -309,8 +314,9 @@ footer {
     margin-left: 0;
   }
   .btn {
-    font-size: 15px;
-    border-size: 1px;
+    font-size: 10px;
+    border-width: 0.5px;
+    padding: 5px;
   }
   p {
     font-size: 15px;
@@ -320,5 +326,6 @@ footer {
   }
   .headrow {
     margin-bottom: 10px;
+    min-height: 15vh;
   }
 }
