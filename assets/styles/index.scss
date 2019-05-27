@@ -28,6 +28,7 @@ body {
   width: 450px;
   margin: 0 auto;
   font-family: sans-serif;
+  padding: 0;
 }
 
 img {
@@ -35,6 +36,8 @@ img {
   height: 450px;
   width: 450px;
   position: absolute;
+  padding-left: 0;
+  margin: 0 auto;
 }
 input {
   border: solid $border-color;
@@ -78,6 +81,8 @@ s-in {
 
 .row {
   height: 150px;
+  padding: 0;
+  margin: 0 auto;
 }
 
 .box {
@@ -87,6 +92,8 @@ s-in {
   display: flex;
   justify-content: center;
   font-size: 80px;
+  padding: 0;
+  margin: 0 auto;
 }
 
 .box:hover {

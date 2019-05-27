@@ -195,7 +195,7 @@ const checkForWin = function () {
   } else if (rowOne.every(i => i === 'o') || rowTwo.every(i => i === 'o') || rowThree.every(i => i === 'o') || columnOne.every(i => i === 'o') || columnTwo.every(i => i === 'o') || columnThree.every(i => i === 'o') || diagOne.every(i => i === 'o') || diagTwo.every(i => i === 'o')) {
     if (ultron === true) {
       $('h2').html('Ultron wins!')
-      $('#ultron').delay(1500).fadeIn(2000)
+      $('#ultron').delay(1000).fadeIn(2000)
     } else {
       $('h2').html('O wins!')
     }
@@ -204,7 +204,7 @@ const checkForWin = function () {
     finalMove()
   } else if (moveArr.length === 9) {
     $('h2').html('Cats!')
-    $('#cat').delay(1500).fadeIn(2000)
+    $('#cat').delay(1000).fadeIn(2000)
     $('.moveMessage').html('')
     gameData.game.over = true
     finalMove()
