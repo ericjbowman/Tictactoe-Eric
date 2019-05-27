@@ -58,27 +58,35 @@ const computerMove = function () {
     }
   }
   getAllIndexes(cells, 'x', 'o')
-  let n = 0
+  let z = true
+  let n = 10
   if (($('.zero').html() === 'x' || $('.two').html() === 'x' || $('.six').html() === 'x' || $('.eight').html() === 'x') && unusedCellIndexes.length === 8) {
     n = 4
     $('.four').html('o')
     return
-  } else if (lines.forEach(line => {
-    for (let i = 0; i < line.length; i++) {
-      (($(`div[data=${line[i]}]`).html() && $(`div[data=${line[i + 1]}]`).html() === 'x') || ($(`div[data=${line[i]}]`).html() && $(`div[data=${line[i + 2]}]`).html() === 'x'))
-      }
-  })) { alert('no middle')
+  } else if (unusedCellIndexes.length < 8) {
+    console.log('fewer than 8')
     lines.forEach(line => {
-      for (let i = 0; i < line.length; i++) {
+      while (z === true) {
+        for (let i = 0; i < line.length; i++) {
         // console.log($(`div[data=${line[i]}]`).html())
-        if (($(`div[data=${line[i]}]`).html() && $(`div[data=${line[i + 1]}]`).html() === 'x') || ($(`div[data=${line[i]}]`).html() && $(`div[data=${line[i + 2]}]`).html() === 'x')) {
+          if (($(`div[data=${line[i]}]`).html() && $(`div[data=${line[i + 1]}]`).html() === 'x') || ($(`div[data=${line[i]}]`).html() && $(`div[data=${line[i + 2]}]`).html() === 'x')) {
           // alert('2 in a row!')
-          const compBlock = line.filter(square => $(`div[data=${square}]`).html() === '')
-          if ($(`div[data=${compBlock}]`).html() === '') {
-            $(`div[data=${compBlock}]`).html('o')
-            n = 1
+            const compBlock = line.filter(square => $(`div[data=${square}]`).html() === '')
+            if ($(`div[data=${compBlock}]`).html() === '') {
+              $(`div[data=${compBlock}]`).html('o')
+              z = false
+              break
+            }
+          } else {
+            n = Math.floor((Math.random() * (unusedCellIndexes.length)))
+            $(`div[data=${unusedCellIndexes[n]}]`).html('o')
+            z = false
+            break
           }
+          break
         }
+        console.log(line)
       }
     })
   } else {
