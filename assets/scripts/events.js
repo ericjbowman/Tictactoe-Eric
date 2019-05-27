@@ -62,16 +62,16 @@ const computerMove = function () {
   if (($('.zero').html() === 'x' || $('.two').html() === 'x' || $('.six').html() === 'x' || $('.eight').html() === 'x') && unusedCellIndexes.length === 8) {
     n = 4
     $('.four').html('o')
-  } else if ((unusedCellIndexes.length < 8) && (lines.some(line => ($(`div[data=${line[0]}]`).html() && $(`div[data=${line[1]}]`).html() === 'x') || ($(`div[data=${line[0]}]`).html() && $(`div[data=${line[2]}]`).html() === 'x') || ($(`div[data=${line[1]}]`).html() && $(`div[data=${line[2]}]`).html() === 'x')))) {
+  } else if ((unusedCellIndexes.length < 8) && (lines.some(line => ($(`div[data=${line[0]}]`).html() === 'o' && $(`div[data=${line[1]}]`).html() === 'o') || ($(`div[data=${line[0]}]`).html() === 'o' && $(`div[data=${line[2]}]`).html() === 'o') || ($(`div[data=${line[1]}]`).html() === 'o' && $(`div[data=${line[2]}]`).html() === 'o')))) {
     console.log('fewer than 8')
 
     let z = true
     while (z === true) {
       for (let i = 0; i < cells.length; i++) {
-        if ((($(`div[data=${lines[i][0]}]`).html() && $(`div[data=${lines[i][1]}]`).html() === 'x') || ($(`div[data=${lines[i][0]}]`).html() && $(`div[data=${lines[i][2]}]`).html() === 'x') || ($(`div[data=${lines[i][1]}]`).html() && $(`div[data=${lines[i][2]}]`).html() === 'x'))) {
+        if ((($(`div[data=${lines[i][0]}]`).html() === 'o' && $(`div[data=${lines[i][1]}]`).html() === 'o') || ($(`div[data=${lines[i][0]}]`).html() === 'o' && $(`div[data=${lines[i][2]}]`).html() === 'o') || ($(`div[data=${lines[i][1]}]`).html() === 'o' && $(`div[data=${lines[i][2]}]`).html() === 'o'))) {
           console.log('2 in a row!')
           const compBlock = lines[i].filter(square => $(`div[data=${square}]`).html() === '')
-          if (($(`div[data=${compBlock}]`).html() === '')) {
+          if ((compBlock) && ($(`div[data=${compBlock}]`).html() === '')) {
             $(`div[data=${compBlock}]`).html('o')
             z = false
             break
@@ -79,45 +79,27 @@ const computerMove = function () {
         }
       }
     }
+  } else if ((unusedCellIndexes.length < 8) && (lines.some(line => ($(`div[data=${line[0]}]`).html() === 'x' && $(`div[data=${line[1]}]`).html() === 'x') || ($(`div[data=${line[0]}]`).html() === 'x' && $(`div[data=${line[2]}]`).html() === 'x') || ($(`div[data=${line[1]}]`).html() === 'x' && $(`div[data=${line[2]}]`).html() === 'x')))) {
+    console.log('fewer than 8')
 
-
-
-
-
-
-
-
-
-
-
-    // lines.forEach(line => {
-    //   let z = true
-    //   const xarr = []
-    //   const oarr = []
-    //   cells.filter(cell => {
-    //     if (cell === 'x') {
-    //       xarr.push('x')
-    //     } else if (cell === 'o') {
-    //       oarr.push('o')
-    //     }
-    //   })
-    //   console.log(`X: ${xarr.length} O: ${oarr.length}`)
-    //   while (z === true) {
-    //     // console.log($(`div[data=${line[i]}]`).html())
-    //     if ((($(`div[data=${line[0]}]`).html() && $(`div[data=${line[1]}]`).html() === 'x') || ($(`div[data=${line[0]}]`).html() && $(`div[data=${line[2]}]`).html() === 'x') || ($(`div[data=${line[1]}]`).html() && $(`div[data=${line[2]}]`).html() === 'x')) && (oarr.length < xarr.length)) {
-    //       console.log('2 in a row!')
-    //       const compBlock = line.filter(square => $(`div[data=${square}]`).html() === '')
-    //       if (($(`div[data=${compBlock}]`).html() === '') && (oarr.length < xarr.length)) {
-    //         $(`div[data=${compBlock}]`).html('o')
-    //         z = false
-    //         break
-    //       }
-    //     } else {
-    //       z = false
-    //     }
-    //   }
-    //   console.log(line)
-    // })
+    let z = true
+    while (z === true) {
+      for (let i = 0; i < cells.length; i++) {
+        if ((($(`div[data=${lines[i][0]}]`).html() === 'x' && $(`div[data=${lines[i][1]}]`).html() === 'x') || ($(`div[data=${lines[i][0]}]`).html() === 'x' && $(`div[data=${lines[i][2]}]`).html() === 'x') || ($(`div[data=${lines[i][1]}]`).html() === 'x' && $(`div[data=${lines[i][2]}]`).html() === 'x'))) {
+          console.log('2 in a row!')
+          const compBlock = lines[i].filter(square => $(`div[data=${square}]`).html() === '')
+          if ((compBlock) && ($(`div[data=${compBlock}]`).html() === '')) {
+            $(`div[data=${compBlock}]`).html('o')
+            z = false
+            break
+          } else {
+            n = Math.floor((Math.random() * (unusedCellIndexes.length)))
+            $(`div[data=${unusedCellIndexes[n]}]`).html('o')
+            break
+          }
+        }
+      }
+    }
   } else {
     n = Math.floor((Math.random() * (unusedCellIndexes.length)))
     $(`div[data=${unusedCellIndexes[n]}]`).html('o')
