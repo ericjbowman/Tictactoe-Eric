@@ -93,13 +93,6 @@ const computerMove = function () {
   moveArr.push('o')
   checkForWin()
   finalMove()
-  // if (unusedCellIndexes.length === 0) {
-  //   $('h2').html('Cats!')
-  //   $('#cat').delay(1500).fadeIn(2000)
-  //   $('.moveMessage').html('')
-  //   gameData.game.over = true
-  //   finalMove()
-  // }
 }
 
 // This is the data sent to the api
@@ -155,7 +148,6 @@ const checkForWin = function () {
       $('h2').html('Ultron finds you obsolete')
       $('#ultron').show()
       $('#ultron').delay(1000).fadeOut(2000)
-
     } else {
       $('h2').html('O wins!')
     }
@@ -164,7 +156,7 @@ const checkForWin = function () {
     finalMove()
   } else if (moveArr.length === 9) {
     $('h2').html('Cats!')
-    $('#cat').fadeIn(2000)
+    $('#cat').delay(500).fadeIn(2000)
     $('.moveMessage').html('')
     gameData.game.over = true
     finalMove()
@@ -201,7 +193,7 @@ const fillContent = function () {
   if (gameData.game.over === true) {
     return
   }
-  if (comp === true) {
+  if (comp === true && gameData.game.over === false) {
     computerMove()
     checkForWin()
   }
