@@ -7,27 +7,28 @@ const store = require('./store')
 // comp is a boolean used to play against an AI opponent. Ultron is a boolean used to make AI unbeatable.
 let comp = false
 let ultron = false
-const selfMode = function() {
+const selfMode = function () {
   comp = false
   $(this).closest('.modal')
   $('.moveMessage').html('Good Luck!')
 }
-const compMode = function() {
+const compMode = function () {
   comp = true
   ultron = false
   $(this).closest('.modal')
   $('.moveMessage').html("It's your turn! You: X Computer: O")
 }
-const ultronMode = function() {
+const ultronMode = function () {
   comp = true
   ultron = true
   $('.moveMessage').html("It's your turn! You: X Ultron: O")
 }
 // computerMove finds available cells and chooses randomly from them unless Ultron mode is on. Ultron makes decisions based on X moves to prevent X win.
-const computerMove = function() {
+const computerMove = function () {
   $('.moveMessage').html("It's your turn! You: X Computer: O")
-
+  // cells is an array of the contents of all squares on the gameboard
   const cells = [$('.zero').html(), $('.one').html(), $('.two').html(), $('.three').html(), $('.four').html(), $('.five').html(), $('.six').html(), $('.seven').html(), $('.eight').html()]
+  // lines is an array of rows, columns, and diagonals on the gameboard
   const lines = [
     ['0', '1', '2'],
     ['3', '4', '5'],
@@ -38,9 +39,11 @@ const computerMove = function() {
     ['0', '4', '8'],
     ['2', '4', '6']
   ]
-  let unusedCellIndexes = []
+  const unusedCellIndexes = []
+  // openRows is an array of rows, columns, and diagonals that are still open for moves
   const openRows = lines.filter(line => line.some(square => $(`div[data=${square}]`).html() === ''))
-  function getAllIndexes(arr, val, sec) {
+  // getALLIndexes sorts through the cells and moves open cells to the unusedCellIndexes array
+  function getAllIndexes (arr, val, sec) {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i] !== val && arr[i] !== sec) {
         unusedCellIndexes.push(i)
@@ -48,9 +51,12 @@ const computerMove = function() {
     }
   }
   getAllIndexes(cells, 'x', 'o')
-// n is arbitrarily set to a nonexistant cell index until
+  // n is arbitrarily set to a nonexistant cell index until a random open cell is chosen.
   let n = 10
-
+  // First two conditionals are for Ultron to prevent a fork in which player x has two winning routes
+  // Then Ultron checks for a 2 'o's in a row and fills the empty cell if it's open
+  // If there are not 2 o's, Ultron checks for 2 'x's in a row and fills the next cell to prevent an X win
+  // If there are not 2 in a row, Ultron will randomly choose a cell to fill. This is what the computer opponent does every move.
   if (unusedCellIndexes.length === 8 && $('.four').html() === 'x' && ultron === true) {
     $('.zero').html('o')
   } else if (($('.zero').html() === 'x' || $('.two').html() === 'x' || $('.six').html() === 'x' || $('.eight').html() === 'x') && unusedCellIndexes.length === 8 && ultron === true) {
@@ -59,9 +65,9 @@ const computerMove = function() {
     for (let i = 0; i < cells.length; i++) {
       if (((($(`div[data=${openRows[i][0]}]`).html() === 'o' && $(`div[data=${openRows[i][1]}]`).html() === 'o')) || (($(`div[data=${openRows[i][0]}]`).html() === 'o' && $(`div[data=${openRows[i][2]}]`).html() === 'o')) || (($(`div[data=${openRows[i][1]}]`).html() === 'o' && $(`div[data=${openRows[i][2]}]`).html() === 'o')))) {
         const compBlock = openRows[i].filter(square => $(`div[data=${square}]`).html() === '')
-        if (!compBlock) {
-          break
-        }
+        // if (!compBlock) {
+        //   break
+        // }
         if ((compBlock) && ($(`div[data=${compBlock}]`).html() === '')) {
           $(`div[data=${compBlock}]`).html('o')
           break
@@ -72,9 +78,9 @@ const computerMove = function() {
     for (let i = 0; i < cells.length; i++) {
       if (((($(`div[data=${openRows[i][0]}]`).html() === 'x' && $(`div[data=${openRows[i][1]}]`).html() === 'x')) || (($(`div[data=${openRows[i][0]}]`).html() === 'x' && $(`div[data=${openRows[i][2]}]`).html() === 'x')) || (($(`div[data=${openRows[i][1]}]`).html() === 'x' && $(`div[data=${openRows[i][2]}]`).html() === 'x')))) {
         const compBlock = openRows[i].filter(square => $(`div[data=${square}]`).html() === '')
-        if (!compBlock) {
-          break
-        } else if ((compBlock) && ($(`div[data=${compBlock}]`).html() === '')) {
+        // if (!compBlock) {
+        //   break
+        if ((compBlock) && ($(`div[data=${compBlock}]`).html() === '')) {
           $(`div[data=${compBlock}]`).html('o')
           break
         }
@@ -85,13 +91,15 @@ const computerMove = function() {
     $(`div[data=${unusedCellIndexes[n]}]`).html('o')
   }
   moveArr.push('o')
-  if (unusedCellIndexes.length === 0) {
-    $('h2').html('Cats!')
-    $('#cat').delay(1500).fadeIn(2000)
-    $('.moveMessage').html('')
-    gameData.game.over = true
-    finalMove()
-  }
+  checkForWin()
+  finalMove()
+  // if (unusedCellIndexes.length === 0) {
+  //   $('h2').html('Cats!')
+  //   $('#cat').delay(1500).fadeIn(2000)
+  //   $('.moveMessage').html('')
+  //   gameData.game.over = true
+  //   finalMove()
+  // }
 }
 
 // This is the data sent to the api
@@ -107,7 +115,7 @@ const gameData = {
 // moveArr is an arry of moves in order that they are made
 let moveArr = []
 // Initiates a new game
-const newGame = function() {
+const newGame = function () {
   if (moveArr.length === 0) {
     api.startGame()
       .then(ui.onStartGameSuccess, gameData.game.over = false)
@@ -130,12 +138,10 @@ const triggerIndexSuccess = function () {
 // finalMove initiates an API patch for gameData and API index if successfull
 const finalMove = function () {
   api.patchGameData(gameData, store.id)
-    // .then(ui.logPatchData)
     .then(triggerIndexSuccess())
 }
-// fillContent is triggered by clicking a square. It checks if the game is over, if the square is already clicked, and whose turn it is, assigning player 'o' or 'x'.
-// Then it checks for a win or tie, let's the player know the result, and triggers finalMove.
 
+// checkForWin checks for a win or tie, let's the player know the result, and triggers finalMove.
 const checkForWin = function () {
   const localCells = [$('.zero').html(), $('.one').html(), $('.two').html(), $('.three').html(), $('.four').html(), $('.five').html(), $('.six').html(), $('.seven').html(), $('.eight').html()]
   const localLines = [[localCells[0], localCells[1], localCells[2]], [localCells[3], localCells[4], localCells[5]], [localCells[6], localCells[7], localCells[8]], [localCells[0], localCells[3], localCells[6]], [localCells[1], localCells[4], localCells[7]], [localCells[2], localCells[5], localCells[8]], [localCells[0], localCells[4], localCells[8]], [localCells[2], localCells[4], localCells[6]]]
@@ -147,7 +153,9 @@ const checkForWin = function () {
   } else if (localLines.some(line => line.every(cell => cell === 'o'))) {
     if (ultron === true) {
       $('h2').html('Ultron finds you obsolete')
-      $('#ultron').delay(1000).fadeIn(2000)
+      $('#ultron').show()
+      $('#ultron').delay(1000).fadeOut(2000)
+
     } else {
       $('h2').html('O wins!')
     }
@@ -156,13 +164,13 @@ const checkForWin = function () {
     finalMove()
   } else if (moveArr.length === 9) {
     $('h2').html('Cats!')
-    $('#cat').delay(1000).fadeIn(2000)
+    $('#cat').fadeIn(2000)
     $('.moveMessage').html('')
     gameData.game.over = true
     finalMove()
   }
 }
-
+// fillContent is triggered by clicking a square. It checks if the game is over, if the square is already clicked, and whose turn it is, assigning player 'o' or 'x'.
 const fillContent = function () {
   if (gameData.game.over === true) {
     $('.borg').html('Resistance is futile!')
