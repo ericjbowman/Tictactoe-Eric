@@ -7,6 +7,18 @@ const store = require('./store')
 // comp is a boolean used to play against an AI opponent. Ultron is a boolean used to make AI unbeatable.
 let xWins = 0
 let yWins = 0
+// moveArr is an arry of moves in order that they are made
+let moveArr = []
+// This is the data sent to the api
+const gameData = {
+  game: {
+    cell: {
+      index: 1,
+      value: ''
+    },
+    over: false
+  }
+}
 
 const winner = function (array) {
   // let xWins = 0
@@ -45,6 +57,7 @@ const ultronMode = function () {
 }
 // computerMove finds available cells and chooses randomly from them unless Ultron mode is on. Ultron makes decisions based on X moves to prevent X win.
 const computerMove = function () {
+  gameData.game.cell.value = 'o'
   $('.moveMessage').html("It's your turn! You: X Computer: O")
   // cells is an array of the contents of all squares on the gameboard
   const cells = [$('.zero').html(), $('.one').html(), $('.two').html(), $('.three').html(), $('.four').html(), $('.five').html(), $('.six').html(), $('.seven').html(), $('.eight').html()]
@@ -61,7 +74,7 @@ const computerMove = function () {
   ]
   const unusedCellIndexes = []
   // openRows is an array of rows, columns, and diagonals that are still open for moves
-  const openRows = lines.filter(line => line.some(square => $(`div[data=${square}]`).html() === ''))
+  const openRows = lines.filter(line => line.some(square => $(`div[data-cell-index=${square}]`).html() === ''))
   // getALLIndexes sorts through the cells and moves open cells to the unusedCellIndexes array
   function getAllIndexes (arr, val, sec) {
     for (let i = 0; i < arr.length; i++) {
@@ -79,54 +92,47 @@ const computerMove = function () {
   // If there are not 2 in a row, Ultron will randomly choose a cell to fill. This is what the computer opponent does every move.
   if (unusedCellIndexes.length === 8 && $('.four').html() === 'x' && ultron === true) {
     $('.zero').html('o')
+    gameData.game.cell.index = 0
   } else if (($('.zero').html() === 'x' || $('.two').html() === 'x' || $('.six').html() === 'x' || $('.eight').html() === 'x') && unusedCellIndexes.length === 8 && ultron === true) {
     $('.four').html('o')
-  } else if ((unusedCellIndexes.length < 8) && (openRows.some(line => (($(`div[data=${line[0]}]`).html() === 'o' && $(`div[data=${line[1]}]`).html() === 'o')) || (($(`div[data=${line[0]}]`).html() === 'o' && $(`div[data=${line[2]}]`).html() === 'o')) || (($(`div[data=${line[1]}]`).html() === 'o' && $(`div[data=${line[2]}]`).html() === 'o')))) && ultron === true) {
+    gameData.game.cell.index = 4
+  } else if ((unusedCellIndexes.length < 8) && (openRows.some(line => (($(`div[data-cell-index=${line[0]}]`).html() === 'o' && $(`div[data-cell-index=${line[1]}]`).html() === 'o')) || (($(`div[data-cell-index=${line[0]}]`).html() === 'o' && $(`div[data-cell-index=${line[2]}]`).html() === 'o')) || (($(`div[data-cell-index=${line[1]}]`).html() === 'o' && $(`div[data-cell-index=${line[2]}]`).html() === 'o')))) && ultron === true) {
     for (let i = 0; i < cells.length; i++) {
-      if (((($(`div[data=${openRows[i][0]}]`).html() === 'o' && $(`div[data=${openRows[i][1]}]`).html() === 'o')) || (($(`div[data=${openRows[i][0]}]`).html() === 'o' && $(`div[data=${openRows[i][2]}]`).html() === 'o')) || (($(`div[data=${openRows[i][1]}]`).html() === 'o' && $(`div[data=${openRows[i][2]}]`).html() === 'o')))) {
-        const compBlock = openRows[i].filter(square => $(`div[data=${square}]`).html() === '')
+      if (((($(`div[data-cell-index=${openRows[i][0]}]`).html() === 'o' && $(`div[data-cell-index=${openRows[i][1]}]`).html() === 'o')) || (($(`div[data-cell-index=${openRows[i][0]}]`).html() === 'o' && $(`div[data-cell-index=${openRows[i][2]}]`).html() === 'o')) || (($(`div[data-cell-index=${openRows[i][1]}]`).html() === 'o' && $(`div[data-cell-index=${openRows[i][2]}]`).html() === 'o')))) {
+        const compBlock = openRows[i].filter(square => $(`div[data-cell-index=${square}]`).html() === '')
         // if (!compBlock) {
         //   break
         // }
-        if ((compBlock) && ($(`div[data=${compBlock}]`).html() === '')) {
-          $(`div[data=${compBlock}]`).html('o')
+        if ((compBlock) && ($(`div[data-cell-index=${compBlock}]`).html() === '')) {
+          $(`div[data-cell-index=${compBlock}]`).html('o')
+          gameData.game.cell.index = compBlock
           break
         }
       }
     }
-  } else if ((unusedCellIndexes.length < 8) && (openRows.some(line => (($(`div[data=${line[0]}]`).html() === 'x' && $(`div[data=${line[1]}]`).html() === 'x')) || (($(`div[data=${line[0]}]`).html() === 'x' && $(`div[data=${line[2]}]`).html() === 'x')) || (($(`div[data=${line[1]}]`).html() === 'x' && $(`div[data=${line[2]}]`).html() === 'x')))) && ultron === true) {
+  } else if ((unusedCellIndexes.length < 8) && (openRows.some(line => (($(`div[data-cell-index=${line[0]}]`).html() === 'x' && $(`div[data-cell-index=${line[1]}]`).html() === 'x')) || (($(`div[data-cell-index=${line[0]}]`).html() === 'x' && $(`div[data-cell-index=${line[2]}]`).html() === 'x')) || (($(`div[data-cell-index=${line[1]}]`).html() === 'x' && $(`div[data-cell-index=${line[2]}]`).html() === 'x')))) && ultron === true) {
     for (let i = 0; i < cells.length; i++) {
-      if (((($(`div[data=${openRows[i][0]}]`).html() === 'x' && $(`div[data=${openRows[i][1]}]`).html() === 'x')) || (($(`div[data=${openRows[i][0]}]`).html() === 'x' && $(`div[data=${openRows[i][2]}]`).html() === 'x')) || (($(`div[data=${openRows[i][1]}]`).html() === 'x' && $(`div[data=${openRows[i][2]}]`).html() === 'x')))) {
-        const compBlock = openRows[i].filter(square => $(`div[data=${square}]`).html() === '')
+      if (((($(`div[data-cell-index=${openRows[i][0]}]`).html() === 'x' && $(`div[data-cell-index=${openRows[i][1]}]`).html() === 'x')) || (($(`div[data-cell-index=${openRows[i][0]}]`).html() === 'x' && $(`div[data-cell-index=${openRows[i][2]}]`).html() === 'x')) || (($(`div[data-cell-index=${openRows[i][1]}]`).html() === 'x' && $(`div[data-cell-index=${openRows[i][2]}]`).html() === 'x')))) {
+        const compBlock = openRows[i].filter(square => $(`div[data-cell-index=${square}]`).html() === '')
         // if (!compBlock) {
         //   break
-        if ((compBlock) && ($(`div[data=${compBlock}]`).html() === '')) {
-          $(`div[data=${compBlock}]`).html('o')
+        if ((compBlock) && ($(`div[data-cell-index=${compBlock}]`).html() === '')) {
+          $(`div[data-cell-index=${compBlock}]`).html('o')
+          gameData.game.cell.index = compBlock
           break
         }
       }
     }
   } else {
     n = Math.floor((Math.random() * (unusedCellIndexes.length)))
-    $(`div[data=${unusedCellIndexes[n]}]`).html('o')
+    $(`div[data-cell-index=${unusedCellIndexes[n]}]`).html('o')
+    gameData.game.cell.index = n
   }
   moveArr.push('o')
-  checkForWin()
-  finalMove()
+  api.patchGameData(gameData, store.id)
+    .then(ui.onPatchGameDataSuccess)
+    .then(checkForWin())
 }
-
-// This is the data sent to the api
-const gameData = {
-  game: {
-    cell: {
-      index: 1,
-      value: ''
-    },
-    over: false
-  }
-}
-// moveArr is an arry of moves in order that they are made
-let moveArr = []
 // Initiates a new game
 const newGame = function () {
   if (moveArr.length === 0) {
@@ -137,11 +143,11 @@ const newGame = function () {
 // move function shows the move on gameboard and updates api with cell index, value, and whether the game is over
 const move = function (player) {
   $(event.target).html(player)
-  // moveArr.push('player')
+  moveArr.push(player)
   gameData.game.cell.index = $(event.target).data('cell-index')
   gameData.game.cell.value = player
   api.patchGameData(gameData, store.id)
-    .then(moveArr.push('player'))
+    .then(ui.onPatchGameDataSuccess)
 }
 // triggerIndexSuccess ensures that the api patch happens before the api index occurs
 const triggerIndexSuccess = function () {

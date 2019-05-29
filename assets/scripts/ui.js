@@ -117,6 +117,10 @@ const onIndexSuccess = function (responseData) {
   console.log(store.GamesArray)
 }
 
+const onPatchGameDataSuccess = function (responseData) {
+  console.log(responseData)
+}
+
 module.exports = {
   signUpSuccess,
   signUpFailure,
@@ -127,6 +131,7 @@ module.exports = {
   changePasswordSuccess,
   changePasswordFailure,
   onIndexSuccess,
+  onPatchGameDataSuccess,
   onStartGameSuccess,
   onChangePwButton
 }
