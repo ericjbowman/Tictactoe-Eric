@@ -59,6 +59,7 @@ const signOutSuccess = function () {
   $('#sign-up').removeClass('disappear')
   $('.chooseOpBut').addClass('disappear')
   store.user = null
+  store.GamesArray = []
 }
 
 const signOutFailure = function () {
@@ -112,13 +113,13 @@ const onStartGameSuccess = function (responseData) {
 
 const onIndexSuccess = function (responseData) {
   $('.gamesPlayed').html(`Games played: ${responseData.games.length}`)
-  store.GamesArray = []
+  // store.GamesArray = []
   responseData.games.forEach(game => store.GamesArray.push(game.cells))
-  console.log(store.GamesArray)
+  console.log('Index = ', responseData)
 }
 
 const onPatchGameDataSuccess = function (responseData) {
-  console.log(responseData)
+  console.log('Patch = ', responseData)
 }
 
 module.exports = {

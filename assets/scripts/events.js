@@ -6,7 +6,7 @@ const ui = require('./ui')
 const store = require('./store')
 // comp is a boolean used to play against an AI opponent. Ultron is a boolean used to make AI unbeatable.
 let xWins = 0
-let yWins = 0
+let oWins = 0
 // moveArr is an arry of moves in order that they are made
 let moveArr = []
 // This is the data sent to the api
@@ -20,6 +20,15 @@ const gameData = {
   }
 }
 
+let comp = false
+let ultron = false
+const selfMode = function () {
+  comp = false
+  ultron = false
+  $(this).closest('.modal')
+  $('.moveMessage').html('Good Luck!')
+}
+
 const winner = function (array) {
   // let xWins = 0
   // let xYins = 0
@@ -27,23 +36,18 @@ const winner = function (array) {
   if (winningCombos.some(line => line.every(cell => cell === 'x'))) {
     xWins++
   } else if (winningCombos.some(line => line.every(cell => cell === 'o'))) {
-    yWins++
+    oWins++
   }
 }
 const checkAllWins = function () {
+  console.log(store.GamesArray)
   store.GamesArray.forEach(game => {
     winner(game)
-    console.log(xWins, yWins)
   })
+  console.log('X:', xWins)
+  console.log('O:', oWins)
 }
 
-let comp = false
-let ultron = false
-const selfMode = function () {
-  comp = false
-  $(this).closest('.modal')
-  $('.moveMessage').html('Good Luck!')
-}
 const compMode = function () {
   comp = true
   ultron = false
@@ -93,19 +97,20 @@ const computerMove = function () {
   if (unusedCellIndexes.length === 8 && $('.four').html() === 'x' && ultron === true) {
     $('.zero').html('o')
     gameData.game.cell.index = 0
+    console.log(gameData.game.cell.index)
   } else if (($('.zero').html() === 'x' || $('.two').html() === 'x' || $('.six').html() === 'x' || $('.eight').html() === 'x') && unusedCellIndexes.length === 8 && ultron === true) {
     $('.four').html('o')
     gameData.game.cell.index = 4
+    console.log(gameData.game.cell.index)
   } else if ((unusedCellIndexes.length < 8) && (openRows.some(line => (($(`div[data-cell-index=${line[0]}]`).html() === 'o' && $(`div[data-cell-index=${line[1]}]`).html() === 'o')) || (($(`div[data-cell-index=${line[0]}]`).html() === 'o' && $(`div[data-cell-index=${line[2]}]`).html() === 'o')) || (($(`div[data-cell-index=${line[1]}]`).html() === 'o' && $(`div[data-cell-index=${line[2]}]`).html() === 'o')))) && ultron === true) {
     for (let i = 0; i < cells.length; i++) {
       if (((($(`div[data-cell-index=${openRows[i][0]}]`).html() === 'o' && $(`div[data-cell-index=${openRows[i][1]}]`).html() === 'o')) || (($(`div[data-cell-index=${openRows[i][0]}]`).html() === 'o' && $(`div[data-cell-index=${openRows[i][2]}]`).html() === 'o')) || (($(`div[data-cell-index=${openRows[i][1]}]`).html() === 'o' && $(`div[data-cell-index=${openRows[i][2]}]`).html() === 'o')))) {
         const compBlock = openRows[i].filter(square => $(`div[data-cell-index=${square}]`).html() === '')
-        // if (!compBlock) {
-        //   break
-        // }
+        console.log('compBlock', compBlock)
         if ((compBlock) && ($(`div[data-cell-index=${compBlock}]`).html() === '')) {
           $(`div[data-cell-index=${compBlock}]`).html('o')
-          gameData.game.cell.index = compBlock
+          gameData.game.cell.index = compBlock[0]
+          console.log(gameData.game.cell.index)
           break
         }
       }
@@ -114,11 +119,11 @@ const computerMove = function () {
     for (let i = 0; i < cells.length; i++) {
       if (((($(`div[data-cell-index=${openRows[i][0]}]`).html() === 'x' && $(`div[data-cell-index=${openRows[i][1]}]`).html() === 'x')) || (($(`div[data-cell-index=${openRows[i][0]}]`).html() === 'x' && $(`div[data-cell-index=${openRows[i][2]}]`).html() === 'x')) || (($(`div[data-cell-index=${openRows[i][1]}]`).html() === 'x' && $(`div[data-cell-index=${openRows[i][2]}]`).html() === 'x')))) {
         const compBlock = openRows[i].filter(square => $(`div[data-cell-index=${square}]`).html() === '')
-        // if (!compBlock) {
-        //   break
+        console.log('compBlock', compBlock)
         if ((compBlock) && ($(`div[data-cell-index=${compBlock}]`).html() === '')) {
           $(`div[data-cell-index=${compBlock}]`).html('o')
-          gameData.game.cell.index = compBlock
+          gameData.game.cell.index = compBlock[0]
+          console.log(gameData.game.cell.index)
           break
         }
       }
@@ -131,7 +136,7 @@ const computerMove = function () {
   moveArr.push('o')
   api.patchGameData(gameData, store.id)
     .then(ui.onPatchGameDataSuccess)
-    .then(checkForWin())
+    .then(checkForWin)
 }
 // Initiates a new game
 const newGame = function () {
@@ -153,12 +158,12 @@ const move = function (player) {
 const triggerIndexSuccess = function () {
   api.indexGamedata()
     .then(ui.onIndexSuccess)
-    .then(checkAllWins())
+    .then(checkAllWins)
 }
 // finalMove initiates an API patch for gameData and API index if successfull
 const finalMove = function () {
   api.patchGameData(gameData, store.id)
-    .then(triggerIndexSuccess())
+    .then(triggerIndexSuccess)
 }
 
 // checkForWin checks for a win or tie, let's the player know the result, and triggers finalMove.
@@ -216,12 +221,14 @@ const fillContent = function () {
     $('.moveMessage').html(`It's O's turn`)
     move(player)
   }
-  checkForWin()
+  if (comp === false) {
+    checkForWin()
+  }
   if (gameData.game.over === true) {
     return
   }
   if (comp === true && gameData.game.over === false) {
-    computerMove()
+    setTimeout(computerMove(), 2000)
     checkForWin()
   }
 }

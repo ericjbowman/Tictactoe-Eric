@@ -1,6 +1,7 @@
 'use strict'
 const events = require('./events.js')
 const ui = require('./ui.js')
+const store = require('./store.js')
 // use require with a reference to bundle the file and use it in this file
 // const example = require('./example')
 
@@ -8,6 +9,7 @@ const ui = require('./ui.js')
 // require('./example')
 
 $(() => {
+  store.GamesArray = []
   $('.box').on('click', events.fillContent)
   $('.newGame').on('click', events.emptyContent)
   events.addHandlers()
