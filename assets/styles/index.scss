@@ -1,22 +1,22 @@
 @import '~bootstrap/scss/bootstrap';
-
 $primary-one: #E1FFDA;
 $secondary: #FECEA3;
 $light: #FEDCBE;
-$pink-hover: #FEDCBE;
+$hover: #FEDCBE;
 $border-color: #000;
-
-$primary-blue: blue;
-$secondary-blue: #4286f4;
-$background-grey: #c0cde0;
-$blue-hover: #85b3fc;
+// $primary-blue: blue;
+// $secondary-blue: #4286f4;
+// $background-grey: #c0cde0;
+// $blue-hover: #85b3fc;
 
 * {
   font-family: 'Ubuntu Condensed', sans-serif;
 }
+
 body {
   background-color: $primary-one;
 }
+
 .tit {
   color: $border-color;
   text-align: center;
@@ -41,19 +41,23 @@ img {
   border: solid $border-color;
   border-width: 2px;
 }
+
 input {
   border: solid $border-color;
   border-width: 2px;
 }
+
 h1 {
   font-size: 70px;
   margin-left: 5px;
 }
+
 .upmid {
   display: flex;
   justify-content: center;
 }
-.Login, {
+
+.Login {
   margin-left: 5px;
   height: 100px;
   width: 40%;
@@ -63,22 +67,26 @@ p {
   // margin-left: 20px;
   font-size: 30px;
   color: $border-color;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 s-in {
   font-size: 30px;
   color: $border-color;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
-.but, button {
+button {
   background-color: $secondary;
   // padding: 10px, 10px;
 }
 
-.but:hover {
-  background-color: $pink-hover;
+.but {
+  background-color: $secondary;
+}
+
+button:hover {
+  background-color: $hover;
 }
 
 .row {
@@ -99,16 +107,20 @@ s-in {
 }
 
 .box:hover {
-  background-color: $pink-hover;
+  background-color: $hover;
 }
 
-h2, .gamesPlayed, .moveMessage {
+.gamesPlayed,
+.moveMessage,
+h2 {
   color: $border-color;
   text-align: center;
 }
+
 h4 {
   font-size: 30px;
 }
+
 .borg {
   color: red;
   text-align: center;
@@ -126,10 +138,6 @@ form {
   // margin: 0 auto;
 }
 
-button:hover {
-  background-color: $pink-hover;
-}
-
 .playAgain {
   display: flex;
   justify-content: center;
@@ -145,7 +153,6 @@ button:hover {
   height: 200px;
 }
 
-
 .failure {
   color: red;
 }
@@ -154,7 +161,7 @@ button:hover {
   background-color: $secondary;
   border: solid $border-color;
   border-width: 2px;
-  border-radius: 0px;
+  border-radius: 0;
   margin-top: 5px;
 }
 
@@ -174,23 +181,6 @@ input {
 footer {
   bottom: 0;
   margin-bottom: 0;
-}
-
-#me {
-  font-size: 20px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  margin-right: 10px;
-  margin-bottom: 10px;
-}
-
-.fbottom {
-  padding: 10px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  // height: 100px;
 }
 
 .modal-header {
@@ -221,6 +211,7 @@ footer {
 .modal-footer {
   height: 4em;
 }
+
 .cls {
   position: absolute;
   bottom: 0;
@@ -229,6 +220,7 @@ footer {
   margin-bottom: 10px;
   margin-top: 10px;
 }
+
 .uprt {
   display: flex;
   justify-content: flex-end;
@@ -247,14 +239,13 @@ footer {
 
 .newGame {
   font-size: 30px;
-  padding: .5em;
+  padding: 0.5em;
   margin-bottom: 5px;
   background-color: $secondary;
   border: solid $border-color;
   border-width: 2px;
   // margin: 0 auto;
   height: 3em;
-
 }
 
 #vanish {
@@ -263,7 +254,7 @@ footer {
 }
 
 #signed-in {
-  margin: 10px 0px 0px 0px;
+  margin: 10px 0 0;
 }
 
 #centerme {
@@ -274,6 +265,7 @@ footer {
 //   display: flex;
 //   justify-content: center;
 // }
+
 .mess {
   height: 20vh;
   display: flex;
@@ -291,39 +283,51 @@ footer {
     width: 150px;
     margin-top: 10px;
     border-width: 0.5px;
-    }
+  }
+
   .row {
     height: 50px;
   }
+
   .box {
     height: 50px;
     width: 50px;
     font-size: 30px;
     border-width: 0.5px;
   }
+
   img {
     height: 150px;
     width: 150px;
   }
-  h2, h3, h4, p, {
+
+  h2,
+  h3,
+  h4,
+  p {
     font-size: 15px;
   }
+
   h1 {
     font-size: 30px;
     margin-top: 5px;
     margin-left: 0;
   }
+
   .btn {
     font-size: 10px;
     border-width: 0.5px;
     padding: 5px;
   }
+
   p {
     font-size: 15px;
   }
+
   input {
     font-size: 15px;
   }
+
   .headrow {
     margin-bottom: 10px;
     min-height: 15vh;

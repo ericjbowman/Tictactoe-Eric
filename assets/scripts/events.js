@@ -5,6 +5,26 @@ const api = require('./api')
 const ui = require('./ui')
 const store = require('./store')
 // comp is a boolean used to play against an AI opponent. Ultron is a boolean used to make AI unbeatable.
+let xWins = 0
+let yWins = 0
+
+const winner = function (array) {
+  // let xWins = 0
+  // let xYins = 0
+  const winningCombos = [[array[0], array[1], array[2]], [array[3], array[4], array[5]], [array[6], array[7], array[8]], [array[0], array[3], array[6]], [array[1], array[4], array[7]], [array[2], array[5], array[8]], [array[0], array[4], array[8]], [array[2], array[4], array[6]]]
+  if (winningCombos.some(line => line.every(cell => cell === 'x'))) {
+    xWins++
+  } else if (winningCombos.some(line => line.every(cell => cell === 'o'))) {
+    yWins++
+  }
+}
+const checkAllWins = function () {
+  store.GamesArray.forEach(game => {
+    winner(game)
+    console.log(xWins, yWins)
+  })
+}
+
 let comp = false
 let ultron = false
 const selfMode = function () {
@@ -127,6 +147,7 @@ const move = function (player) {
 const triggerIndexSuccess = function () {
   api.indexGamedata()
     .then(ui.onIndexSuccess)
+    .then(checkAllWins())
 }
 // finalMove initiates an API patch for gameData and API index if successfull
 const finalMove = function () {
@@ -261,5 +282,6 @@ module.exports = {
   addHandlers,
   compMode,
   selfMode,
-  ultronMode
+  ultronMode,
+  checkAllWins
 }

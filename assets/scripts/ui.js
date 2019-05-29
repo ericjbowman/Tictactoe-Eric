@@ -77,8 +77,8 @@ const onChangePwButton = function (event) {
 const changePasswordSuccess = function () {
   $('.onChangePassword').removeClass('failure')
   $('.onChangePassword').html('Changed password successfully')
-  $('.onChangePassword').ready(function() {
-    $('.onChangePassword').fadeIn('slow', function() {
+  $('.onChangePassword').ready(function () {
+    $('.onChangePassword').fadeIn('slow', function () {
       $('.onChangePassword').delay(2000).fadeOut()
     })
   })
@@ -93,8 +93,8 @@ const changePasswordFailure = function () {
   $('.onChangePassword').addClass('failure')
   $('.onChangePassword').html('Failed to change password')
   $('#change-password').trigger('reset')
-  $('.onChangePassword').ready(function() {
-    $('.onChangePassword').fadeIn('slow', function() {
+  $('.onChangePassword').ready(function () {
+    $('.onChangePassword').fadeIn('slow', function () {
       $('.onChangePassword').delay(2000).fadeOut()
     })
   })
@@ -103,6 +103,7 @@ const changePasswordFailure = function () {
   $('#change-password').trigger('reset')
   $('#signed-in').html('')
 }
+
 const onStartGameSuccess = function (responseData) {
   store.id = responseData.game.id
   $('.chooseOpBut').removeClass('disappear')
@@ -111,6 +112,9 @@ const onStartGameSuccess = function (responseData) {
 
 const onIndexSuccess = function (responseData) {
   $('.gamesPlayed').html(`Games played: ${responseData.games.length}`)
+  store.GamesArray = []
+  responseData.games.forEach(game => store.GamesArray.push(game.cells))
+  console.log(store.GamesArray)
 }
 
 module.exports = {
