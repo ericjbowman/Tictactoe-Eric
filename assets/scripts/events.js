@@ -49,7 +49,7 @@ const winner = function (array) {
   const winningCombos = [[array[0], array[1], array[2]], [array[3], array[4], array[5]], [array[6], array[7], array[8]], [array[0], array[3], array[6]], [array[1], array[4], array[7]], [array[2], array[5], array[8]], [array[0], array[4], array[8]], [array[2], array[4], array[6]]]
   if (winningCombos.some(line => line.every(cell => cell === 'x'))) {
     xWins++
-  } else if (winningCombos.some(line => line.every(cell => cell === 'o'))) {
+  } if (winningCombos.some(line => line.every(cell => cell === 'o'))) {
     oWins++
   }
 }
@@ -90,8 +90,6 @@ const computerMove = function () {
     }
   }
   getAllIndexes(cells, 'x', 'o')
-  // n is arbitrarily set to a nonexistant cell index until a random open cell is chosen.
-  let n = 10
   // First two conditionals are for Ultron to prevent a fork in which player x has two winning routes
   // Then Ultron checks for a 2 'o's in a row and fills the empty cell if it's open
   // If there are not 2 o's, Ultron checks for 2 'x's in a row and fills the next cell to prevent an X win
@@ -131,15 +129,20 @@ const computerMove = function () {
       }
     }
   } else {
-    n = Math.floor((Math.random() * (unusedCellIndexes.length)))
+    const n = Math.floor((Math.random() * (unusedCellIndexes.length)))
     $(`div[data-cell-index=${unusedCellIndexes[n]}]`).html('o')
     gameData.game.cell.index = n
   }
   moveArr.push('o')
-  // api.patchGameData(gameData, store.id)
-  //   .then(ui.onPatchGameDataSuccess)
-  //   .then(checkForWin)
-  checkForWin()
+  api.patchGameData(gameData, store.id)
+    .then(ui.onPatchGameDataSuccess)
+    .then(checkForWin)
+}
+
+const triggerComp = function () {
+  if (comp === true && gameData.game.over === false) {
+    computerMove()
+  }
 }
 // Initiates a new game
 const newGame = function () {
@@ -156,6 +159,7 @@ const move = function (player) {
   gameData.game.cell.value = player
   api.patchGameData(gameData, store.id)
     .then(ui.onPatchGameDataSuccess)
+    .then(triggerComp)
 }
 // triggerIndexSuccess ensures that the api patch happens before the api index occurs
 const triggerIndexSuccess = function () {
@@ -230,15 +234,7 @@ const fillContent = function () {
     $('.moveMessage').html(`It's O's turn`)
     move(player)
   }
-  if (comp === false) {
-    checkForWin()
-  }
-  if (gameData.game.over === true) {
-    return
-  }
-  if (comp === true) {
-    computerMove()
-  }
+  checkForWin()
 }
 // emptyContent is triggered by the newGame button and removes messages and contents of game board. It also triggers newGame,
 // posting a new game to the api.
