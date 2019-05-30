@@ -136,9 +136,9 @@ const computerMove = function () {
     gameData.game.cell.index = n
   }
   moveArr.push('o')
-  // api.patchGameData(gameData, store.id)
-  //   .then(ui.onPatchGameDataSuccess)
-  //   .then(checkForWin)
+  api.patchGameData(gameData, store.id)
+    .then(ui.onPatchGameDataSuccess)
+    .then(checkForWin)
   checkForWin()
 }
 // Initiates a new game
@@ -154,8 +154,16 @@ const move = function (player) {
   moveArr.push(player)
   gameData.game.cell.index = $(event.target).data('cell-index')
   gameData.game.cell.value = player
-  api.patchGameData(gameData, store.id)
-    .then(ui.onPatchGameDataSuccess)
+  if (comp === false) {
+    api.patchGameData(gameData, store.id)
+      .then(ui.onPatchGameDataSuccess)
+  }
+  if (comp === true) {
+    api.patchGameData(gameData, store.id)
+      .then(ui.onPatchGameDataSuccess)
+      .then(checkForWin)
+      .then(computerMove)
+  }
 }
 // triggerIndexSuccess ensures that the api patch happens before the api index occurs
 const triggerIndexSuccess = function () {
@@ -230,16 +238,13 @@ const fillContent = function () {
     $('.moveMessage').html(`It's O's turn`)
     move(player)
   }
-  if (comp === false) {
-    checkForWin()
-  }
-  if (gameData.game.over === true) {
-    return
-  }
-  if (comp === true && gameData.game.over === false) {
-    setTimeout(computerMove(), 2000)
-    checkForWin()
-  }
+  // checkForWin()
+  // if (gameData.game.over === true) {
+  //   return
+  // }
+  // if (comp === true) {
+  //   setTimeout(computerMove(), 2000)
+  // }
 }
 // emptyContent is triggered by the newGame button and removes messages and contents of game board. It also triggers newGame,
 // posting a new game to the api.
