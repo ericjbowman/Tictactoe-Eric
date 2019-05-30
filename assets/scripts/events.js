@@ -40,7 +40,7 @@ const winner = function (array) {
   }
 }
 const checkAllWins = function () {
-  console.log(store.GamesArray)
+  console.log('store.GamesArray', store.GamesArray)
   store.GamesArray.forEach(game => {
     winner(game)
   })
@@ -97,7 +97,7 @@ const computerMove = function () {
   if (unusedCellIndexes.length === 8 && $('.four').html() === 'x' && ultron === true) {
     $('.zero').html('o')
     gameData.game.cell.index = 0
-    console.log(gameData.game.cell.index)
+    console.log('gameData.game.cell.index', gameData.game.cell.index)
   } else if (($('.zero').html() === 'x' || $('.two').html() === 'x' || $('.six').html() === 'x' || $('.eight').html() === 'x') && unusedCellIndexes.length === 8 && ultron === true) {
     $('.four').html('o')
     gameData.game.cell.index = 4
@@ -110,7 +110,7 @@ const computerMove = function () {
         if ((compBlock) && ($(`div[data-cell-index=${compBlock}]`).html() === '')) {
           $(`div[data-cell-index=${compBlock}]`).html('o')
           gameData.game.cell.index = compBlock[0]
-          console.log(gameData.game.cell.index)
+          console.log('gameData.game.cell.index', gameData.game.cell.index)
           break
         }
       }
@@ -123,7 +123,7 @@ const computerMove = function () {
         if ((compBlock) && ($(`div[data-cell-index=${compBlock}]`).html() === '')) {
           $(`div[data-cell-index=${compBlock}]`).html('o')
           gameData.game.cell.index = compBlock[0]
-          console.log(gameData.game.cell.index)
+          console.log('gameData.game.cell.index', gameData.game.cell.index)
           break
         }
       }
@@ -247,6 +247,9 @@ const emptyContent = function () {
   $('#message').html('')
   $('#signed-in').html('')
   $('img').hide()
+  xWins = 0
+  oWins = 0
+  store.GamesArray = []
 }
 
 const onSignUp = function (event) {

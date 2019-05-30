@@ -9,7 +9,6 @@ const store = require('./store.js')
 // require('./example')
 
 $(() => {
-  store.GamesArray = []
   $('.box').on('click', events.fillContent)
   $('.newGame').on('click', events.emptyContent)
   events.addHandlers()

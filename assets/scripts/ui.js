@@ -59,7 +59,6 @@ const signOutSuccess = function () {
   $('#sign-up').removeClass('disappear')
   $('.chooseOpBut').addClass('disappear')
   store.user = null
-  store.GamesArray = []
 }
 
 const signOutFailure = function () {
