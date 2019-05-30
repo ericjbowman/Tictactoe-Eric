@@ -236,9 +236,8 @@ const fillContent = function () {
   if (gameData.game.over === true) {
     return
   }
-  if (comp === true && gameData.game.over === false) {
-    setTimeout(computerMove(), 2000)
-    checkForWin()
+  if (comp === true) {
+    computerMove()
   }
 }
 // emptyContent is triggered by the newGame button and removes messages and contents of game board. It also triggers newGame,
