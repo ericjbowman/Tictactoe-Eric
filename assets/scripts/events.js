@@ -22,11 +22,25 @@ const gameData = {
 
 let comp = false
 let ultron = false
+
 const selfMode = function () {
   comp = false
   ultron = false
   $(this).closest('.modal')
   $('.moveMessage').html('Good Luck!')
+}
+
+const compMode = function () {
+  comp = true
+  ultron = false
+  $(this).closest('.modal')
+  $('.moveMessage').html("It's your turn! You: X Computer: O")
+}
+
+const ultronMode = function () {
+  comp = true
+  ultron = true
+  $('.moveMessage').html("It's your turn! You: X Ultron: O")
 }
 
 const winner = function (array) {
@@ -46,18 +60,6 @@ const checkAllWins = function () {
   })
   console.log('X:', xWins)
   console.log('O:', oWins)
-}
-
-const compMode = function () {
-  comp = true
-  ultron = false
-  $(this).closest('.modal')
-  $('.moveMessage').html("It's your turn! You: X Computer: O")
-}
-const ultronMode = function () {
-  comp = true
-  ultron = true
-  $('.moveMessage').html("It's your turn! You: X Ultron: O")
 }
 // computerMove finds available cells and chooses randomly from them unless Ultron mode is on. Ultron makes decisions based on X moves to prevent X win.
 const computerMove = function () {
@@ -134,9 +136,10 @@ const computerMove = function () {
     gameData.game.cell.index = n
   }
   moveArr.push('o')
-  api.patchGameData(gameData, store.id)
-    .then(ui.onPatchGameDataSuccess)
-    .then(checkForWin)
+  // api.patchGameData(gameData, store.id)
+  //   .then(ui.onPatchGameDataSuccess)
+  //   .then(checkForWin)
+  checkForWin()
 }
 // Initiates a new game
 const newGame = function () {
@@ -192,6 +195,12 @@ const checkForWin = function () {
     $('.moveMessage').html('')
     gameData.game.over = true
     finalMove()
+  // } else {
+  //   api.patchGameData(gameData, store.id)
+  //     .then(ui.onPatchGameDataSuccess)
+  //   if (comp === true) {
+  //     triggerIndexSuccess()
+  //   }
   }
 }
 // fillContent is triggered by clicking a square. It checks if the game is over, if the square is already clicked, and whose turn it is, assigning player 'o' or 'x'.
