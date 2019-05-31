@@ -1,6 +1,7 @@
 'use strict'
 
 const store = require('./store')
+const events = require('./events')
 
 const signUpSuccess = function (data) {
   $('#message').text('Signed up successfully')
@@ -112,7 +113,6 @@ const onStartGameSuccess = function (responseData) {
 
 const onIndexSuccess = function (responseData) {
   $('.gamesPlayed').html(`Games played: ${responseData.games.length}`)
-  // store.GamesArray = []
   responseData.games.forEach(game => store.GamesArray.push(game.cells))
   console.log('Index = ', responseData)
 }
