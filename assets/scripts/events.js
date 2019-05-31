@@ -131,7 +131,8 @@ const computerMove = function () {
   } else {
     const n = Math.floor((Math.random() * (unusedCellIndexes.length)))
     $(`div[data-cell-index=${unusedCellIndexes[n]}]`).html('o')
-    gameData.game.cell.index = n
+    gameData.game.cell.index = unusedCellIndexes[n]
+    console.log('this', gameData.game.cell.index)
   }
   moveArr.push('o')
   api.patchGameData(gameData, store.id)
