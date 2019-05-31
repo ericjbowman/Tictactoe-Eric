@@ -61,7 +61,11 @@ const checkAllWins = function () {
 // computerMove finds available cells and chooses randomly from them unless Ultron mode is on. Ultron makes decisions based on X moves to prevent X win.
 const computerMove = function () {
   gameData.game.cell.value = 'o'
-  $('.moveMessage').html("It's your turn! You: X Computer: O")
+  if (ultron === false) {
+    $('.moveMessage').html("It's your turn! You: X Computer: O")
+  } else if (ultron === true) {
+    $('.moveMessage').html("It's your turn! You: X Ultron: O")
+  }
   // cells is an array of the contents of all squares on the gameboard
   const cells = [$('.zero').html(), $('.one').html(), $('.two').html(), $('.three').html(), $('.four').html(), $('.five').html(), $('.six').html(), $('.seven').html(), $('.eight').html()]
   // lines is an array of rows, columns, and diagonals on the gameboard
