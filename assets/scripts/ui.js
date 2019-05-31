@@ -115,11 +115,10 @@ const onStartGameSuccess = function (responseData) {
 const onIndexSuccess = function (responseData) {
   $('.gamesPlayed').html(`Games played: ${responseData.games.length}`)
   responseData.games.forEach(game => store.GamesArray.push(game.cells))
-  console.log('Index = ', responseData)
 }
 
 const onPatchGameDataSuccess = function (responseData) {
-  console.log('Patch = ', responseData)
+  // console.log('Patch = ', responseData)
 }
 
 module.exports = {

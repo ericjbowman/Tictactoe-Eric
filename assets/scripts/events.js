@@ -54,12 +54,9 @@ const winner = function (array) {
   }
 }
 const checkAllWins = function () {
-  console.log('store.GamesArray', store.GamesArray)
   store.GamesArray.forEach(game => {
     winner(game)
   })
-  console.log('X:', xWins)
-  console.log('O:', oWins)
 }
 // computerMove finds available cells and chooses randomly from them unless Ultron mode is on. Ultron makes decisions based on X moves to prevent X win.
 const computerMove = function () {
@@ -97,20 +94,16 @@ const computerMove = function () {
   if (unusedCellIndexes.length === 8 && $('.four').html() === 'x' && ultron === true) {
     $('.zero').html('o')
     gameData.game.cell.index = 0
-    console.log('gameData.game.cell.index', gameData.game.cell.index)
   } else if (($('.zero').html() === 'x' || $('.two').html() === 'x' || $('.six').html() === 'x' || $('.eight').html() === 'x') && unusedCellIndexes.length === 8 && ultron === true) {
     $('.four').html('o')
     gameData.game.cell.index = 4
-    console.log(gameData.game.cell.index)
   } else if ((unusedCellIndexes.length < 8) && (openRows.some(line => (($(`div[data-cell-index=${line[0]}]`).html() === 'o' && $(`div[data-cell-index=${line[1]}]`).html() === 'o')) || (($(`div[data-cell-index=${line[0]}]`).html() === 'o' && $(`div[data-cell-index=${line[2]}]`).html() === 'o')) || (($(`div[data-cell-index=${line[1]}]`).html() === 'o' && $(`div[data-cell-index=${line[2]}]`).html() === 'o')))) && ultron === true) {
     for (let i = 0; i < cells.length; i++) {
       if (((($(`div[data-cell-index=${openRows[i][0]}]`).html() === 'o' && $(`div[data-cell-index=${openRows[i][1]}]`).html() === 'o')) || (($(`div[data-cell-index=${openRows[i][0]}]`).html() === 'o' && $(`div[data-cell-index=${openRows[i][2]}]`).html() === 'o')) || (($(`div[data-cell-index=${openRows[i][1]}]`).html() === 'o' && $(`div[data-cell-index=${openRows[i][2]}]`).html() === 'o')))) {
         const compBlock = openRows[i].filter(square => $(`div[data-cell-index=${square}]`).html() === '')
-        console.log('compBlock', compBlock)
         if ((compBlock) && ($(`div[data-cell-index=${compBlock}]`).html() === '')) {
           $(`div[data-cell-index=${compBlock}]`).html('o')
           gameData.game.cell.index = compBlock[0]
-          console.log('gameData.game.cell.index', gameData.game.cell.index)
           break
         }
       }
@@ -119,11 +112,9 @@ const computerMove = function () {
     for (let i = 0; i < cells.length; i++) {
       if (((($(`div[data-cell-index=${openRows[i][0]}]`).html() === 'x' && $(`div[data-cell-index=${openRows[i][1]}]`).html() === 'x')) || (($(`div[data-cell-index=${openRows[i][0]}]`).html() === 'x' && $(`div[data-cell-index=${openRows[i][2]}]`).html() === 'x')) || (($(`div[data-cell-index=${openRows[i][1]}]`).html() === 'x' && $(`div[data-cell-index=${openRows[i][2]}]`).html() === 'x')))) {
         const compBlock = openRows[i].filter(square => $(`div[data-cell-index=${square}]`).html() === '')
-        console.log('compBlock', compBlock)
         if ((compBlock) && ($(`div[data-cell-index=${compBlock}]`).html() === '')) {
           $(`div[data-cell-index=${compBlock}]`).html('o')
           gameData.game.cell.index = compBlock[0]
-          console.log('gameData.game.cell.index', gameData.game.cell.index)
           break
         }
       }
@@ -132,7 +123,6 @@ const computerMove = function () {
     const n = Math.floor((Math.random() * (unusedCellIndexes.length)))
     $(`div[data-cell-index=${unusedCellIndexes[n]}]`).html('o')
     gameData.game.cell.index = unusedCellIndexes[n]
-    console.log('this', gameData.game.cell.index)
   }
   moveArr.push('o')
   api.patchGameData(gameData, store.id)
