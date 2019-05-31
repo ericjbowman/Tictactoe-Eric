@@ -167,7 +167,7 @@ const triggerIndexSuccess = function () {
   api.indexGamedata()
     .then(ui.onIndexSuccess)
     .then(checkAllWins)
-    .then(() => $('.wins').html(`X wins: ${xWins} O wins: ${oWins}`))
+    .then(() => $('.wins').html(`X wins: ${xWins}, O wins: ${oWins}`))
 }
 // finalMove initiates an API patch for gameData and API index if successfull
 const finalMove = function () {

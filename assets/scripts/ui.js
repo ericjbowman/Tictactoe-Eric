@@ -59,6 +59,7 @@ const signOutSuccess = function () {
   $('.changePw').addClass('disappear')
   $('#sign-up').removeClass('disappear')
   $('.chooseOpBut').addClass('disappear')
+  $('#signed-in').html('')
   store.user = null
 }
 
