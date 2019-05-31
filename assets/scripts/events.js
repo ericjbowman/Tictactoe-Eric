@@ -243,10 +243,7 @@ const fillContent = function () {
 const emptyContent = function () {
   $('.board').removeClass('disappear')
   $('.box').html('')
-  $('h2').html('')
-  $('.borg').html('')
-  $('.gamesPlayed').html('')
-  $('.moveMessage').html('')
+  $('.info').html('')
   moveArr = []
   gameData.game.over = false
   newGame()
