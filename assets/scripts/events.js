@@ -277,6 +277,7 @@ const emptyContent = function () {
   $('.box').removeClass('x')
   $('.box').removeClass('o')
   $('.box').addClass('xhov')
+  $('.box').addClass('hov')
   $('.info').html('')
   moveArr = []
   gameData.game.over = false
