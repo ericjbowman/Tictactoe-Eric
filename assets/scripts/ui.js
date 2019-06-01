@@ -34,6 +34,7 @@ const signInSuccess = function (data) {
   $('#sign-up').addClass('disappear')
   $('form').trigger('reset')
   $('#signed-in').html('Signed in!')
+  $('#anim').addClass('enable')
 }
 
 const signInFailure = function () {
@@ -110,6 +111,7 @@ const onStartGameSuccess = function (responseData) {
   store.id = responseData.game.id
   $('.chooseOpBut').removeClass('disappear')
   $('#signed-in').html('')
+  $('#anim').removeClass('enable')
 }
 
 const onIndexSuccess = function (responseData) {

@@ -78,6 +78,10 @@ p {
 button:hover {
   cursor: pointer;
   background-color: $hover;
+  // animation: jelly 0.5s;
+}
+
+.enable{
   animation: jelly 0.5s;
 }
 
@@ -100,7 +104,7 @@ button:hover {
 .but:hover {
   background-color: $hover;
   cursor: pointer;
-  animation: jelly 0.5s;
+  // animation: jelly 0.5s;
 }
 
 .row {

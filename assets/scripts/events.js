@@ -178,6 +178,7 @@ const checkForWin = function () {
     $('.moveMessage').html('')
     gameData.game.over = true
     finalMove()
+    $('#anim').addClass('enable')
   } else if (localLines.some(line => line.every(cell => cell === 'o'))) {
     if (ultron === true) {
       $('h2').html('Ultron finds you obsolete')
@@ -189,12 +190,14 @@ const checkForWin = function () {
     $('.moveMessage').html('')
     gameData.game.over = true
     finalMove()
+    $('#anim').addClass('enable')
   } else if (moveArr.length === 9) {
     $('h2').html('Cats!')
     $('#cat').delay(500).fadeIn(2000)
     $('.moveMessage').html('')
     gameData.game.over = true
     finalMove()
+    $('#anim').addClass('enable')
   // } else {
   //   api.patchGameData(gameData, store.id)
   //     .then(ui.onPatchGameDataSuccess)
@@ -207,6 +210,10 @@ const checkForWin = function () {
 const fillContent = function () {
   if (gameData.game.over === true) {
     $('.borg').html('Resistance is futile!')
+    $('.borg').addClass('enable').delay(1500).queue((next) => {
+      $('.borg').removeClass('enable')
+      next()
+    })
     if (comp === true) {
       if ($('h2').html() === 'O wins!') {
         $('#locutus').show()
@@ -217,6 +224,10 @@ const fillContent = function () {
     return
   } else if ($(event.target).html() !== '') {
     $('.moveMessage').html('Choose an empty Square!')
+    $('.moveMessage').addClass('enable').delay(1500).queue((next) => {
+      $('.moveMessage').removeClass('enable')
+      next()
+    })
     return
   } else if (comp === true) {
     const player = 'x'
