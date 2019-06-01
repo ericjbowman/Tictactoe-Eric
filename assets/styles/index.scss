@@ -4,7 +4,7 @@ $secondary: #FECEA3;
 $light: #FEDCBE;
 $hover: #ffe5c2;
 $x: #fffdb2;
-$o: #fbb2ff;
+$o: #d4a0e8;
 $border-color: #000;
 $highlight: #dae8ff; // $primary-blue: blue;
 // $secondary-blue: #4286f4;
@@ -16,7 +16,8 @@ $highlight: #dae8ff; // $primary-blue: blue;
 }
 
 body {
-  background-color: $primary-one;
+  background-color: #e1ffda;
+  background-image: url("https://www.transparenttextures.com/patterns/scribble-light.png");
 }
 
 .tit {
@@ -31,6 +32,16 @@ body {
   margin-bottom: 10px;
   font-family: sans-serif;
   padding: 0;
+}
+
+.box {
+  // background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+  background-image: url("https://www.transparenttextures.com/patterns/scribble-light.png");
+}
+
+.container {
+  // background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+  background-image: url("https://www.transparenttextures.com/patterns/scribble-light.png");
 }
 
 img {
