@@ -2,11 +2,11 @@
 $primary-one: #E1FFDA;
 $secondary: #FECEA3;
 $light: #FEDCBE;
-$hover: #FEDCBE;
+$hover: #ffe5c2;
 $x: #fffdb2;
-$o: #c7dbe2;
+$o: #fbb2ff;
 $border-color: #000;
-$highlight: #c7dbe2; // $primary-blue: blue;
+$highlight: #dae8ff; // $primary-blue: blue;
 // $secondary-blue: #4286f4;
 // $background-grey: #c0cde0;
 // $blue-hover: #85b3fc;
@@ -306,7 +306,7 @@ footer {
 }
 
 .headrow {
-  background-color: #c7dbe2;
+  background-image: linear-gradient($highlight, #abc1ff);
   margin-left: -15px;
   margin-right: -15px;
   height: 75px;
@@ -324,6 +324,36 @@ footer {
 .x {
   background-color: $x;
 }
+
+// .top {
+//   border-bottom: 0px;
+// }
+//
+// .middle {
+//   border-top: 0px;
+//   border-bottom: 0 px;
+// }
+//
+// .bottom {
+//   border-top: 0px;
+// }
+
+.zero, .three .six, .one, .four, .seven {
+  border-right: 0;
+}
+
+.zero, .one, .two {
+  border-bottom: 0;
+}
+
+.six, .seven, .eight {
+  border-top: 0;
+}
+
+.three, .six {
+  border-right: 0;
+}
+
 
 @media only screen and (max-width: 950px) {
   h1 {
@@ -344,7 +374,7 @@ input {
     height: 150px;
     width: 150px;
     margin-top: 10px;
-    border-width: 0.5px;
+    // border-width: 0.5px;
   }
   .row {
     height: 50px;
