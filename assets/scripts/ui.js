@@ -117,6 +117,10 @@ const onStartGameSuccess = function (responseData) {
 const onIndexSuccess = function (responseData) {
   $('.gamesPlayed').html(`Games played: ${responseData.games.length}`)
   responseData.games.forEach(game => store.GamesArray.push(game.cells))
+  $('#anim').delay(500).queue((next) => {
+    $('#anim').addClass('enable')
+    next()
+  })
 }
 
 const onPatchGameDataSuccess = function (responseData) {

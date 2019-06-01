@@ -197,7 +197,6 @@ const checkForWin = function () {
     $('.moveMessage').html('')
     gameData.game.over = true
     finalMove()
-    $('#anim').addClass('enable')
     $('.hov').removeClass('xhov')
     $('.hov').removeClass('ohov')
     $('.container').addClass('enable').delay(1500).queue((next) => {
@@ -211,11 +210,14 @@ const checkForWin = function () {
       $('#ultron').delay(1000).fadeOut(2000)
     } else {
       $('h2').html('O wins!')
+      $('.container').addClass('enable').delay(1500).queue((next) => {
+        $('.container').removeClass('enable')
+        next()
+      })
     }
     $('.moveMessage').html('')
     gameData.game.over = true
     finalMove()
-    $('#anim').addClass('enable')
     $('.hov').removeClass('xhov')
     $('.hov').removeClass('ohov')
   } else if (moveArr.length === 9) {
@@ -224,8 +226,11 @@ const checkForWin = function () {
     $('.moveMessage').html('')
     gameData.game.over = true
     finalMove()
-    $('#anim').addClass('enable')
     $('.hov').removeClass('ohov')
+    $('.container').addClass('enable').delay(1500).queue((next) => {
+      $('.container').removeClass('enable')
+      next()
+    })
   }
 }
 // fillContent is triggered by clicking a square. It checks if the game is over, if the square is already clicked, and whose turn it is, assigning player 'o' or 'x'.
