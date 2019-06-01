@@ -99,11 +99,13 @@ const computerMove = function () {
     $('.zero').html('o')
     $('.zero').addClass('o')
     $('.zero').removeClass('xhov')
+    $('.zero').removeClass('hov')
     gameData.game.cell.index = 0
   } else if (($('.zero').html() === 'x' || $('.two').html() === 'x' || $('.six').html() === 'x' || $('.eight').html() === 'x') && unusedCellIndexes.length === 8 && ultron === true) {
     $('.four').html('o')
     $('.four').addClass('o')
     $('.four').removeClass('xhov')
+    $('.four').removeClass('hov')
     gameData.game.cell.index = 4
   } else if ((unusedCellIndexes.length < 8) && (openRows.some(line => (($(`div[data-cell-index=${line[0]}]`).html() === 'o' && $(`div[data-cell-index=${line[1]}]`).html() === 'o')) || (($(`div[data-cell-index=${line[0]}]`).html() === 'o' && $(`div[data-cell-index=${line[2]}]`).html() === 'o')) || (($(`div[data-cell-index=${line[1]}]`).html() === 'o' && $(`div[data-cell-index=${line[2]}]`).html() === 'o')))) && ultron === true) {
     for (let i = 0; i < cells.length; i++) {
@@ -113,6 +115,7 @@ const computerMove = function () {
           $(`div[data-cell-index=${compBlock}]`).html('o')
           $(`div[data-cell-index=${compBlock}]`).addClass('o')
           $(`div[data-cell-index=${compBlock}]`).removeClass('xhov')
+          $(`div[data-cell-index=${compBlock}]`).removeClass('hov')
           gameData.game.cell.index = compBlock[0]
           break
         }
@@ -126,6 +129,7 @@ const computerMove = function () {
           $(`div[data-cell-index=${compBlock}]`).html('o')
           $(`div[data-cell-index=${compBlock}]`).addClass('o')
           $(`div[data-cell-index=${compBlock}]`).removeClass('xhov')
+          $(`div[data-cell-index=${compBlock}]`).removeClass('hov')
           gameData.game.cell.index = compBlock[0]
           break
         }
@@ -136,6 +140,7 @@ const computerMove = function () {
     $(`div[data-cell-index=${unusedCellIndexes[n]}]`).html('o')
     $(`div[data-cell-index=${unusedCellIndexes[n]}]`).addClass('o')
     $(`div[data-cell-index=${unusedCellIndexes[n]}]`).removeClass('xhov')
+    $(`div[data-cell-index=${unusedCellIndexes[n]}]`).removeClass('hov')
     gameData.game.cell.index = unusedCellIndexes[n]
   }
   moveArr.push('o')
@@ -162,6 +167,7 @@ const move = function (player) {
   $(event.target).addClass(`${player}`)
   $(event.target).removeClass('xhov')
   $(event.target).removeClass('ohov')
+  $(event.target).removeClass('hov')
   moveArr.push(player)
   gameData.game.cell.index = $(event.target).data('cell-index')
   gameData.game.cell.value = player
@@ -192,8 +198,8 @@ const checkForWin = function () {
     gameData.game.over = true
     finalMove()
     $('#anim').addClass('enable')
-    $('.box').removeClass('xhov')
-    $('.box').removeClass('ohov')
+    $('.hov').removeClass('xhov')
+    $('.hov').removeClass('ohov')
     $('.container').addClass('enable').delay(1500).queue((next) => {
       $('.container').removeClass('enable')
       next()
@@ -210,8 +216,8 @@ const checkForWin = function () {
     gameData.game.over = true
     finalMove()
     $('#anim').addClass('enable')
-    $('.box').removeClass('xhov')
-    $('.box').removeClass('ohov')
+    $('.hov').removeClass('xhov')
+    $('.hov').removeClass('ohov')
   } else if (moveArr.length === 9) {
     $('h2').html('Cats!')
     $('#cat').delay(500).fadeIn(2000)
@@ -219,7 +225,7 @@ const checkForWin = function () {
     gameData.game.over = true
     finalMove()
     $('#anim').addClass('enable')
-    $('.box').removeClass('ohov')
+    $('.hov').removeClass('ohov')
   }
 }
 // fillContent is triggered by clicking a square. It checks if the game is over, if the square is already clicked, and whose turn it is, assigning player 'o' or 'x'.
@@ -249,14 +255,14 @@ const fillContent = function () {
     const player = 'x'
     move(player)
   } else if ((moveArr.length % 2 !== 0) && (gameData.game.over === false)) {
-    $('.box').removeClass('ohov')
-    $('.box').addClass('xhov')
+    $('.hov').removeClass('ohov')
+    $('.hov').addClass('xhov')
     const player = 'o'
     $('.moveMessage').html(`It's X's turn`)
     move(player)
   } else if ((moveArr.length % 2 === 0) && (gameData.game.over === false)) {
-    $('.box').removeClass('xhov')
-    $('.box').addClass('ohov')
+    $('.hov').removeClass('xhov')
+    $('.hov').addClass('ohov')
     const player = 'x'
     $('.moveMessage').html(`It's O's turn`)
     move(player)
