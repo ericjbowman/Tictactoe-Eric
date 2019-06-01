@@ -97,9 +97,13 @@ const computerMove = function () {
   // If there are not 2 in a row, Ultron will randomly choose a cell to fill. This is what the computer opponent does every move.
   if (unusedCellIndexes.length === 8 && $('.four').html() === 'x' && ultron === true) {
     $('.zero').html('o')
+    $('.zero').addClass('o')
+    $('.zero').removeClass('xhov')
     gameData.game.cell.index = 0
   } else if (($('.zero').html() === 'x' || $('.two').html() === 'x' || $('.six').html() === 'x' || $('.eight').html() === 'x') && unusedCellIndexes.length === 8 && ultron === true) {
     $('.four').html('o')
+    $('.four').addClass('o')
+    $('.four').removeClass('xhov')
     gameData.game.cell.index = 4
   } else if ((unusedCellIndexes.length < 8) && (openRows.some(line => (($(`div[data-cell-index=${line[0]}]`).html() === 'o' && $(`div[data-cell-index=${line[1]}]`).html() === 'o')) || (($(`div[data-cell-index=${line[0]}]`).html() === 'o' && $(`div[data-cell-index=${line[2]}]`).html() === 'o')) || (($(`div[data-cell-index=${line[1]}]`).html() === 'o' && $(`div[data-cell-index=${line[2]}]`).html() === 'o')))) && ultron === true) {
     for (let i = 0; i < cells.length; i++) {
@@ -107,6 +111,8 @@ const computerMove = function () {
         const compBlock = openRows[i].filter(square => $(`div[data-cell-index=${square}]`).html() === '')
         if ((compBlock) && ($(`div[data-cell-index=${compBlock}]`).html() === '')) {
           $(`div[data-cell-index=${compBlock}]`).html('o')
+          $(`div[data-cell-index=${compBlock}]`).addClass('o')
+          $(`div[data-cell-index=${compBlock}]`).removeClass('xhov')
           gameData.game.cell.index = compBlock[0]
           break
         }
@@ -118,6 +124,8 @@ const computerMove = function () {
         const compBlock = openRows[i].filter(square => $(`div[data-cell-index=${square}]`).html() === '')
         if ((compBlock) && ($(`div[data-cell-index=${compBlock}]`).html() === '')) {
           $(`div[data-cell-index=${compBlock}]`).html('o')
+          $(`div[data-cell-index=${compBlock}]`).addClass('o')
+          $(`div[data-cell-index=${compBlock}]`).removeClass('xhov')
           gameData.game.cell.index = compBlock[0]
           break
         }
@@ -126,6 +134,8 @@ const computerMove = function () {
   } else {
     const n = Math.floor((Math.random() * (unusedCellIndexes.length)))
     $(`div[data-cell-index=${unusedCellIndexes[n]}]`).html('o')
+    $(`div[data-cell-index=${unusedCellIndexes[n]}]`).addClass('o')
+    $(`div[data-cell-index=${unusedCellIndexes[n]}]`).removeClass('xhov')
     gameData.game.cell.index = unusedCellIndexes[n]
   }
   moveArr.push('o')
@@ -149,6 +159,9 @@ const newGame = function () {
 // move function shows the move on gameboard and updates api with cell index, value, and whether the game is over
 const move = function (player) {
   $(event.target).html(player)
+  $(event.target).addClass(`${player}`)
+  $(event.target).removeClass('xhov')
+  $(event.target).removeClass('ohov')
   moveArr.push(player)
   gameData.game.cell.index = $(event.target).data('cell-index')
   gameData.game.cell.value = player
@@ -179,6 +192,12 @@ const checkForWin = function () {
     gameData.game.over = true
     finalMove()
     $('#anim').addClass('enable')
+    $('.box').removeClass('xhov')
+    $('.box').removeClass('ohov')
+    $('.container').addClass('enable').delay(1500).queue((next) => {
+      $('.container').removeClass('enable')
+      next()
+    })
   } else if (localLines.some(line => line.every(cell => cell === 'o'))) {
     if (ultron === true) {
       $('h2').html('Ultron finds you obsolete')
@@ -191,6 +210,8 @@ const checkForWin = function () {
     gameData.game.over = true
     finalMove()
     $('#anim').addClass('enable')
+    $('.box').removeClass('xhov')
+    $('.box').removeClass('ohov')
   } else if (moveArr.length === 9) {
     $('h2').html('Cats!')
     $('#cat').delay(500).fadeIn(2000)
@@ -198,12 +219,7 @@ const checkForWin = function () {
     gameData.game.over = true
     finalMove()
     $('#anim').addClass('enable')
-  // } else {
-  //   api.patchGameData(gameData, store.id)
-  //     .then(ui.onPatchGameDataSuccess)
-  //   if (comp === true) {
-  //     triggerIndexSuccess()
-  //   }
+    $('.box').removeClass('ohov')
   }
 }
 // fillContent is triggered by clicking a square. It checks if the game is over, if the square is already clicked, and whose turn it is, assigning player 'o' or 'x'.
@@ -233,10 +249,14 @@ const fillContent = function () {
     const player = 'x'
     move(player)
   } else if ((moveArr.length % 2 !== 0) && (gameData.game.over === false)) {
+    $('.box').removeClass('ohov')
+    $('.box').addClass('xhov')
     const player = 'o'
     $('.moveMessage').html(`It's X's turn`)
     move(player)
   } else if ((moveArr.length % 2 === 0) && (gameData.game.over === false)) {
+    $('.box').removeClass('xhov')
+    $('.box').addClass('ohov')
     const player = 'x'
     $('.moveMessage').html(`It's O's turn`)
     move(player)
@@ -248,6 +268,9 @@ const fillContent = function () {
 const emptyContent = function () {
   $('.board').removeClass('disappear')
   $('.box').html('')
+  $('.box').removeClass('x')
+  $('.box').removeClass('o')
+  $('.box').addClass('xhov')
   $('.info').html('')
   moveArr = []
   gameData.game.over = false
