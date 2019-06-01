@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
+    <title>Tic Tac Toe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+          <!-- Do not add `link` tags-->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+
+          <!-- Do not add `script` tags-->
+    <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+    <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+  </head>
+<body class="container-fluid wrapper">
+  <header class="row headrow">
+    <div class="tit col-4">
+    <h1>Tic Tac Toe</h1>
+    </div>
+    <div class="col-4 upmid nav-item" id="vanish">
+      <button type="button" class="btn newGame but disappear bar" id="anim" data-toggle="modal" data-target="#vsWho">New Game</button>
+    </div>
+    <div class="col-4 uprt">
+      <div>
+        <button type="button" class="btn changePw disappear bar" data-toggle="modal" data-target="#change-pw">Change Password</button>
+          <div class="modal fade" id="change-pw">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3>Change Password</h3>
+                </div>
+                <div class="modal-body pwBody">
+                  <form id="change-password" class="disappear">
+                        <input type="password" name="passwords[old]" placeholder="Old Password">
+                        <input type="password" name="passwords[new]" placeholder="New Password">
+                        <input type="submit" value="Change Password!" class="but">
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <p class="onChangePassword"><p>
+                  <button type="button" class="btn cls" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <form id="sign-out" class="disappear">
+        <input type="submit" value="Sign out" class="but btn bar">
+      </form>
+    </div>
+  </header>
+
+      <div class="col-6 initLog">
+      <h4 class="failure">Sign in to play</h4>
+      <form id="sign-up">
+        <h3>Sign up</h3>
+          <input type="text" name="credentials[email]" placeholder="Email">
+          <input type="password" name="credentials[password]" placeholder="Password">
+          <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
+          <br><input type="submit" value="Sign up" class="but">
+      </form>
+      <form id="sign-in">
+        <h3>Sign in</h3>
+          <input type="text" name="credentials[email]" placeholder="Email">
+          <input type="password" name="credentials[password]" placeholder="Password">
+          <br><input type="submit" value="Sign in" class="but">
+      </form>
+      <p id="message"></p>
+    </div>
+    <!-- <div id="vanish">
+      <button type="button" class="btn newGame disappear" data-toggle="modal" data-target="#vsWho">New Game</button>
+    </div> -->
+        <div class="modal fade" id="vsWho">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3>Choose Your Opponent</h3>
+              </div>
+              <div class="modal-body vsContent">
+                <div class= "playAgain">
+                  <button class="vsSelf btn" data-dismiss="modal">Yourself</button><button class="vsComp btn" data-dismiss="modal">Computer</button><button class="vsUltron btn" data-dismiss="modal">Ultron: The Unbreakable</button>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <p class="onChooseOpponent"><p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+  <div class="row bodmid">
+    <div class="col-12">
+      <div id="centerme">
+      <p id="signed-in"></p>
+      </div>
+      <div class="container board disappear">
+        <img class="pic" id='ultron' src="https://i.imgur.com/Q1Bnctj.png" alt="Ultron">
+        <img class="pic" id='cat' src="https://i.imgur.com/vO0umue.jpg" alt="Cat">
+        <img class="pic" id='locutus' src="https://i.imgur.com/haqYfBD.png" alt="Locutus">
+        <div class="row top">
+          <div class="col-4 box hov zero" data-cell-index='0'></div>
+          <div class="col-4 box hov one" data-cell-index='1'></div>
+          <div class="col-4 box hov two" data-cell-index='2'></div>
+        </div>
+        <div class="row middle">
+          <div class="col-4 box hov three" data-cell-index='3'></div>
+          <div class="col-4 box hov four" data-cell-index='4'></div>
+          <div class="col-4 box hov five" data-cell-index='5'></div>
+        </div>
+        <div class="row bottom">
+          <div class="col-4 box hov six" data-cell-index='6'></div>
+          <div class="col-4 box hov seven" data-cell-index='7'></div>
+          <div class="col-4 box hov eight" data-cell-index='8'></div>
+        </div>
+        <div class= "bottomMessages">
+          <h2 class="info"></h2>
+          <h3 class= "moveMessage info"></h3>
+          <h3 class= "gamesPlayed info"></h3>
+          <h3 class= "wins info"></h3>
+          <h3 class= "borg info"></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
